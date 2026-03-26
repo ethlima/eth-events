@@ -79,6 +79,8 @@ body:
         - conference
         - workshop
         - hackathon
+        - bootcamp
+        - cohorte
     validations:
       required: true
 
