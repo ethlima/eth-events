@@ -13,5 +13,20 @@
     "issueUrl": "https://github.com/ethlima/eth-events/issues/3",
     "issueNum": 3,
     "createdAt": "2026-03-26T05:30:20Z"
+  },
+  {
+    "id": 2,
+    "title": "PL Genesis Hackathon: Frontiers of Collaboration",
+    "description": "```markdown\nA global builder competition with over $150,000 in rewards and two tracks: Fresh Code and Existing Code.\nSubmissions close March 31, 2026.\n```",
+    "date": "2026-04-01",
+    "time": "",
+    "location": "Online",
+    "type": "hackathon",
+    "link": "https://pl-genesis-frontiers-of-collaboration-hackathon.devspot.app/hackathons/52?activeTab=overview",
+    "tags": [],
+    "organizer": "Protocolo Labs",
+    "issueUrl": "https://github.com/ethlima/eth-events/issues/2",
+    "issueNum": 2,
+    "createdAt": "2026-03-26T05:12:21Z"
   }
 ]

@@ -9,6 +9,10 @@ permissions:
   contents: write
   issues: read
 
+concurrency:
+  group: sync-events
+  cancel-in-progress: true
+
 jobs:
   sync-events:
     runs-on: ubuntu-latest
@@ -17,6 +21,8 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
 
       - name: Setup Node.js
         uses: actions/setup-node@v4
@@ -29,17 +35,18 @@ jobs:
           script: |
             const fs = require('fs');
 
-            // Trae todos los issues con label "approved"
-            const { data: issues } = await github.rest.issues.listForRepo({
-              owner: context.repo.owner,
-              repo: context.repo.repo,
-              labels: 'approved',
-              state: 'open',
-              per_page: 100,
-            });
+            // Paginación completa
+            const issues = await github.paginate(
+              github.rest.issues.listForRepo,
+              {
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                labels: 'approved',
+                state: 'open',
+                per_page: 100,
+              }
+            );
 
-            // Issue Forms genera secciones con encabezados H3
-            // Ejemplo: "### 📌 Nombre del Evento\n\nValor aquí\n\n"
             function extract(body, heading) {
               if (!body) return '';
               const re = new RegExp(
@@ -54,46 +61,71 @@ jobs:
                 .trim();
             }
 
+            function clean(str) {
+              return (str || '').trim();
+            }
+
             const events = issues.map(issue => {
               const body = issue.body || '';
+
+              const rawDate = clean(extract(body, 'Fecha'));
+              const parsedDate = rawDate ? new Date(rawDate) : null;
+
               return {
                 id: issue.number,
-                title: extract(body, 'Nombre') || issue.title.replace(/\[EVENTO\]\s*/i, ''),
-                description: extract(body, 'Descripci'),  // sin tilde para mayor compatibilidad
-                date: extract(body, 'Fecha'),
-                time: extract(body, 'Hora'),
-                location: extract(body, 'Ubicaci'),        // sin tilde para mayor compatibilidad
-                type: (extract(body, 'Tipo') || 'meetup').toLowerCase().replace(/[^a-z]/g, ''),
-                link: extract(body, 'Link'),
-                tags: extract(body, 'Tags')
+                title: clean(
+                  extract(body, 'Nombre') ||
+                  issue.title.replace(/\[EVENTO\]\s*/i, '')
+                ),
+                description: clean(extract(body, 'Descripci')),
+                date: rawDate,
+                time: clean(extract(body, 'Hora')),
+                location: clean(extract(body, 'Ubicaci')),
+                type: clean(
+                  (extract(body, 'Tipo') || 'meetup')
+                    .toLowerCase()
+                    .replace(/[^a-z]/g, '')
+                ),
+                link: clean(extract(body, 'Link')),
+                tags: clean(extract(body, 'Tags'))
                   .split(',')
-                  .map(t => t.trim())
+                  .map(t => t.trim().toLowerCase())
                   .filter(Boolean),
-                organizer: extract(body, 'Organizador'),
+                organizer: clean(extract(body, 'Organizador')),
                 issueUrl: issue.html_url,
                 issueNum: issue.number,
                 createdAt: issue.created_at,
+                _sortDate: parsedDate && !isNaN(parsedDate) ? parsedDate : null,
               };
             });
 
-            // Ordena por fecha ascendente
+            // Orden robusto
             events.sort((a, b) => {
-              if (!a.date) return 1;
-              if (!b.date) return -1;
-              return new Date(a.date) - new Date(b.date);
+              if (!a._sortDate) return 1;
+              if (!b._sortDate) return -1;
+              return a._sortDate - b._sortDate;
             });
+
+            // Remover campo interno
+            const finalEvents = events.map(({ _sortDate, ...rest }) => rest);
 
             fs.writeFileSync(
               'events.json',
-              JSON.stringify(events, null, 2)
+              JSON.stringify(finalEvents, null, 2)
             );
 
-            console.log(`✅ Generados ${events.length} eventos`);
+            console.log(`✅ Generados ${finalEvents.length} eventos`);
 
-      - name: Commit events.json
+      - name: Commit & Push
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
+
           git add events.json
-          git diff --cached --quiet || git commit -m "chore: sync events.json [skip ci]"
-          git push
+          git diff --cached --quiet && echo "No changes" && exit 0
+
+          git commit -m "chore: sync events.json [skip ci]"
+
+          # sync seguro
+          git pull --rebase origin main
+          git push origin main
