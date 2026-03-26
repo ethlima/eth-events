@@ -469,6 +469,18 @@
       border: 1px solid rgba(167, 139, 250, 0.25);
     }
 
+    .type-bootcamp {
+      background: rgba(139, 92, 246, 0.12);
+      color: #8b5cf6;
+      border: 1px solid rgba(139, 92, 246, 0.25);
+    }
+
+    .type-cohorte {
+      background: rgba(236, 72, 153, 0.12);
+      color: #ec4899;
+      border: 1px solid rgba(236, 72, 153, 0.25);
+    }
+
     .event-issue {
       font-family: var(--mono);
       font-size: 11px;
@@ -543,16 +555,36 @@
     .event-link {
       font-family: var(--mono);
       font-size: 11px;
-      color: var(--accent);
+      font-weight: 700;
+      color: #fff;
       text-decoration: none;
       display: flex;
       align-items: center;
-      gap: 4px;
-      transition: gap 0.2s;
+      gap: 6px;
+      padding: 8px 18px;
+      background: var(--accent);
+      border-radius: 8px;
+      transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+      box-shadow: 0 4px 12px rgba(98, 126, 234, 0.25);
     }
 
     .event-link:hover {
-      gap: 8px;
+      background: var(--accent2);
+      transform: translateY(-2px);
+      box-shadow: 0 8px 24px rgba(98, 126, 234, 0.45);
+      gap: 10px;
+    }
+
+    .event-card.past .event-link {
+      background: var(--surface2);
+      color: var(--muted);
+      box-shadow: none;
+      padding: 6px 14px;
+    }
+
+    .event-card.past .event-link:hover {
+      background: var(--border);
+      color: var(--text);
     }
 
     /* EMPTY STATE */
@@ -1178,6 +1210,8 @@
         workshop: 'type-workshop',
         hackathon: 'type-hackathon',
         meetup: 'type-meetup',
+        bootcamp: 'type-bootcamp',
+        cohorte: 'type-cohorte',
       }[e.type] || 'type-meetup';
 
       const dateStr = e.date ? new Date(e.date + 'T00:00').toLocaleDateString('es', {
