@@ -50,7 +50,7 @@ jobs:
                 owner: context.repo.owner,
                 repo: context.repo.repo,
                 labels: 'approved',
-                state: 'open',
+                state: 'all',
                 per_page: 100,
               }
             );
@@ -87,6 +87,7 @@ jobs:
                 ),
                 description: clean(extract(body, 'Descripci')),
                 date: rawDate,
+                endDate: clean(extract(body, 'Fecha de fin') || extract(body, 'Término') || extract(body, 'Fin')),
                 time: clean(extract(body, 'Hora')),
                 location: clean(extract(body, 'Ubicaci')),
                 type: clean(
@@ -102,6 +103,7 @@ jobs:
                 organizer: clean(extract(body, 'Organizador')),
                 issueUrl: issue.html_url,
                 issueNum: issue.number,
+                state: issue.state,
                 createdAt: issue.created_at,
                 _sortDate: parsedDate && !isNaN(parsedDate) ? parsedDate : null,
               };
