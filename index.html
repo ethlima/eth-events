@@ -5,25 +5,22 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>ETH Events — Comunidad</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link
-    href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=Syne:wght@400;600;800&display=swap"
-    rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet" />
   <style>
     :root {
-      --bg: #0a0b0f;
-      --surface: #111318;
-      --surface2: #181b22;
-      --border: #1e2230;
+      --bg: #050609;
+      --surface: rgba(17, 19, 24, 0.6);
+      --surface2: rgba(24, 27, 34, 0.8);
+      --border: rgba(255, 255, 255, 0.08);
       --accent: #627eea;
       --accent2: #8a9ff5;
-      --accent-glow: rgba(98, 126, 234, 0.18);
-      --text: #e8eaf0;
-      --muted: #6b7280;
+      --accent-glow: rgba(98, 126, 234, 0.12);
+      --text: #f0f2f5;
+      --muted: #94a3b8;
       --success: #10b981;
       --warning: #f59e0b;
       --mono: 'Space Mono', monospace;
-      --sans: 'Syne', sans-serif;
+      --sans: 'Inter', sans-serif;
     }
 
     * {
@@ -142,7 +139,7 @@
       position: relative;
       z-index: 1;
       text-align: center;
-      padding: 100px 40px 80px;
+      padding: 80px 40px 40px;
     }
 
     .hero-tag {
@@ -195,6 +192,7 @@
       background: linear-gradient(135deg, #627eea 0%, #a78bfa 50%, #627eea 100%);
       background-size: 200% auto;
       -webkit-background-clip: text;
+      background-clip: text;
       -webkit-text-fill-color: transparent;
       animation: shimmer 4s linear infinite;
     }
@@ -270,18 +268,13 @@
       z-index: 1;
       display: flex;
       justify-content: center;
-      gap: 1px;
-      background: var(--border);
-      border-top: 1px solid var(--border);
-      border-bottom: 1px solid var(--border);
+      gap: 32px;
+      padding: 0 40px 40px;
     }
 
     .stat {
-      flex: 1;
-      max-width: 200px;
       text-align: center;
-      padding: 32px 24px;
-      background: var(--bg);
+      background: transparent;
     }
 
     .stat-value {
@@ -306,7 +299,7 @@
       z-index: 1;
       max-width: 1100px;
       margin: 0 auto;
-      padding: 80px 40px;
+      padding: 40px 40px 80px;
     }
 
     .section-header {
@@ -363,16 +356,18 @@
     .event-card {
       background: var(--surface);
       border: 1px solid var(--border);
-      border-radius: 12px;
+      border-radius: 16px;
       overflow: hidden;
-      transition: border-color 0.2s, transform 0.2s, box-shadow 0.2s;
+      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
       position: relative;
+      backdrop-filter: blur(12px);
     }
 
     .event-card:hover {
-      border-color: rgba(98, 126, 234, 0.4);
-      transform: translateY(-4px);
-      box-shadow: 0 20px 60px rgba(0, 0, 0, 0.4), 0 0 30px rgba(98, 126, 234, 0.1);
+      border-color: rgba(98, 126, 234, 0.5);
+      transform: translateY(-8px);
+      box-shadow: 0 30px 60px rgba(0, 0, 0, 0.5), 0 0 40px rgba(98, 126, 234, 0.15);
+      background: rgba(17, 19, 24, 0.8);
     }
 
     .event-card::before {
@@ -826,32 +821,24 @@
     <ul class="nav-links">
       <li><a href="#events">EVENTOS</a></li>
       <li><a href="#how">CÓMO FUNCIONA</a></li>
-      <li><a href="#template">TEMPLATE</a></li>
     </ul>
     <a class="nav-cta" href="https://github.com/ethlima/eth-events/issues/new?template=event.yml" target="_blank">
       + NUEVO EVENTO
     </a>
   </nav>
 
-  <!-- HERO -->
-  <section class="hero">
-    <div class="hero-tag">POWERED BY GITHUB ISSUES</div>
-    <h1>Eventos de la<br /><span>Comunidad Web3</span></h1>
-    <p>Agrega tu evento abriendo un issue en GitHub. Sin formularios, sin permisos. Descentralizado como debe ser.</p>
-    <div class="hero-actions">
-      <a class="btn-primary" href="https://github.com/ethlima/eth-events/issues/new?template=event.yml" target="_blank">
-        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-          <path d="M12 5v14M5 12h14" />
-        </svg>
-        PROPONER EVENTO
-      </a>
-      <a class="btn-secondary" href="https://github.com/ethlima/eth-events" target="_blank">
-        <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
-          <path
-            d="M12 2C6.477 2 2 6.477 2 12c0 4.418 2.865 8.166 6.839 9.489.5.092.682-.217.682-.482 0-.237-.009-.868-.013-1.703-2.782.604-3.369-1.341-3.369-1.341-.454-1.155-1.11-1.462-1.11-1.462-.908-.62.069-.608.069-.608 1.003.07 1.531 1.03 1.531 1.03.892 1.529 2.341 1.087 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.11-4.555-4.943 0-1.091.39-1.984 1.029-2.683-.103-.253-.446-1.27.098-2.647 0 0 .84-.269 2.75 1.025A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.294 2.747-1.025 2.747-1.025.546 1.377.202 2.394.1 2.647.64.699 1.028 1.592 1.028 2.683 0 3.842-2.339 4.687-4.566 4.93.359.309.678.919.678 1.852 0 1.336-.012 2.415-.012 2.744 0 .267.18.578.688.48C19.138 20.161 22 16.416 22 12c0-5.523-4.477-10-10-10z" />
-        </svg>
-        VER EN GITHUB
-      </a>
+  <!-- EVENTS -->
+  <section class="section" id="events">
+    <div class="section-header">
+      <h2 class="section-title">Próximos <span>Eventos</span></h2>
+      <div class="filter-bar" id="filter-bar">
+        <button class="filter-btn active" data-filter="all">TODOS</button>
+      </div>
+    </div>
+    <div class="events-grid" id="events-grid">
+      <div class="loading">
+        <div class="spinner"></div> CARGANDO EVENTOS...
+      </div>
     </div>
   </section>
 
@@ -871,18 +858,25 @@
     </div>
   </div>
 
-  <!-- EVENTS -->
-  <section class="section" id="events">
-    <div class="section-header">
-      <h2 class="section-title">Próximos <span>Eventos</span></h2>
-      <div class="filter-bar" id="filter-bar">
-        <button class="filter-btn active" data-filter="all">TODOS</button>
-      </div>
-    </div>
-    <div class="events-grid" id="events-grid">
-      <div class="loading">
-        <div class="spinner"></div> CARGANDO EVENTOS...
-      </div>
+  <!-- HERO (Moved down/secondary) -->
+  <section class="hero" style="padding-top: 40px; padding-bottom: 80px; border-top: 1px solid var(--border)">
+    <div class="hero-tag">POWERED BY GITHUB ISSUES</div>
+    <h2 style="font-size: 32px; margin-bottom: 20px">Súmate a la <span>Comunidad</span></h2>
+    <p>Agrega tu evento abriendo un issue en GitHub. Descentralizado y abierto.</p>
+    <div class="hero-actions">
+      <a class="btn-primary" href="https://github.com/ethlima/eth-events/issues/new?template=event.yml" target="_blank">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M12 5v14M5 12h14" />
+        </svg>
+        PROPONER EVENTO
+      </a>
+      <a class="btn-secondary" href="https://github.com/ethlima/eth-events" target="_blank">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
+          <path
+            d="M12 2C6.477 2 2 6.477 2 12c0 4.418 2.865 8.166 6.839 9.489.5.092.682-.217.682-.482 0-.237-.009-.868-.013-1.703-2.782.604-3.369-1.341-3.369-1.341-.454-1.155-1.11-1.462-1.11-1.462-.908-.62.069-.608.069-.608 1.003.07 1.531 1.03 1.531 1.03.892 1.529 2.341 1.087 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.11-4.555-4.943 0-1.091.39-1.984 1.029-2.683-.103-.253-.446-1.27.098-2.647 0 0 .84-.269 2.75 1.025A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.294 2.747-1.025 2.747-1.025.546 1.377.202 2.394.1 2.647.64.699 1.028 1.592 1.028 2.683 0 3.842-2.339 4.687-4.566 4.93.359.309.678.919.678 1.852 0 1.336-.012 2.415-.012 2.744 0 .267.18.578.688.48C19.138 20.161 22 16.416 22 12c0-5.523-4.477-10-10-10z" />
+        </svg>
+        VER EN GITHUB
+      </a>
     </div>
   </section>
 
@@ -890,7 +884,6 @@
   <div class="how-section" id="how">
     <div class="how-inner">
       <h2 class="how-title">¿Cómo agregar un evento?</h2>
-      <p class="how-subtitle">// sin backend · sin base de datos · solo GitHub</p>
       <div class="steps">
         <div class="step">
           <div class="step-num">PASO 01</div>
@@ -942,55 +935,7 @@
     </div>
   </div>
 
-  <!-- ISSUE TEMPLATE -->
-  <section class="template-section" id="template">
-    <h2 class="section-title" style="margin-bottom: 8px">Template de <span style="color:var(--accent)">Issue</span></h2>
-    <p style="font-family:var(--mono);font-size:13px;color:var(--muted);margin-bottom:32px">//
-      .github/ISSUE_TEMPLATE/event.md</p>
-    <div class="code-block">
-      <div class="code-header">
-        <div class="code-dots">
-          <div class="dot dot-r"></div>
-          <div class="dot dot-y"></div>
-          <div class="dot dot-g"></div>
-        </div>
-        <span>event.md</span>
-        <span>ISSUE TEMPLATE</span>
-      </div>
-      <div class="code-content">
-        <span class="c-comment">---</span><br>
-        <span class="c-key">name</span>: <span class="c-val">📅 Nuevo Evento</span><br>
-        <span class="c-key">about</span>: <span class="c-val">Propón un evento para la comunidad</span><br>
-        <span class="c-key">title</span>: <span class="c-val">"[EVENTO] Nombre del Evento"</span><br>
-        <span class="c-key">labels</span>: <span class="c-val">evento, pendiente</span><br>
-        <span class="c-comment">---</span><br>
-        <br>
-        <span class="c-accent">## 📌 Nombre del Evento</span><br>
-        <span class="c-comment">&lt;!-- Nombre completo del evento --&gt;</span><br>
-        <br>
-        <span class="c-accent">## 📝 Descripción</span><br>
-        <span class="c-comment">&lt;!-- Describe el evento en 2-3 líneas --&gt;</span><br>
-        <br>
-        <span class="c-accent">## 🗓️ Fecha</span><br>
-        <span class="c-comment">&lt;!-- Formato: YYYY-MM-DD --&gt;</span><br>
-        <br>
-        <span class="c-accent">## ⏰ Hora</span><br>
-        <span class="c-comment">&lt;!-- Formato: HH:MM (UTC-5) --&gt;</span><br>
-        <br>
-        <span class="c-accent">## 📍 Ubicación</span><br>
-        <span class="c-comment">&lt;!-- Ciudad, País o "Online" --&gt;</span><br>
-        <br>
-        <span class="c-accent">## 🏷️ Tipo</span><br>
-        <span class="c-comment">&lt;!-- conference | workshop | hackathon | meetup --&gt;</span><br>
-        <br>
-        <span class="c-accent">## 🔗 Link de registro</span><br>
-        <span class="c-comment">&lt;!-- URL de registro o más info --&gt;</span><br>
-        <br>
-        <span class="c-accent">## 🏷️ Tags</span><br>
-        <span class="c-comment">&lt;!-- ej: ethereum, solidity, defi, nft --&gt;</span>
-      </div>
-    </div>
-  </section>
+
 
   <!-- FOOTER -->
   <footer>
@@ -1050,7 +995,7 @@
       const body = issue.body || '';
       function get(keyword) {
         const re = new RegExp(
-          '###[^\n]*' + keyword + '[^\n]*\n+([\s\S]*?)(?=\n###|$)',
+          '###[^\\n]*' + keyword + '[^\\n]*\\n+([\\s\\S]*?)(?=\\n###|$)',
           'i'
         );
         const m = body.match(re);
