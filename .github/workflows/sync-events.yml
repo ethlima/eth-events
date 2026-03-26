@@ -59,11 +59,11 @@ jobs:
               return {
                 id: issue.number,
                 title: extract(body, 'Nombre') || issue.title.replace(/\[EVENTO\]\s*/i, ''),
-                description: extract(body, 'Descripción'),
+                description: extract(body, 'Descripci'),  // sin tilde para mayor compatibilidad
                 date: extract(body, 'Fecha'),
                 time: extract(body, 'Hora'),
-                location: extract(body, 'Ubicación'),
-                type: (extract(body, 'Tipo') || 'meetup').toLowerCase().trim(),
+                location: extract(body, 'Ubicaci'),        // sin tilde para mayor compatibilidad
+                type: (extract(body, 'Tipo') || 'meetup').toLowerCase().replace(/[^a-z]/g, ''),
                 link: extract(body, 'Link'),
                 tags: extract(body, 'Tags')
                   .split(',')

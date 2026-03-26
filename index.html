@@ -1,14 +1,11 @@
 <!DOCTYPE html>
 <html lang="es">
-
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>ETH Events — Comunidad</title>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link
-    href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=Syne:wght@400;600;800&display=swap"
-    rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=Syne:wght@400;600;800&display=swap" rel="stylesheet" />
   <style>
     :root {
       --bg: #0a0b0f;
@@ -17,7 +14,7 @@
       --border: #1e2230;
       --accent: #627eea;
       --accent2: #8a9ff5;
-      --accent-glow: rgba(98, 126, 234, 0.18);
+      --accent-glow: rgba(98,126,234,0.18);
       --text: #e8eaf0;
       --muted: #6b7280;
       --success: #10b981;
@@ -26,11 +23,7 @@
       --sans: 'Syne', sans-serif;
     }
 
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
 
     body {
       background: var(--bg);
@@ -46,8 +39,8 @@
       position: fixed;
       inset: 0;
       background-image:
-        linear-gradient(rgba(98, 126, 234, 0.04) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(98, 126, 234, 0.04) 1px, transparent 1px);
+        linear-gradient(rgba(98,126,234,0.04) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(98,126,234,0.04) 1px, transparent 1px);
       background-size: 48px 48px;
       pointer-events: none;
       z-index: 0;
@@ -62,7 +55,7 @@
       transform: translateX(-50%);
       width: 800px;
       height: 500px;
-      background: radial-gradient(ellipse at center, rgba(98, 126, 234, 0.12) 0%, transparent 70%);
+      background: radial-gradient(ellipse at center, rgba(98,126,234,0.12) 0%, transparent 70%);
       pointer-events: none;
       z-index: 0;
     }
@@ -77,7 +70,7 @@
       justify-content: space-between;
       padding: 0 40px;
       height: 64px;
-      background: rgba(10, 11, 15, 0.85);
+      background: rgba(10,11,15,0.85);
       backdrop-filter: blur(20px);
       border-bottom: 1px solid var(--border);
     }
@@ -94,10 +87,7 @@
       text-decoration: none;
     }
 
-    .nav-logo svg {
-      width: 28px;
-      height: 28px;
-    }
+    .nav-logo svg { width: 28px; height: 28px; }
 
     .nav-links {
       display: flex;
@@ -115,9 +105,7 @@
       transition: color 0.2s;
     }
 
-    .nav-links a:hover {
-      color: var(--text);
-    }
+    .nav-links a:hover { color: var(--text); }
 
     .nav-cta {
       font-family: var(--mono);
@@ -153,8 +141,8 @@
       font-size: 11px;
       color: var(--accent);
       letter-spacing: 0.15em;
-      background: rgba(98, 126, 234, 0.08);
-      border: 1px solid rgba(98, 126, 234, 0.2);
+      background: rgba(98,126,234,0.08);
+      border: 1px solid rgba(98,126,234,0.2);
       border-radius: 100px;
       padding: 6px 16px;
       margin-bottom: 32px;
@@ -162,25 +150,15 @@
 
     .hero-tag::before {
       content: '';
-      width: 6px;
-      height: 6px;
+      width: 6px; height: 6px;
       background: var(--accent);
       border-radius: 50%;
       animation: pulse 2s infinite;
     }
 
     @keyframes pulse {
-
-      0%,
-      100% {
-        opacity: 1;
-        transform: scale(1);
-      }
-
-      50% {
-        opacity: 0.5;
-        transform: scale(0.8);
-      }
+      0%, 100% { opacity: 1; transform: scale(1); }
+      50% { opacity: 0.5; transform: scale(0.8); }
     }
 
     .hero h1 {
@@ -200,9 +178,7 @@
     }
 
     @keyframes shimmer {
-      to {
-        background-position: 200% center;
-      }
+      to { background-position: 200% center; }
     }
 
     .hero p {
@@ -235,12 +211,12 @@
       text-decoration: none;
       letter-spacing: 0.05em;
       transition: transform 0.2s, box-shadow 0.2s;
-      box-shadow: 0 0 30px rgba(98, 126, 234, 0.3);
+      box-shadow: 0 0 30px rgba(98,126,234,0.3);
     }
 
     .btn-primary:hover {
       transform: translateY(-2px);
-      box-shadow: 0 0 50px rgba(98, 126, 234, 0.5);
+      box-shadow: 0 0 50px rgba(98,126,234,0.5);
     }
 
     .btn-secondary {
@@ -370,26 +346,22 @@
     }
 
     .event-card:hover {
-      border-color: rgba(98, 126, 234, 0.4);
+      border-color: rgba(98,126,234,0.4);
       transform: translateY(-4px);
-      box-shadow: 0 20px 60px rgba(0, 0, 0, 0.4), 0 0 30px rgba(98, 126, 234, 0.1);
+      box-shadow: 0 20px 60px rgba(0,0,0,0.4), 0 0 30px rgba(98,126,234,0.1);
     }
 
     .event-card::before {
       content: '';
       position: absolute;
-      top: 0;
-      left: 0;
-      right: 0;
+      top: 0; left: 0; right: 0;
       height: 2px;
       background: linear-gradient(90deg, transparent, var(--accent), transparent);
       opacity: 0;
       transition: opacity 0.2s;
     }
 
-    .event-card:hover::before {
-      opacity: 1;
-    }
+    .event-card:hover::before { opacity: 1; }
 
     .event-header {
       padding: 20px 20px 0;
@@ -408,29 +380,10 @@
       font-weight: 700;
     }
 
-    .type-conference {
-      background: rgba(98, 126, 234, 0.12);
-      color: var(--accent);
-      border: 1px solid rgba(98, 126, 234, 0.25);
-    }
-
-    .type-workshop {
-      background: rgba(16, 185, 129, 0.12);
-      color: #10b981;
-      border: 1px solid rgba(16, 185, 129, 0.25);
-    }
-
-    .type-hackathon {
-      background: rgba(245, 158, 11, 0.12);
-      color: #f59e0b;
-      border: 1px solid rgba(245, 158, 11, 0.25);
-    }
-
-    .type-meetup {
-      background: rgba(167, 139, 250, 0.12);
-      color: #a78bfa;
-      border: 1px solid rgba(167, 139, 250, 0.25);
-    }
+    .type-conference { background: rgba(98,126,234,0.12); color: var(--accent); border: 1px solid rgba(98,126,234,0.25); }
+    .type-workshop { background: rgba(16,185,129,0.12); color: #10b981; border: 1px solid rgba(16,185,129,0.25); }
+    .type-hackathon { background: rgba(245,158,11,0.12); color: #f59e0b; border: 1px solid rgba(245,158,11,0.25); }
+    .type-meetup { background: rgba(167,139,250,0.12); color: #a78bfa; border: 1px solid rgba(167,139,250,0.25); }
 
     .event-issue {
       font-family: var(--mono);
@@ -473,12 +426,7 @@
       color: var(--muted);
     }
 
-    .meta-item svg {
-      width: 14px;
-      height: 14px;
-      flex-shrink: 0;
-      color: var(--accent);
-    }
+    .meta-item svg { width: 14px; height: 14px; flex-shrink: 0; color: var(--accent); }
 
     .event-footer {
       padding: 0 20px 20px;
@@ -514,9 +462,7 @@
       transition: gap 0.2s;
     }
 
-    .event-link:hover {
-      gap: 8px;
-    }
+    .event-link:hover { gap: 8px; }
 
     /* EMPTY STATE */
     .empty-state {
@@ -527,18 +473,8 @@
       border-radius: 12px;
     }
 
-    .empty-state h3 {
-      font-size: 20px;
-      margin-bottom: 10px;
-      color: var(--muted);
-    }
-
-    .empty-state p {
-      font-size: 14px;
-      color: var(--muted);
-      margin-bottom: 24px;
-      font-family: var(--mono);
-    }
+    .empty-state h3 { font-size: 20px; margin-bottom: 10px; color: var(--muted); }
+    .empty-state p { font-size: 14px; color: var(--muted); margin-bottom: 24px; font-family: var(--mono); }
 
     /* HOW IT WORKS */
     .how-section {
@@ -597,7 +533,7 @@
       width: 44px;
       height: 44px;
       background: var(--accent-glow);
-      border: 1px solid rgba(98, 126, 234, 0.2);
+      border: 1px solid rgba(98,126,234,0.2);
       border-radius: 10px;
       display: flex;
       align-items: center;
@@ -605,11 +541,7 @@
       margin-bottom: 16px;
     }
 
-    .step-icon svg {
-      width: 22px;
-      height: 22px;
-      color: var(--accent);
-    }
+    .step-icon svg { width: 22px; height: 22px; color: var(--accent); }
 
     .step h3 {
       font-size: 16px;
@@ -663,28 +595,11 @@
       color: var(--muted);
     }
 
-    .code-dots {
-      display: flex;
-      gap: 6px;
-    }
-
-    .dot {
-      width: 10px;
-      height: 10px;
-      border-radius: 50%;
-    }
-
-    .dot-r {
-      background: #ff5f57;
-    }
-
-    .dot-y {
-      background: #febc2e;
-    }
-
-    .dot-g {
-      background: #28c840;
-    }
+    .code-dots { display: flex; gap: 6px; }
+    .dot { width: 10px; height: 10px; border-radius: 50%; }
+    .dot-r { background: #ff5f57; }
+    .dot-y { background: #febc2e; }
+    .dot-g { background: #28c840; }
 
     .code-content {
       padding: 24px;
@@ -695,21 +610,10 @@
       overflow-x: auto;
     }
 
-    .code-content .c-key {
-      color: #a78bfa;
-    }
-
-    .code-content .c-val {
-      color: #34d399;
-    }
-
-    .code-content .c-comment {
-      color: var(--muted);
-    }
-
-    .code-content .c-accent {
-      color: var(--accent2);
-    }
+    .code-content .c-key { color: #a78bfa; }
+    .code-content .c-val { color: #34d399; }
+    .code-content .c-comment { color: var(--muted); }
+    .code-content .c-accent { color: var(--accent2); }
 
     /* FOOTER */
     footer {
@@ -746,9 +650,7 @@
       transition: color 0.2s;
     }
 
-    .footer-links a:hover {
-      color: var(--accent);
-    }
+    .footer-links a:hover { color: var(--accent); }
 
     /* LOADING */
     .loading {
@@ -772,54 +674,28 @@
       animation: spin 0.8s linear infinite;
     }
 
-    @keyframes spin {
-      to {
-        transform: rotate(360deg);
-      }
-    }
+    @keyframes spin { to { transform: rotate(360deg); } }
 
     /* RESPONSIVE */
     @media (max-width: 768px) {
-      nav {
-        padding: 0 20px;
-      }
-
-      .nav-links {
-        display: none;
-      }
-
-      .hero {
-        padding: 60px 20px 60px;
-      }
-
-      .section {
-        padding: 60px 20px;
-      }
-
-      .section-header {
-        flex-direction: column;
-        align-items: flex-start;
-        gap: 16px;
-      }
-
-      footer {
-        padding: 30px 20px;
-        flex-direction: column;
-      }
+      nav { padding: 0 20px; }
+      .nav-links { display: none; }
+      .hero { padding: 60px 20px 60px; }
+      .section { padding: 60px 20px; }
+      .section-header { flex-direction: column; align-items: flex-start; gap: 16px; }
+      footer { padding: 30px 20px; flex-direction: column; }
     }
   </style>
 </head>
-
 <body>
 
   <!-- NAV -->
   <nav>
     <a class="nav-logo" href="#">
       <svg viewBox="0 0 32 32" fill="none">
-        <polygon points="16,2 28,9 28,23 16,30 4,23 4,9" fill="none" stroke="#627eea" stroke-width="1.5" />
-        <polygon points="16,8 22,12 22,20 16,24 10,20 10,12" fill="rgba(98,126,234,0.15)" stroke="#627eea"
-          stroke-width="1" />
-        <circle cx="16" cy="16" r="3" fill="#627eea" />
+        <polygon points="16,2 28,9 28,23 16,30 4,23 4,9" fill="none" stroke="#627eea" stroke-width="1.5"/>
+        <polygon points="16,8 22,12 22,20 16,24 10,20 10,12" fill="rgba(98,126,234,0.15)" stroke="#627eea" stroke-width="1"/>
+        <circle cx="16" cy="16" r="3" fill="#627eea"/>
       </svg>
       ETH_EVENTS
     </a>
@@ -828,7 +704,7 @@
       <li><a href="#how">CÓMO FUNCIONA</a></li>
       <li><a href="#template">TEMPLATE</a></li>
     </ul>
-    <a class="nav-cta" href="https://github.com/ethlima/eth-events/issues/new?template=event.md" target="_blank">
+    <a class="nav-cta" href="https://github.com/TU_USUARIO/eth-events/issues/new?template=event.md" target="_blank">
       + NUEVO EVENTO
     </a>
   </nav>
@@ -839,17 +715,12 @@
     <h1>Eventos de la<br /><span>Comunidad Web3</span></h1>
     <p>Agrega tu evento abriendo un issue en GitHub. Sin formularios, sin permisos. Descentralizado como debe ser.</p>
     <div class="hero-actions">
-      <a class="btn-primary" href="https://github.com/ethlima/eth-events/issues/new?template=event.md" target="_blank">
-        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-          <path d="M12 5v14M5 12h14" />
-        </svg>
+      <a class="btn-primary" href="https://github.com/TU_USUARIO/eth-events/issues/new?template=event.md" target="_blank">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 5v14M5 12h14"/></svg>
         PROPONER EVENTO
       </a>
-      <a class="btn-secondary" href="https://github.com/ethlima/eth-events" target="_blank">
-        <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
-          <path
-            d="M12 2C6.477 2 2 6.477 2 12c0 4.418 2.865 8.166 6.839 9.489.5.092.682-.217.682-.482 0-.237-.009-.868-.013-1.703-2.782.604-3.369-1.341-3.369-1.341-.454-1.155-1.11-1.462-1.11-1.462-.908-.62.069-.608.069-.608 1.003.07 1.531 1.03 1.531 1.03.892 1.529 2.341 1.087 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.11-4.555-4.943 0-1.091.39-1.984 1.029-2.683-.103-.253-.446-1.27.098-2.647 0 0 .84-.269 2.75 1.025A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.294 2.747-1.025 2.747-1.025.546 1.377.202 2.394.1 2.647.64.699 1.028 1.592 1.028 2.683 0 3.842-2.339 4.687-4.566 4.93.359.309.678.919.678 1.852 0 1.336-.012 2.415-.012 2.744 0 .267.18.578.688.48C19.138 20.161 22 16.416 22 12c0-5.523-4.477-10-10-10z" />
-        </svg>
+      <a class="btn-secondary" href="https://github.com/TU_USUARIO/eth-events" target="_blank">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.477 2 2 6.477 2 12c0 4.418 2.865 8.166 6.839 9.489.5.092.682-.217.682-.482 0-.237-.009-.868-.013-1.703-2.782.604-3.369-1.341-3.369-1.341-.454-1.155-1.11-1.462-1.11-1.462-.908-.62.069-.608.069-.608 1.003.07 1.531 1.03 1.531 1.03.892 1.529 2.341 1.087 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.11-4.555-4.943 0-1.091.39-1.984 1.029-2.683-.103-.253-.446-1.27.098-2.647 0 0 .84-.269 2.75 1.025A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.294 2.747-1.025 2.747-1.025.546 1.377.202 2.394.1 2.647.64.699 1.028 1.592 1.028 2.683 0 3.842-2.339 4.687-4.566 4.93.359.309.678.919.678 1.852 0 1.336-.012 2.415-.012 2.744 0 .267.18.578.688.48C19.138 20.161 22 16.416 22 12c0-5.523-4.477-10-10-10z"/></svg>
         VER EN GITHUB
       </a>
     </div>
@@ -880,9 +751,7 @@
       </div>
     </div>
     <div class="events-grid" id="events-grid">
-      <div class="loading">
-        <div class="spinner"></div> CARGANDO EVENTOS...
-      </div>
+      <div class="loading"><div class="spinner"></div> CARGANDO EVENTOS...</div>
     </div>
   </section>
 
@@ -895,48 +764,34 @@
         <div class="step">
           <div class="step-num">PASO 01</div>
           <div class="step-icon">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
-              <path d="M9 12h6M9 16h6M9 8h6M5 20h14a2 2 0 002-2V6a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
-            </svg>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M9 12h6M9 16h6M9 8h6M5 20h14a2 2 0 002-2V6a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"/></svg>
           </div>
           <h3>Abre un Issue</h3>
-          <p>Ve al repositorio en GitHub y abre un nuevo issue usando el template <code>event.md</code>. Llena los
-            campos del formulario.</p>
+          <p>Ve al repositorio en GitHub y abre un nuevo issue usando el template <code>event.md</code>. Llena los campos del formulario.</p>
         </div>
         <div class="step">
           <div class="step-num">PASO 02</div>
           <div class="step-icon">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
-              <path d="M7 7h10v10H7z" />
-              <path d="M7 7L4 4m13 3l3-3M7 17l-3 3m13-3l3 3" />
-            </svg>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M7 7h10v10H7z"/><path d="M7 7L4 4m13 3l3-3M7 17l-3 3m13-3l3 3"/></svg>
           </div>
           <h3>GitHub Actions</h3>
-          <p>Un workflow automático se dispara, parsea el issue y regenera el archivo <code>events.json</code> con los
-            datos del evento.</p>
+          <p>Un workflow automático se dispara, parsea el issue y regenera el archivo <code>events.json</code> con los datos del evento.</p>
         </div>
         <div class="step">
           <div class="step-num">PASO 03</div>
           <div class="step-icon">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
-              <path d="M13 10V3L4 14h7v7l9-11h-7z" />
-            </svg>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M13 10V3L4 14h7v7l9-11h-7z"/></svg>
           </div>
           <h3>Deploy automático</h3>
-          <p>GitHub Pages se actualiza automáticamente y el evento aparece en el sitio en minutos. Sin intervención
-            manual.</p>
+          <p>GitHub Pages se actualiza automáticamente y el evento aparece en el sitio en minutos. Sin intervención manual.</p>
         </div>
         <div class="step">
           <div class="step-num">PASO 04</div>
           <div class="step-icon">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
-              <path
-                d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0z" />
-            </svg>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0z"/></svg>
           </div>
           <h3>Comunidad revisa</h3>
-          <p>Los maintainers pueden aprobar, cerrar o etiquetar issues. Solo eventos con label <code>approved</code> se
-            publican.</p>
+          <p>Los maintainers pueden aprobar, cerrar o etiquetar issues. Solo eventos con label <code>approved</code> se publican.</p>
         </div>
       </div>
     </div>
@@ -945,8 +800,7 @@
   <!-- ISSUE TEMPLATE -->
   <section class="template-section" id="template">
     <h2 class="section-title" style="margin-bottom: 8px">Template de <span style="color:var(--accent)">Issue</span></h2>
-    <p style="font-family:var(--mono);font-size:13px;color:var(--muted);margin-bottom:32px">//
-      .github/ISSUE_TEMPLATE/event.md</p>
+    <p style="font-family:var(--mono);font-size:13px;color:var(--muted);margin-bottom:32px">// .github/ISSUE_TEMPLATE/event.md</p>
     <div class="code-block">
       <div class="code-header">
         <div class="code-dots">
@@ -958,36 +812,36 @@
         <span>ISSUE TEMPLATE</span>
       </div>
       <div class="code-content">
-        <span class="c-comment">---</span><br>
-        <span class="c-key">name</span>: <span class="c-val">📅 Nuevo Evento</span><br>
-        <span class="c-key">about</span>: <span class="c-val">Propón un evento para la comunidad</span><br>
-        <span class="c-key">title</span>: <span class="c-val">"[EVENTO] Nombre del Evento"</span><br>
-        <span class="c-key">labels</span>: <span class="c-val">evento, pendiente</span><br>
-        <span class="c-comment">---</span><br>
-        <br>
-        <span class="c-accent">## 📌 Nombre del Evento</span><br>
-        <span class="c-comment">&lt;!-- Nombre completo del evento --&gt;</span><br>
-        <br>
-        <span class="c-accent">## 📝 Descripción</span><br>
-        <span class="c-comment">&lt;!-- Describe el evento en 2-3 líneas --&gt;</span><br>
-        <br>
-        <span class="c-accent">## 🗓️ Fecha</span><br>
-        <span class="c-comment">&lt;!-- Formato: YYYY-MM-DD --&gt;</span><br>
-        <br>
-        <span class="c-accent">## ⏰ Hora</span><br>
-        <span class="c-comment">&lt;!-- Formato: HH:MM (UTC-5) --&gt;</span><br>
-        <br>
-        <span class="c-accent">## 📍 Ubicación</span><br>
-        <span class="c-comment">&lt;!-- Ciudad, País o "Online" --&gt;</span><br>
-        <br>
-        <span class="c-accent">## 🏷️ Tipo</span><br>
-        <span class="c-comment">&lt;!-- conference | workshop | hackathon | meetup --&gt;</span><br>
-        <br>
-        <span class="c-accent">## 🔗 Link de registro</span><br>
-        <span class="c-comment">&lt;!-- URL de registro o más info --&gt;</span><br>
-        <br>
-        <span class="c-accent">## 🏷️ Tags</span><br>
-        <span class="c-comment">&lt;!-- ej: ethereum, solidity, defi, nft --&gt;</span>
+<span class="c-comment">---</span><br>
+<span class="c-key">name</span>: <span class="c-val">📅 Nuevo Evento</span><br>
+<span class="c-key">about</span>: <span class="c-val">Propón un evento para la comunidad</span><br>
+<span class="c-key">title</span>: <span class="c-val">"[EVENTO] Nombre del Evento"</span><br>
+<span class="c-key">labels</span>: <span class="c-val">evento, pendiente</span><br>
+<span class="c-comment">---</span><br>
+<br>
+<span class="c-accent">## 📌 Nombre del Evento</span><br>
+<span class="c-comment">&lt;!-- Nombre completo del evento --&gt;</span><br>
+<br>
+<span class="c-accent">## 📝 Descripción</span><br>
+<span class="c-comment">&lt;!-- Describe el evento en 2-3 líneas --&gt;</span><br>
+<br>
+<span class="c-accent">## 🗓️ Fecha</span><br>
+<span class="c-comment">&lt;!-- Formato: YYYY-MM-DD --&gt;</span><br>
+<br>
+<span class="c-accent">## ⏰ Hora</span><br>
+<span class="c-comment">&lt;!-- Formato: HH:MM (UTC-5) --&gt;</span><br>
+<br>
+<span class="c-accent">## 📍 Ubicación</span><br>
+<span class="c-comment">&lt;!-- Ciudad, País o "Online" --&gt;</span><br>
+<br>
+<span class="c-accent">## 🏷️ Tipo</span><br>
+<span class="c-comment">&lt;!-- conference | workshop | hackathon | meetup --&gt;</span><br>
+<br>
+<span class="c-accent">## 🔗 Link de registro</span><br>
+<span class="c-comment">&lt;!-- URL de registro o más info --&gt;</span><br>
+<br>
+<span class="c-accent">## 🏷️ Tags</span><br>
+<span class="c-comment">&lt;!-- ej: ethereum, solidity, defi, nft --&gt;</span>
       </div>
     </div>
   </section>
@@ -996,15 +850,15 @@
   <footer>
     <div class="footer-left">
       <svg width="18" height="18" viewBox="0 0 32 32" fill="none">
-        <polygon points="16,2 28,9 28,23 16,30 4,23 4,9" stroke="#627eea" stroke-width="1.5" fill="none" />
-        <circle cx="16" cy="16" r="3" fill="#627eea" />
+        <polygon points="16,2 28,9 28,23 16,30 4,23 4,9" stroke="#627eea" stroke-width="1.5" fill="none"/>
+        <circle cx="16" cy="16" r="3" fill="#627eea"/>
       </svg>
       ETH_EVENTS © 2025 — Powered by GitHub
     </div>
     <div class="footer-links">
-      <a href="https://github.com/ethlima/eth-events" target="_blank">GitHub</a>
-      <a href="https://github.com/ethlima/eth-events/issues" target="_blank">Issues</a>
-      <a href="https://github.com/ethlima/eth-events/blob/main/README.md" target="_blank">Docs</a>
+      <a href="https://github.com/TU_USUARIO/eth-events" target="_blank">GitHub</a>
+      <a href="https://github.com/TU_USUARIO/eth-events/issues" target="_blank">Issues</a>
+      <a href="https://github.com/TU_USUARIO/eth-events/blob/main/README.md" target="_blank">Docs</a>
     </div>
   </footer>
 
@@ -1012,32 +866,32 @@
     // ──────────────────────────────────────────────
     // Carga eventos desde events.json (generado por GitHub Actions)
     // ──────────────────────────────────────────────
-    const REPO = 'ethlima/eth-events'; // ← CAMBIAR
+    const REPO = 'TU_USUARIO/eth-events'; // ← CAMBIAR
 
     async function loadEvents() {
       const grid = document.getElementById('events-grid');
       try {
-        // Carga el JSON generado automáticamente por el workflow
+        // 1. Carga events.json generado por el workflow
         const res = await fetch('./events.json?t=' + Date.now());
-        if (!res.ok) throw new Error('No events.json found');
-        const events = await res.json();
-        renderEvents(events);
+        if (!res.ok) throw new Error('no json');
+        const data = await res.json();
+        if (!Array.isArray(data)) throw new Error('bad json');
+        renderEvents(data);
       } catch {
-        // Fallback: carga directamente desde GitHub Issues API
+        // 2. Fallback: GitHub Issues API
         try {
           const res = await fetch(
-            `https://api.github.com/repos/${REPO}/issues?labels=approved&state=open&per_page=50`
+            `https://api.github.com/repos/${REPO}/issues?labels=approved&state=open&per_page=100`
           );
           const issues = await res.json();
-          if (!Array.isArray(issues)) throw new Error('API error');
-          const events = issues.map(parseIssue).filter(Boolean);
-          renderEvents(events);
+          if (!Array.isArray(issues)) throw new Error('api error');
+          renderEvents(issues.map(parseIssue));
         } catch {
           grid.innerHTML = `
             <div class="empty-state">
               <h3>Sin eventos aún</h3>
               <p>// Sé el primero en proponer un evento</p>
-              <a class="btn-primary" href="https://github.com/${REPO}/issues/new?template=event.md" target="_blank">
+              <a class="btn-primary" href="https://github.com/${REPO}/issues/new?template=event.yml" target="_blank">
                 + PROPONER EVENTO
               </a>
             </div>`;
@@ -1045,25 +899,33 @@
       }
     }
 
+    // Parsea body de GitHub Issue Forms (encabezados ###)
     function parseIssue(issue) {
       const body = issue.body || '';
-      const get = (label) => {
-        const re = new RegExp(`##\\s*[^#\\n]*${label}[^\\n]*\\n+([^\\n#]+)`, 'i');
+      function get(keyword) {
+        const re = new RegExp(
+          '###[^\n]*' + keyword + '[^\n]*\n+([\s\S]*?)(?=\n###|$)',
+          'i'
+        );
         const m = body.match(re);
-        return m ? m[1].trim() : '';
-      };
+        if (!m) return '';
+        return m[1]
+          .replace(/_No response_/gi, '')
+          .replace(/<!--[\s\S]*?-->/g, '')
+          .trim();
+      }
       return {
-        id: issue.number,
-        title: get('Nombre') || issue.title.replace(/\[EVENTO\]\s*/i, ''),
-        description: get('Descripción'),
-        date: get('Fecha'),
-        time: get('Hora'),
-        location: get('Ubicación'),
-        type: (get('Tipo') || 'meetup').toLowerCase().trim(),
-        link: get('Link'),
-        tags: get('Tags').split(',').map(t => t.trim()).filter(Boolean),
-        issueUrl: issue.html_url,
-        issueNum: issue.number,
+        id:          issue.number,
+        title:       get('Nombre') || issue.title.replace(/\[EVENTO\]\s*/i, ''),
+        description: get('Descripci'),
+        date:        get('Fecha'),
+        time:        get('Hora'),
+        location:    get('Ubicaci'),
+        type:        (get('Tipo') || 'meetup').toLowerCase().replace(/[^a-z]/g, ''),
+        link:        get('Link'),
+        tags:        get('Tags').split(',').map(t => t.trim()).filter(Boolean),
+        issueUrl:    issue.html_url,
+        issueNum:    issue.number,
       };
     }
 
@@ -1168,5 +1030,4 @@
     loadEvents();
   </script>
 </body>
-
 </html>
