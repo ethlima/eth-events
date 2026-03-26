@@ -1,0 +1,156 @@
+name: 🔖 Approve Event via Comment
+
+on:
+  issue_comment:
+    types: [created]
+
+permissions:
+  issues: write
+  contents: write
+
+jobs:
+  approve:
+    # Solo corre si el comentario es exactamente /approve o /reject
+    if: |
+      (github.event.comment.body == '/approve' || github.event.comment.body == '/reject') &&
+      !github.event.issue.pull_request
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Verificar permisos del comentador
+        id: check-permission
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const { data: perm } = await github.rest.repos.getCollaboratorPermissionLevel({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              username: context.actor,
+            });
+
+            const level = perm.permission; // admin, write, read, none
+            const allowed = ['admin', 'write'].includes(level);
+
+            console.log(`Usuario: ${context.actor} | Permiso: ${level} | Permitido: ${allowed}`);
+            core.setOutput('allowed', allowed ? 'true' : 'false');
+
+      - name: Aplicar /approve
+        if: |
+          steps.check-permission.outputs.allowed == 'true' &&
+          github.event.comment.body == '/approve'
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const issue = context.issue.number;
+
+            // Agrega label "approved", quita "pendiente"
+            await github.rest.issues.addLabels({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              issue_number: issue,
+              labels: ['approved'],
+            });
+
+            try {
+              await github.rest.issues.removeLabel({
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                issue_number: issue,
+                name: 'pendiente',
+              });
+            } catch {}
+
+            // Reacción ✅ al comentario
+            await github.rest.reactions.createForIssueComment({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              comment_id: context.payload.comment.id,
+              content: '+1',
+            });
+
+            // Comentario de confirmación
+            await github.rest.issues.createComment({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              issue_number: issue,
+              body: `✅ **Evento aprobado** por @${context.actor}.\n\nEl sitio se actualizará automáticamente en unos minutos. 🚀`,
+            });
+
+            console.log(`✅ Issue #${issue} aprobado por ${context.actor}`);
+
+      - name: Aplicar /reject
+        if: |
+          steps.check-permission.outputs.allowed == 'true' &&
+          github.event.comment.body == '/reject'
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const issue = context.issue.number;
+
+            // Agrega label "rechazado", quita "pendiente" y "approved"
+            await github.rest.issues.addLabels({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              issue_number: issue,
+              labels: ['rechazado'],
+            });
+
+            for (const label of ['pendiente', 'approved']) {
+              try {
+                await github.rest.issues.removeLabel({
+                  owner: context.repo.owner,
+                  repo: context.repo.repo,
+                  issue_number: issue,
+                  name: label,
+                });
+              } catch {}
+            }
+
+            // Reacción 👎 al comentario
+            await github.rest.reactions.createForIssueComment({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              comment_id: context.payload.comment.id,
+              content: '-1',
+            });
+
+            // Comentario de rechazo
+            await github.rest.issues.createComment({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              issue_number: issue,
+              body: `❌ **Evento rechazado** por @${context.actor}.\n\nSi crees que es un error, edita el issue y solicita una nueva revisión.`,
+            });
+
+            console.log(`❌ Issue #${issue} rechazado por ${context.actor}`);
+
+      - name: Sin permisos — ignorar
+        if: steps.check-permission.outputs.allowed == 'false'
+        uses: actions/github-script@v7
+        with:
+          script: |
+            // Reacción de "no autorizado" al comentario
+            await github.rest.reactions.createForIssueComment({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              comment_id: context.payload.comment.id,
+              content: 'confused',
+            });
+            console.log(`⛔ ${context.actor} no tiene permisos para aprobar eventos.`);
+
+      - name: Checkout (para trigger de sync)
+        if: steps.check-permission.outputs.allowed == 'true'
+        uses: actions/checkout@v4
+
+      - name: Trigger sync-events
+        if: steps.check-permission.outputs.allowed == 'true'
+        uses: actions/github-script@v7
+        with:
+          script: |
+            await github.rest.actions.createWorkflowDispatch({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              workflow_id: 'sync-events.yml',
+              ref: 'main',
+            });
+            console.log('🔄 sync-events.yml disparado');
