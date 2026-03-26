@@ -1,1 +1,19 @@
-[]
+[
+  {
+    "id": 1,
+    "title": "Founder School",
+    "description": "```markdown\nA 10-week, cohort-based, virtual, and equity-free program designed to help you go from zero to one.\n```",
+    "date": "2026-06-12",
+    "time": "",
+    "location": "Online",
+    "type": "meetup",
+    "link": "https://docs.google.com/forms/d/e/1FAIpQLSeC55SDLg9ZH8uwP1l2nJjeEFFr-IwZNTz5wQAfC37bxNe3vw/viewform",
+    "tags": [
+      "Cohorte"
+    ],
+    "organizer": "",
+    "issueUrl": "https://github.com/ethlima/eth-events/issues/1",
+    "issueNum": 1,
+    "createdAt": "2026-03-26T04:52:48Z"
+  }
+]
