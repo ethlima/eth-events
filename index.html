@@ -1,0 +1,1025 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>ETH Events — Comunidad</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=Syne:wght@400;600;800&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --bg: #0a0b0f;
+      --surface: #111318;
+      --surface2: #181b22;
+      --border: #1e2230;
+      --accent: #627eea;
+      --accent2: #8a9ff5;
+      --accent-glow: rgba(98,126,234,0.18);
+      --text: #e8eaf0;
+      --muted: #6b7280;
+      --success: #10b981;
+      --warning: #f59e0b;
+      --mono: 'Space Mono', monospace;
+      --sans: 'Syne', sans-serif;
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: var(--sans);
+      min-height: 100vh;
+      overflow-x: hidden;
+    }
+
+    /* Grid bg */
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background-image:
+        linear-gradient(rgba(98,126,234,0.04) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(98,126,234,0.04) 1px, transparent 1px);
+      background-size: 48px 48px;
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    /* Glow orb */
+    body::after {
+      content: '';
+      position: fixed;
+      top: -200px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 800px;
+      height: 500px;
+      background: radial-gradient(ellipse at center, rgba(98,126,234,0.12) 0%, transparent 70%);
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    /* NAV */
+    nav {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 40px;
+      height: 64px;
+      background: rgba(10,11,15,0.85);
+      backdrop-filter: blur(20px);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .nav-logo {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-family: var(--mono);
+      font-size: 14px;
+      font-weight: 700;
+      color: var(--accent);
+      letter-spacing: 0.08em;
+      text-decoration: none;
+    }
+
+    .nav-logo svg { width: 28px; height: 28px; }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 32px;
+      list-style: none;
+    }
+
+    .nav-links a {
+      font-family: var(--mono);
+      font-size: 12px;
+      color: var(--muted);
+      text-decoration: none;
+      letter-spacing: 0.1em;
+      transition: color 0.2s;
+    }
+
+    .nav-links a:hover { color: var(--text); }
+
+    .nav-cta {
+      font-family: var(--mono);
+      font-size: 12px;
+      padding: 8px 20px;
+      background: transparent;
+      border: 1px solid var(--accent);
+      color: var(--accent);
+      border-radius: 4px;
+      text-decoration: none;
+      letter-spacing: 0.08em;
+      transition: background 0.2s, color 0.2s;
+    }
+
+    .nav-cta:hover {
+      background: var(--accent);
+      color: #fff;
+    }
+
+    /* HERO */
+    .hero {
+      position: relative;
+      z-index: 1;
+      text-align: center;
+      padding: 100px 40px 80px;
+    }
+
+    .hero-tag {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      font-family: var(--mono);
+      font-size: 11px;
+      color: var(--accent);
+      letter-spacing: 0.15em;
+      background: rgba(98,126,234,0.08);
+      border: 1px solid rgba(98,126,234,0.2);
+      border-radius: 100px;
+      padding: 6px 16px;
+      margin-bottom: 32px;
+    }
+
+    .hero-tag::before {
+      content: '';
+      width: 6px; height: 6px;
+      background: var(--accent);
+      border-radius: 50%;
+      animation: pulse 2s infinite;
+    }
+
+    @keyframes pulse {
+      0%, 100% { opacity: 1; transform: scale(1); }
+      50% { opacity: 0.5; transform: scale(0.8); }
+    }
+
+    .hero h1 {
+      font-size: clamp(40px, 7vw, 80px);
+      font-weight: 800;
+      line-height: 1.05;
+      letter-spacing: -0.03em;
+      margin-bottom: 24px;
+    }
+
+    .hero h1 span {
+      background: linear-gradient(135deg, #627eea 0%, #a78bfa 50%, #627eea 100%);
+      background-size: 200% auto;
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      animation: shimmer 4s linear infinite;
+    }
+
+    @keyframes shimmer {
+      to { background-position: 200% center; }
+    }
+
+    .hero p {
+      font-size: 18px;
+      color: var(--muted);
+      max-width: 540px;
+      margin: 0 auto 48px;
+      line-height: 1.7;
+      font-weight: 400;
+    }
+
+    .hero-actions {
+      display: flex;
+      gap: 16px;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+
+    .btn-primary {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 14px 32px;
+      background: var(--accent);
+      color: #fff;
+      border-radius: 6px;
+      font-family: var(--mono);
+      font-size: 13px;
+      font-weight: 700;
+      text-decoration: none;
+      letter-spacing: 0.05em;
+      transition: transform 0.2s, box-shadow 0.2s;
+      box-shadow: 0 0 30px rgba(98,126,234,0.3);
+    }
+
+    .btn-primary:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 0 50px rgba(98,126,234,0.5);
+    }
+
+    .btn-secondary {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 14px 32px;
+      background: transparent;
+      color: var(--text);
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      font-family: var(--mono);
+      font-size: 13px;
+      text-decoration: none;
+      letter-spacing: 0.05em;
+      transition: border-color 0.2s, background 0.2s;
+    }
+
+    .btn-secondary:hover {
+      border-color: var(--accent);
+      background: var(--accent-glow);
+    }
+
+    /* STATS */
+    .stats {
+      position: relative;
+      z-index: 1;
+      display: flex;
+      justify-content: center;
+      gap: 1px;
+      background: var(--border);
+      border-top: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .stat {
+      flex: 1;
+      max-width: 200px;
+      text-align: center;
+      padding: 32px 24px;
+      background: var(--bg);
+    }
+
+    .stat-value {
+      font-family: var(--mono);
+      font-size: 28px;
+      font-weight: 700;
+      color: var(--accent);
+      display: block;
+      margin-bottom: 6px;
+    }
+
+    .stat-label {
+      font-size: 12px;
+      color: var(--muted);
+      letter-spacing: 0.1em;
+      font-family: var(--mono);
+    }
+
+    /* EVENTS SECTION */
+    .section {
+      position: relative;
+      z-index: 1;
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 80px 40px;
+    }
+
+    .section-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 48px;
+      flex-wrap: gap;
+    }
+
+    .section-title {
+      font-size: 28px;
+      font-weight: 800;
+      letter-spacing: -0.02em;
+    }
+
+    .section-title span {
+      color: var(--accent);
+    }
+
+    .filter-bar {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+
+    .filter-btn {
+      font-family: var(--mono);
+      font-size: 11px;
+      padding: 6px 14px;
+      border: 1px solid var(--border);
+      background: transparent;
+      color: var(--muted);
+      border-radius: 100px;
+      cursor: pointer;
+      letter-spacing: 0.08em;
+      transition: all 0.2s;
+    }
+
+    .filter-btn.active,
+    .filter-btn:hover {
+      border-color: var(--accent);
+      color: var(--accent);
+      background: var(--accent-glow);
+    }
+
+    /* EVENTS GRID */
+    .events-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+      gap: 20px;
+    }
+
+    .event-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      overflow: hidden;
+      transition: border-color 0.2s, transform 0.2s, box-shadow 0.2s;
+      position: relative;
+    }
+
+    .event-card:hover {
+      border-color: rgba(98,126,234,0.4);
+      transform: translateY(-4px);
+      box-shadow: 0 20px 60px rgba(0,0,0,0.4), 0 0 30px rgba(98,126,234,0.1);
+    }
+
+    .event-card::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 2px;
+      background: linear-gradient(90deg, transparent, var(--accent), transparent);
+      opacity: 0;
+      transition: opacity 0.2s;
+    }
+
+    .event-card:hover::before { opacity: 1; }
+
+    .event-header {
+      padding: 20px 20px 0;
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: 12px;
+    }
+
+    .event-type {
+      font-family: var(--mono);
+      font-size: 10px;
+      letter-spacing: 0.15em;
+      padding: 4px 10px;
+      border-radius: 100px;
+      font-weight: 700;
+    }
+
+    .type-conference { background: rgba(98,126,234,0.12); color: var(--accent); border: 1px solid rgba(98,126,234,0.25); }
+    .type-workshop { background: rgba(16,185,129,0.12); color: #10b981; border: 1px solid rgba(16,185,129,0.25); }
+    .type-hackathon { background: rgba(245,158,11,0.12); color: #f59e0b; border: 1px solid rgba(245,158,11,0.25); }
+    .type-meetup { background: rgba(167,139,250,0.12); color: #a78bfa; border: 1px solid rgba(167,139,250,0.25); }
+
+    .event-issue {
+      font-family: var(--mono);
+      font-size: 11px;
+      color: var(--muted);
+    }
+
+    .event-body {
+      padding: 16px 20px 20px;
+    }
+
+    .event-title {
+      font-size: 18px;
+      font-weight: 600;
+      line-height: 1.3;
+      margin-bottom: 10px;
+    }
+
+    .event-description {
+      font-size: 14px;
+      color: var(--muted);
+      line-height: 1.6;
+      margin-bottom: 20px;
+    }
+
+    .event-meta {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      padding-top: 16px;
+      border-top: 1px solid var(--border);
+    }
+
+    .meta-item {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-family: var(--mono);
+      font-size: 12px;
+      color: var(--muted);
+    }
+
+    .meta-item svg { width: 14px; height: 14px; flex-shrink: 0; color: var(--accent); }
+
+    .event-footer {
+      padding: 0 20px 20px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .event-tags {
+      display: flex;
+      gap: 6px;
+      flex-wrap: wrap;
+    }
+
+    .tag {
+      font-family: var(--mono);
+      font-size: 10px;
+      padding: 3px 8px;
+      background: var(--surface2);
+      border: 1px solid var(--border);
+      border-radius: 4px;
+      color: var(--muted);
+    }
+
+    .event-link {
+      font-family: var(--mono);
+      font-size: 11px;
+      color: var(--accent);
+      text-decoration: none;
+      display: flex;
+      align-items: center;
+      gap: 4px;
+      transition: gap 0.2s;
+    }
+
+    .event-link:hover { gap: 8px; }
+
+    /* EMPTY STATE */
+    .empty-state {
+      grid-column: 1/-1;
+      text-align: center;
+      padding: 80px 40px;
+      border: 1px dashed var(--border);
+      border-radius: 12px;
+    }
+
+    .empty-state h3 { font-size: 20px; margin-bottom: 10px; color: var(--muted); }
+    .empty-state p { font-size: 14px; color: var(--muted); margin-bottom: 24px; font-family: var(--mono); }
+
+    /* HOW IT WORKS */
+    .how-section {
+      position: relative;
+      z-index: 1;
+      background: var(--surface);
+      border-top: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .how-inner {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 80px 40px;
+    }
+
+    .how-title {
+      text-align: center;
+      font-size: 28px;
+      font-weight: 800;
+      margin-bottom: 16px;
+      letter-spacing: -0.02em;
+    }
+
+    .how-subtitle {
+      text-align: center;
+      color: var(--muted);
+      margin-bottom: 64px;
+      font-size: 15px;
+      font-family: var(--mono);
+    }
+
+    .steps {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 24px;
+    }
+
+    .step {
+      position: relative;
+      padding: 28px;
+      background: var(--bg);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+    }
+
+    .step-num {
+      font-family: var(--mono);
+      font-size: 11px;
+      color: var(--accent);
+      letter-spacing: 0.1em;
+      margin-bottom: 16px;
+    }
+
+    .step-icon {
+      width: 44px;
+      height: 44px;
+      background: var(--accent-glow);
+      border: 1px solid rgba(98,126,234,0.2);
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 16px;
+    }
+
+    .step-icon svg { width: 22px; height: 22px; color: var(--accent); }
+
+    .step h3 {
+      font-size: 16px;
+      font-weight: 600;
+      margin-bottom: 10px;
+    }
+
+    .step p {
+      font-size: 13px;
+      color: var(--muted);
+      line-height: 1.6;
+    }
+
+    .step code {
+      font-family: var(--mono);
+      font-size: 11px;
+      background: var(--surface2);
+      border: 1px solid var(--border);
+      padding: 2px 6px;
+      border-radius: 3px;
+      color: var(--accent2);
+    }
+
+    /* ISSUE TEMPLATE */
+    .template-section {
+      position: relative;
+      z-index: 1;
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 80px 40px;
+    }
+
+    .code-block {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      overflow: hidden;
+    }
+
+    .code-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 12px 20px;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .code-header span {
+      font-family: var(--mono);
+      font-size: 12px;
+      color: var(--muted);
+    }
+
+    .code-dots { display: flex; gap: 6px; }
+    .dot { width: 10px; height: 10px; border-radius: 50%; }
+    .dot-r { background: #ff5f57; }
+    .dot-y { background: #febc2e; }
+    .dot-g { background: #28c840; }
+
+    .code-content {
+      padding: 24px;
+      font-family: var(--mono);
+      font-size: 13px;
+      line-height: 1.8;
+      color: var(--text);
+      overflow-x: auto;
+    }
+
+    .code-content .c-key { color: #a78bfa; }
+    .code-content .c-val { color: #34d399; }
+    .code-content .c-comment { color: var(--muted); }
+    .code-content .c-accent { color: var(--accent2); }
+
+    /* FOOTER */
+    footer {
+      position: relative;
+      z-index: 1;
+      border-top: 1px solid var(--border);
+      padding: 40px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 20px;
+    }
+
+    .footer-left {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-family: var(--mono);
+      font-size: 12px;
+      color: var(--muted);
+    }
+
+    .footer-links {
+      display: flex;
+      gap: 24px;
+    }
+
+    .footer-links a {
+      font-family: var(--mono);
+      font-size: 12px;
+      color: var(--muted);
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+
+    .footer-links a:hover { color: var(--accent); }
+
+    /* LOADING */
+    .loading {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-family: var(--mono);
+      font-size: 13px;
+      color: var(--muted);
+      padding: 40px;
+      justify-content: center;
+      grid-column: 1/-1;
+    }
+
+    .spinner {
+      width: 16px;
+      height: 16px;
+      border: 2px solid var(--border);
+      border-top-color: var(--accent);
+      border-radius: 50%;
+      animation: spin 0.8s linear infinite;
+    }
+
+    @keyframes spin { to { transform: rotate(360deg); } }
+
+    /* RESPONSIVE */
+    @media (max-width: 768px) {
+      nav { padding: 0 20px; }
+      .nav-links { display: none; }
+      .hero { padding: 60px 20px 60px; }
+      .section { padding: 60px 20px; }
+      .section-header { flex-direction: column; align-items: flex-start; gap: 16px; }
+      footer { padding: 30px 20px; flex-direction: column; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- NAV -->
+  <nav>
+    <a class="nav-logo" href="#">
+      <svg viewBox="0 0 32 32" fill="none">
+        <polygon points="16,2 28,9 28,23 16,30 4,23 4,9" fill="none" stroke="#627eea" stroke-width="1.5"/>
+        <polygon points="16,8 22,12 22,20 16,24 10,20 10,12" fill="rgba(98,126,234,0.15)" stroke="#627eea" stroke-width="1"/>
+        <circle cx="16" cy="16" r="3" fill="#627eea"/>
+      </svg>
+      ETH_EVENTS
+    </a>
+    <ul class="nav-links">
+      <li><a href="#events">EVENTOS</a></li>
+      <li><a href="#how">CÓMO FUNCIONA</a></li>
+      <li><a href="#template">TEMPLATE</a></li>
+    </ul>
+    <a class="nav-cta" href="https://github.com/TU_USUARIO/eth-events/issues/new?template=event.md" target="_blank">
+      + NUEVO EVENTO
+    </a>
+  </nav>
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="hero-tag">POWERED BY GITHUB ISSUES</div>
+    <h1>Eventos de la<br /><span>Comunidad Web3</span></h1>
+    <p>Agrega tu evento abriendo un issue en GitHub. Sin formularios, sin permisos. Descentralizado como debe ser.</p>
+    <div class="hero-actions">
+      <a class="btn-primary" href="https://github.com/TU_USUARIO/eth-events/issues/new?template=event.md" target="_blank">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 5v14M5 12h14"/></svg>
+        PROPONER EVENTO
+      </a>
+      <a class="btn-secondary" href="https://github.com/TU_USUARIO/eth-events" target="_blank">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.477 2 2 6.477 2 12c0 4.418 2.865 8.166 6.839 9.489.5.092.682-.217.682-.482 0-.237-.009-.868-.013-1.703-2.782.604-3.369-1.341-3.369-1.341-.454-1.155-1.11-1.462-1.11-1.462-.908-.62.069-.608.069-.608 1.003.07 1.531 1.03 1.531 1.03.892 1.529 2.341 1.087 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.11-4.555-4.943 0-1.091.39-1.984 1.029-2.683-.103-.253-.446-1.27.098-2.647 0 0 .84-.269 2.75 1.025A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.294 2.747-1.025 2.747-1.025.546 1.377.202 2.394.1 2.647.64.699 1.028 1.592 1.028 2.683 0 3.842-2.339 4.687-4.566 4.93.359.309.678.919.678 1.852 0 1.336-.012 2.415-.012 2.744 0 .267.18.578.688.48C19.138 20.161 22 16.416 22 12c0-5.523-4.477-10-10-10z"/></svg>
+        VER EN GITHUB
+      </a>
+    </div>
+  </section>
+
+  <!-- STATS -->
+  <div class="stats" id="stats">
+    <div class="stat">
+      <span class="stat-value" id="stat-total">—</span>
+      <span class="stat-label">EVENTOS</span>
+    </div>
+    <div class="stat">
+      <span class="stat-value" id="stat-upcoming">—</span>
+      <span class="stat-label">PRÓXIMOS</span>
+    </div>
+    <div class="stat">
+      <span class="stat-value" id="stat-types">—</span>
+      <span class="stat-label">CATEGORÍAS</span>
+    </div>
+  </div>
+
+  <!-- EVENTS -->
+  <section class="section" id="events">
+    <div class="section-header">
+      <h2 class="section-title">Próximos <span>Eventos</span></h2>
+      <div class="filter-bar" id="filter-bar">
+        <button class="filter-btn active" data-filter="all">TODOS</button>
+      </div>
+    </div>
+    <div class="events-grid" id="events-grid">
+      <div class="loading"><div class="spinner"></div> CARGANDO EVENTOS...</div>
+    </div>
+  </section>
+
+  <!-- HOW IT WORKS -->
+  <div class="how-section" id="how">
+    <div class="how-inner">
+      <h2 class="how-title">¿Cómo agregar un evento?</h2>
+      <p class="how-subtitle">// sin backend · sin base de datos · solo GitHub</p>
+      <div class="steps">
+        <div class="step">
+          <div class="step-num">PASO 01</div>
+          <div class="step-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M9 12h6M9 16h6M9 8h6M5 20h14a2 2 0 002-2V6a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"/></svg>
+          </div>
+          <h3>Abre un Issue</h3>
+          <p>Ve al repositorio en GitHub y abre un nuevo issue usando el template <code>event.md</code>. Llena los campos del formulario.</p>
+        </div>
+        <div class="step">
+          <div class="step-num">PASO 02</div>
+          <div class="step-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M7 7h10v10H7z"/><path d="M7 7L4 4m13 3l3-3M7 17l-3 3m13-3l3 3"/></svg>
+          </div>
+          <h3>GitHub Actions</h3>
+          <p>Un workflow automático se dispara, parsea el issue y regenera el archivo <code>events.json</code> con los datos del evento.</p>
+        </div>
+        <div class="step">
+          <div class="step-num">PASO 03</div>
+          <div class="step-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M13 10V3L4 14h7v7l9-11h-7z"/></svg>
+          </div>
+          <h3>Deploy automático</h3>
+          <p>GitHub Pages se actualiza automáticamente y el evento aparece en el sitio en minutos. Sin intervención manual.</p>
+        </div>
+        <div class="step">
+          <div class="step-num">PASO 04</div>
+          <div class="step-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0z"/></svg>
+          </div>
+          <h3>Comunidad revisa</h3>
+          <p>Los maintainers pueden aprobar, cerrar o etiquetar issues. Solo eventos con label <code>approved</code> se publican.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ISSUE TEMPLATE -->
+  <section class="template-section" id="template">
+    <h2 class="section-title" style="margin-bottom: 8px">Template de <span style="color:var(--accent)">Issue</span></h2>
+    <p style="font-family:var(--mono);font-size:13px;color:var(--muted);margin-bottom:32px">// .github/ISSUE_TEMPLATE/event.md</p>
+    <div class="code-block">
+      <div class="code-header">
+        <div class="code-dots">
+          <div class="dot dot-r"></div>
+          <div class="dot dot-y"></div>
+          <div class="dot dot-g"></div>
+        </div>
+        <span>event.md</span>
+        <span>ISSUE TEMPLATE</span>
+      </div>
+      <div class="code-content">
+<span class="c-comment">---</span><br>
+<span class="c-key">name</span>: <span class="c-val">📅 Nuevo Evento</span><br>
+<span class="c-key">about</span>: <span class="c-val">Propón un evento para la comunidad</span><br>
+<span class="c-key">title</span>: <span class="c-val">"[EVENTO] Nombre del Evento"</span><br>
+<span class="c-key">labels</span>: <span class="c-val">evento, pendiente</span><br>
+<span class="c-comment">---</span><br>
+<br>
+<span class="c-accent">## 📌 Nombre del Evento</span><br>
+<span class="c-comment">&lt;!-- Nombre completo del evento --&gt;</span><br>
+<br>
+<span class="c-accent">## 📝 Descripción</span><br>
+<span class="c-comment">&lt;!-- Describe el evento en 2-3 líneas --&gt;</span><br>
+<br>
+<span class="c-accent">## 🗓️ Fecha</span><br>
+<span class="c-comment">&lt;!-- Formato: YYYY-MM-DD --&gt;</span><br>
+<br>
+<span class="c-accent">## ⏰ Hora</span><br>
+<span class="c-comment">&lt;!-- Formato: HH:MM (UTC-5) --&gt;</span><br>
+<br>
+<span class="c-accent">## 📍 Ubicación</span><br>
+<span class="c-comment">&lt;!-- Ciudad, País o "Online" --&gt;</span><br>
+<br>
+<span class="c-accent">## 🏷️ Tipo</span><br>
+<span class="c-comment">&lt;!-- conference | workshop | hackathon | meetup --&gt;</span><br>
+<br>
+<span class="c-accent">## 🔗 Link de registro</span><br>
+<span class="c-comment">&lt;!-- URL de registro o más info --&gt;</span><br>
+<br>
+<span class="c-accent">## 🏷️ Tags</span><br>
+<span class="c-comment">&lt;!-- ej: ethereum, solidity, defi, nft --&gt;</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="footer-left">
+      <svg width="18" height="18" viewBox="0 0 32 32" fill="none">
+        <polygon points="16,2 28,9 28,23 16,30 4,23 4,9" stroke="#627eea" stroke-width="1.5" fill="none"/>
+        <circle cx="16" cy="16" r="3" fill="#627eea"/>
+      </svg>
+      ETH_EVENTS © 2025 — Powered by GitHub
+    </div>
+    <div class="footer-links">
+      <a href="https://github.com/TU_USUARIO/eth-events" target="_blank">GitHub</a>
+      <a href="https://github.com/TU_USUARIO/eth-events/issues" target="_blank">Issues</a>
+      <a href="https://github.com/TU_USUARIO/eth-events/blob/main/README.md" target="_blank">Docs</a>
+    </div>
+  </footer>
+
+  <script>
+    // ──────────────────────────────────────────────
+    // Carga eventos desde events.json (generado por GitHub Actions)
+    // ──────────────────────────────────────────────
+    const REPO = 'TU_USUARIO/eth-events'; // ← CAMBIAR
+
+    async function loadEvents() {
+      const grid = document.getElementById('events-grid');
+      try {
+        // Carga el JSON generado automáticamente por el workflow
+        const res = await fetch('./events.json?t=' + Date.now());
+        if (!res.ok) throw new Error('No events.json found');
+        const events = await res.json();
+        renderEvents(events);
+      } catch {
+        // Fallback: carga directamente desde GitHub Issues API
+        try {
+          const res = await fetch(
+            `https://api.github.com/repos/${REPO}/issues?labels=approved&state=open&per_page=50`
+          );
+          const issues = await res.json();
+          if (!Array.isArray(issues)) throw new Error('API error');
+          const events = issues.map(parseIssue).filter(Boolean);
+          renderEvents(events);
+        } catch {
+          grid.innerHTML = `
+            <div class="empty-state">
+              <h3>Sin eventos aún</h3>
+              <p>// Sé el primero en proponer un evento</p>
+              <a class="btn-primary" href="https://github.com/${REPO}/issues/new?template=event.md" target="_blank">
+                + PROPONER EVENTO
+              </a>
+            </div>`;
+        }
+      }
+    }
+
+    function parseIssue(issue) {
+      const body = issue.body || '';
+      const get = (label) => {
+        const re = new RegExp(`##\\s*[^#\\n]*${label}[^\\n]*\\n+([^\\n#]+)`, 'i');
+        const m = body.match(re);
+        return m ? m[1].trim() : '';
+      };
+      return {
+        id: issue.number,
+        title: get('Nombre') || issue.title.replace(/\[EVENTO\]\s*/i, ''),
+        description: get('Descripción'),
+        date: get('Fecha'),
+        time: get('Hora'),
+        location: get('Ubicación'),
+        type: (get('Tipo') || 'meetup').toLowerCase().trim(),
+        link: get('Link'),
+        tags: get('Tags').split(',').map(t => t.trim()).filter(Boolean),
+        issueUrl: issue.html_url,
+        issueNum: issue.number,
+      };
+    }
+
+    function renderEvents(events) {
+      const grid = document.getElementById('events-grid');
+      const filterBar = document.getElementById('filter-bar');
+
+      // Stats
+      const upcoming = events.filter(e => e.date && new Date(e.date) >= new Date());
+      document.getElementById('stat-total').textContent = events.length;
+      document.getElementById('stat-upcoming').textContent = upcoming.length;
+      const types = [...new Set(events.map(e => e.type))];
+      document.getElementById('stat-types').textContent = types.length;
+
+      // Filters
+      types.forEach(t => {
+        const btn = document.createElement('button');
+        btn.className = 'filter-btn';
+        btn.dataset.filter = t;
+        btn.textContent = t.toUpperCase();
+        btn.onclick = () => applyFilter(t, events);
+        filterBar.appendChild(btn);
+      });
+
+      if (events.length === 0) {
+        grid.innerHTML = `
+          <div class="empty-state">
+            <h3>Sin eventos aún</h3>
+            <p>// Sé el primero en proponer un evento</p>
+            <a class="btn-primary" href="https://github.com/${REPO}/issues/new?template=event.md" target="_blank">+ PROPONER EVENTO</a>
+          </div>`;
+        return;
+      }
+
+      renderGrid(events, events);
+    }
+
+    function applyFilter(filter, allEvents) {
+      document.querySelectorAll('.filter-btn').forEach(b => {
+        b.classList.toggle('active', b.dataset.filter === filter);
+      });
+      const filtered = filter === 'all' ? allEvents : allEvents.filter(e => e.type === filter);
+      renderGrid(filtered, allEvents);
+    }
+
+    function renderGrid(events, allEvents) {
+      const grid = document.getElementById('events-grid');
+      if (events.length === 0) {
+        grid.innerHTML = `<div class="empty-state"><h3>Sin eventos de este tipo</h3><p>// Prueba otro filtro</p></div>`;
+        return;
+      }
+      grid.innerHTML = events.map(e => cardHTML(e)).join('');
+      // Re-bind filter buttons
+      document.querySelectorAll('.filter-btn').forEach(btn => {
+        btn.onclick = () => applyFilter(btn.dataset.filter, allEvents);
+      });
+    }
+
+    function cardHTML(e) {
+      const typeClass = {
+        conference: 'type-conference',
+        workshop: 'type-workshop',
+        hackathon: 'type-hackathon',
+        meetup: 'type-meetup',
+      }[e.type] || 'type-meetup';
+
+      const dateStr = e.date ? new Date(e.date + 'T00:00').toLocaleDateString('es', {
+        day: 'numeric', month: 'short', year: 'numeric'
+      }) : 'Por confirmar';
+
+      const tagsHTML = e.tags.slice(0, 3).map(t => `<span class="tag">#${t}</span>`).join('');
+
+      return `
+        <div class="event-card">
+          <div class="event-header">
+            <span class="event-type ${typeClass}">${e.type.toUpperCase()}</span>
+            <span class="event-issue">#${e.issueNum}</span>
+          </div>
+          <div class="event-body">
+            <h3 class="event-title">${e.title}</h3>
+            <p class="event-description">${e.description || 'Sin descripción.'}</p>
+            <div class="event-meta">
+              <div class="meta-item">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+                ${dateStr}${e.time ? ' · ' + e.time : ''}
+              </div>
+              <div class="meta-item">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>
+                ${e.location || 'Sin definir'}
+              </div>
+            </div>
+          </div>
+          <div class="event-footer">
+            <div class="event-tags">${tagsHTML}</div>
+            <a class="event-link" href="${e.link || e.issueUrl}" target="_blank">
+              VER →
+            </a>
+          </div>
+        </div>`;
+    }
+
+    loadEvents();
+  </script>
+</body>
+</html>
