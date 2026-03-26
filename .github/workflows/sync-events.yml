@@ -1,0 +1,92 @@
+name: 📅 Sync Events from Issues
+
+on:
+  issues:
+    types: [opened, edited, labeled, unlabeled, closed, reopened]
+  workflow_dispatch:
+
+permissions:
+  contents: write
+  issues: read
+
+jobs:
+  sync-events:
+    runs-on: ubuntu-latest
+    name: Parse issues → events.json
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Generate events.json
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const fs = require('fs');
+
+            // Trae todos los issues con label "approved"
+            const { data: issues } = await github.rest.issues.listForRepo({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              labels: 'approved',
+              state: 'open',
+              per_page: 100,
+            });
+
+            function extract(body, label) {
+              if (!body) return '';
+              const re = new RegExp(
+                `##\\s*[^#\\n]*${label}[^\\n]*\\n+([^\\n#]+)`,
+                'i'
+              );
+              const m = body.match(re);
+              return m ? m[1].replace(/<!--.*?-->/gs, '').trim() : '';
+            }
+
+            const events = issues.map(issue => {
+              const body = issue.body || '';
+              return {
+                id: issue.number,
+                title: extract(body, 'Nombre') || issue.title.replace(/\[EVENTO\]\s*/i, ''),
+                description: extract(body, 'Descripción'),
+                date: extract(body, 'Fecha'),
+                time: extract(body, 'Hora'),
+                location: extract(body, 'Ubicación'),
+                type: (extract(body, 'Tipo') || 'meetup').toLowerCase().trim(),
+                link: extract(body, 'Link'),
+                tags: extract(body, 'Tags')
+                  .split(',')
+                  .map(t => t.trim())
+                  .filter(Boolean),
+                issueUrl: issue.html_url,
+                issueNum: issue.number,
+                createdAt: issue.created_at,
+              };
+            });
+
+            // Ordena por fecha ascendente
+            events.sort((a, b) => {
+              if (!a.date) return 1;
+              if (!b.date) return -1;
+              return new Date(a.date) - new Date(b.date);
+            });
+
+            fs.writeFileSync(
+              'events.json',
+              JSON.stringify(events, null, 2)
+            );
+
+            console.log(`✅ Generados ${events.length} eventos`);
+
+      - name: Commit events.json
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add events.json
+          git diff --cached --quiet || git commit -m "chore: sync events.json [skip ci]"
+          git push
