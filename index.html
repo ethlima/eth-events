@@ -1055,6 +1055,8 @@
         if (!m) return '';
         const val = m[1] || '';
         return val
+          .replace(/^```markdown\s*/gi, '')
+          .replace(/```\s*$/g, '')
           .replace(/_No response_/gi, '')
           .replace(/<!--[\s\S]*?-->/g, '')
           .trim();
