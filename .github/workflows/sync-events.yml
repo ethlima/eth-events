@@ -15,6 +15,14 @@ concurrency:
 
 jobs:
   sync-events:
+    # Solo corre si es manual, si se agrega/quita el label 'approved', 
+    # o si se edita un issue que ya está aprobado.
+    if: |
+      github.event_name == 'workflow_dispatch' ||
+      (github.event_name == 'issues' && (
+        github.event.label.name == 'approved' || 
+        contains(github.event.issue.labels.*.name, 'approved')
+      ))
     runs-on: ubuntu-latest
     name: Parse issues → events.json
 
