@@ -1,0 +1,119 @@
+name: 📅 Nuevo Evento
+description: Propón un evento para la comunidad Web3. Será revisado y publicado en el sitio.
+title: "[EVENTO] "
+labels:
+  - evento
+  - pendiente
+assignees: []
+
+body:
+  - type: markdown
+    attributes:
+      value: |
+        ## ◈ Propón tu evento
+        Completa el formulario. Los maintainers revisarán y al aprobar aparecerá en el sitio automáticamente.
+        > Los campos marcados con * son obligatorios.
+
+  - type: input
+    id: nombre
+    attributes:
+      label: 📌 Nombre del Evento
+      description: Nombre completo y descriptivo del evento.
+      placeholder: "ETHLima Meetup — Julio 2025"
+    validations:
+      required: true
+
+  - type: textarea
+    id: descripcion
+    attributes:
+      label: 📝 Descripción
+      description: Describe el evento en 2-3 líneas. ¿De qué trata? ¿A quién va dirigido?
+      placeholder: "Charlas técnicas sobre L2s y ZK proofs. Networking y demos en vivo..."
+      render: markdown
+    validations:
+      required: true
+
+  - type: input
+    id: fecha
+    attributes:
+      label: 🗓️ Fecha
+      description: Formato YYYY-MM-DD
+      placeholder: "2025-08-15"
+    validations:
+      required: true
+
+  - type: input
+    id: hora
+    attributes:
+      label: ⏰ Hora
+      description: Hora local con zona horaria
+      placeholder: "19:00 (UTC-5 Lima)"
+    validations:
+      required: false
+
+  - type: input
+    id: ubicacion
+    attributes:
+      label: 📍 Ubicación
+      description: Ciudad y país, o "Online" si es virtual.
+      placeholder: "Lima, Perú"
+    validations:
+      required: true
+
+  - type: dropdown
+    id: tipo
+    attributes:
+      label: 🏷️ Tipo de evento
+      description: Selecciona la categoría que mejor describe el evento.
+      options:
+        - meetup
+        - conference
+        - workshop
+        - hackathon
+    validations:
+      required: true
+
+  - type: input
+    id: link
+    attributes:
+      label: 🔗 Link de registro / más info
+      description: URL del evento (Eventbrite, Luma, sitio oficial, etc.)
+      placeholder: "https://..."
+    validations:
+      required: false
+
+  - type: input
+    id: tags
+    attributes:
+      label: 🏷️ Tags
+      description: Palabras clave separadas por coma.
+      placeholder: "ethereum, solidity, defi, layer2"
+    validations:
+      required: false
+
+  - type: input
+    id: organizador
+    attributes:
+      label: 👤 Organizador / Contacto
+      description: Nombre o handle de quien organiza el evento.
+      placeholder: "@tuhandle o Nombre Organización"
+    validations:
+      required: false
+
+  - type: checkboxes
+    id: confirmacion
+    attributes:
+      label: ✅ Confirmación
+      options:
+        - label: El evento es real y tiene fecha confirmada.
+          required: true
+        - label: Acepto que los maintainers pueden editar o rechazar el issue.
+          required: true
+        - label: El evento está relacionado con Web3 / Ethereum / blockchain.
+          required: true
+
+  - type: markdown
+    attributes:
+      value: |
+        ---
+        > 🔁 **¿Qué pasa después?** Un maintainer revisará este issue. Si todo está bien, agregará el label `approved` y el evento aparecerá en el sitio en minutos.

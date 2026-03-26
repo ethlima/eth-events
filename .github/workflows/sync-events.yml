@@ -38,14 +38,20 @@ jobs:
               per_page: 100,
             });
 
-            function extract(body, label) {
+            // Issue Forms genera secciones con encabezados H3
+            // Ejemplo: "### 📌 Nombre del Evento\n\nValor aquí\n\n"
+            function extract(body, heading) {
               if (!body) return '';
               const re = new RegExp(
-                `##\\s*[^#\\n]*${label}[^\\n]*\\n+([^\\n#]+)`,
+                `###\\s*[^\\n]*${heading}[^\\n]*\\n+([\\s\\S]*?)(?=\\n###|$)`,
                 'i'
               );
               const m = body.match(re);
-              return m ? m[1].replace(/<!--.*?-->/gs, '').trim() : '';
+              if (!m) return '';
+              return m[1]
+                .replace(/<!--.*?-->/gs, '')
+                .replace(/_No response_/gi, '')
+                .trim();
             }
 
             const events = issues.map(issue => {
@@ -63,6 +69,7 @@ jobs:
                   .split(',')
                   .map(t => t.trim())
                   .filter(Boolean),
+                organizer: extract(body, 'Organizador'),
                 issueUrl: issue.html_url,
                 issueNum: issue.number,
                 createdAt: issue.created_at,
