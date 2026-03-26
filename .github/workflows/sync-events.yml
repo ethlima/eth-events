@@ -75,7 +75,10 @@ jobs:
             }
 
             function clean(str) {
-              return (str || '').trim();
+              return (str || '')
+                .replace(/^```markdown\s*/gi, '')
+                .replace(/```\s*$/g, '')
+                .trim();
             }
 
             const events = issues.map(issue => {
