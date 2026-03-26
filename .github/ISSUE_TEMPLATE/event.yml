@@ -43,6 +43,15 @@ body:
       required: true
 
   - type: input
+    id: fecha-fin
+    attributes:
+      label: 🗓️ Fecha de fin (opcional)
+      description: Solo si el evento dura varios días. Formato YYYY-MM-DD
+      placeholder: "2025-08-17"
+    validations:
+      required: false
+
+  - type: input
     id: hora
     attributes:
       label: ⏰ Hora
