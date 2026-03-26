@@ -1081,21 +1081,26 @@
       const pastSection = document.getElementById('past-events');
       const filterBar = document.getElementById('filter-bar');
 
-      // Sorting "decente": Próximos (ascendente: los más cercanos arriba), Pasados (descendente: los más recientes arriba)
       const now = new Date();
       now.setHours(0, 0, 0, 0);
 
-      const allWithDates = events.map(e => ({
-        ...e,
-        _dateObj: e.date ? new Date(e.date + 'T00:00') : new Date('2099-12-31')
-      }));
+      const allWithDates = events.map(e => {
+        const start = e.date ? new Date(e.date + 'T00:00') : new Date('2099-12-31');
+        const end = (e.endDate && e.endDate !== '') ? new Date(e.endDate + 'T00:00') : start;
+        return {
+          ...e,
+          _dateObj: start,
+          _endObj: end,
+          _isPast: end < now
+        };
+      });
 
       const upcoming = allWithDates
-        .filter(e => e._dateObj >= now)
+        .filter(e => !e._isPast)
         .sort((a, b) => a._dateObj - b._dateObj);
 
       const past = allWithDates
-        .filter(e => e._dateObj < now)
+        .filter(e => e._isPast)
         .sort((a, b) => b._dateObj - a._dateObj);
 
       // Stats
@@ -1145,7 +1150,13 @@
 
       const now = new Date();
       now.setHours(0, 0, 0, 0);
-      const filteredUpcoming = filtered.filter(e => !e.date || new Date(e.date + 'T00:00') >= now);
+
+      const filteredUpcoming = filtered.filter(e => {
+        const start = e.date ? new Date(e.date + 'T00:00') : new Date('2099-12-31');
+        const end = (e.endDate && e.endDate !== '') ? new Date(e.endDate + 'T00:00') : start;
+        return end >= now;
+      });
+
       renderGrid(filteredUpcoming, allEvents);
     }
 
