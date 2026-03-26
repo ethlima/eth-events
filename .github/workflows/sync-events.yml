@@ -8,9 +8,11 @@ on:
 permissions:
   contents: write
   issues: read
+  pages: write
+  id-token: write
 
 concurrency:
-  group: sync-events
+  group: sync-deploy
   cancel-in-progress: true
 
 jobs:
@@ -24,7 +26,10 @@ jobs:
         contains(github.event.issue.labels.*.name, 'approved')
       ))
     runs-on: ubuntu-latest
-    name: Parse issues → events.json
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    name: Parse issues → events.json → deploy
 
     steps:
       - name: Checkout
@@ -139,3 +144,15 @@ jobs:
           # sync seguro
           git pull --rebase origin main
           git push origin main
+
+      - name: Setup Pages
+        uses: actions/configure-pages@v4
+
+      - name: Upload artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: '.'
+
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
