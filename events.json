@@ -1,5 +1,22 @@
 [
   {
+    "id": 5,
+    "title": "GenLayer Hackathon — Bradbury Builders",
+    "description": "```markdown\nA 2-week, fully online hackathon with 6 AI-native tracks, $5K+ in prizes, and onchain fee-sharing mechanics.\nSubmissions close April 3rd.\n```",
+    "date": "2026-03-20",
+    "time": "",
+    "location": "Online",
+    "type": "hackathon",
+    "link": "https://portal.genlayer.foundation/#/hackathon",
+    "tags": [
+      "GenLayer"
+    ],
+    "organizer": "",
+    "issueUrl": "https://github.com/ethlima/eth-events/issues/5",
+    "issueNum": 5,
+    "createdAt": "2026-03-26T13:23:48Z"
+  },
+  {
     "id": 3,
     "title": "GenLayer Hackathon — Bradbury Builders",
     "description": "```markdown\nA 2-week, fully online hackathon with 6 AI-native tracks, $5K+ in prizes, and onchain fee-sharing mechanics.\nSubmissions close April 3rd.\n```",
