@@ -1,9 +1,29 @@
 [
   {
+    "id": 5,
+    "title": "GenLayer Hackathon — Bradbury Builders",
+    "description": "```markdown\nA 2-week, fully online hackathon with 6 AI-native tracks, $5K+ in prizes, and onchain fee-sharing mechanics.\nSubmissions close April 3rd.\n```",
+    "date": "2026-03-20",
+    "endDate": "2026-04-03",
+    "time": "",
+    "location": "Online",
+    "type": "hackathon",
+    "link": "https://portal.genlayer.foundation/#/hackathon",
+    "tags": [
+      "genlayer"
+    ],
+    "organizer": "",
+    "issueUrl": "https://github.com/ethlima/eth-events/issues/5",
+    "issueNum": 5,
+    "state": "open",
+    "createdAt": "2026-03-26T13:23:48Z"
+  },
+  {
     "id": 3,
     "title": "GenLayer Hackathon — Bradbury Builders",
     "description": "```markdown\nA 2-week, fully online hackathon with 6 AI-native tracks, $5K+ in prizes, and onchain fee-sharing mechanics.\nSubmissions close April 3rd.\n```",
     "date": "2026-03-20",
+    "endDate": "",
     "time": "",
     "location": "Online",
     "type": "hackathon",
@@ -12,6 +32,7 @@
     "organizer": "",
     "issueUrl": "https://github.com/ethlima/eth-events/issues/3",
     "issueNum": 3,
+    "state": "open",
     "createdAt": "2026-03-26T05:30:20Z"
   },
   {
@@ -19,6 +40,7 @@
     "title": "PL Genesis Hackathon: Frontiers of Collaboration",
     "description": "```markdown\nA global builder competition with over $150,000 in rewards and two tracks: Fresh Code and Existing Code.\nSubmissions close March 31, 2026.\n```",
     "date": "2026-04-01",
+    "endDate": "",
     "time": "",
     "location": "Online",
     "type": "hackathon",
@@ -27,13 +49,34 @@
     "organizer": "Protocolo Labs",
     "issueUrl": "https://github.com/ethlima/eth-events/issues/2",
     "issueNum": 2,
+    "state": "open",
     "createdAt": "2026-03-26T05:12:21Z"
+  },
+  {
+    "id": 1,
+    "title": "Founder School",
+    "description": "```markdown\nA 10-week, cohort-based, virtual, and equity-free program designed to help you go from zero to one.\n```",
+    "date": "2026-06-12",
+    "endDate": "",
+    "time": "",
+    "location": "Online",
+    "type": "meetup",
+    "link": "https://docs.google.com/forms/d/e/1FAIpQLSeC55SDLg9ZH8uwP1l2nJjeEFFr-IwZNTz5wQAfC37bxNe3vw/viewform",
+    "tags": [
+      "cohorte"
+    ],
+    "organizer": "",
+    "issueUrl": "https://github.com/ethlima/eth-events/issues/1",
+    "issueNum": 1,
+    "state": "closed",
+    "createdAt": "2026-03-26T04:52:48Z"
   },
   {
     "id": 4,
     "title": "Founder School",
     "description": "```markdown\nA 10-week, cohort-based, virtual, and equity-free program designed to help you go from zero to one.\n```",
     "date": "2026-06-20",
+    "endDate": "",
     "time": "",
     "location": "Online",
     "type": "meetup",
@@ -42,6 +85,7 @@
     "organizer": "",
     "issueUrl": "https://github.com/ethlima/eth-events/issues/4",
     "issueNum": 4,
+    "state": "open",
     "createdAt": "2026-03-26T06:02:41Z"
   }
 ]
