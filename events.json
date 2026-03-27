@@ -2,25 +2,28 @@
   {
     "id": 5,
     "title": "GenLayer Hackathon — Bradbury Builders",
-    "description": "```markdown\nA 2-week, fully online hackathon with 6 AI-native tracks, $5K+ in prizes, and onchain fee-sharing mechanics.\nSubmissions close April 3rd.\n```",
+    "description": "A 2-week, fully online hackathon with 6 AI-native tracks, $5K+ in prizes, and onchain fee-sharing mechanics.\nSubmissions close April 3rd.",
     "date": "2026-03-20",
+    "endDate": "2026-04-03",
     "time": "",
     "location": "Online",
     "type": "hackathon",
     "link": "https://portal.genlayer.foundation/#/hackathon",
     "tags": [
-      "GenLayer"
+      "genlayer"
     ],
     "organizer": "",
     "issueUrl": "https://github.com/ethlima/eth-events/issues/5",
     "issueNum": 5,
+    "state": "open",
     "createdAt": "2026-03-26T13:23:48Z"
   },
   {
     "id": 2,
     "title": "PL Genesis Hackathon: Frontiers of Collaboration",
-    "description": "```markdown\nA global builder competition with over $150,000 in rewards and two tracks: Fresh Code and Existing Code.\nSubmissions close March 31, 2026.\n```",
+    "description": "A global builder competition with over $150,000 in rewards and two tracks: Fresh Code and Existing Code.\nSubmissions close March 31, 2026.",
     "date": "2026-04-01",
+    "endDate": "",
     "time": "",
     "location": "Online",
     "type": "hackathon",
@@ -29,13 +32,15 @@
     "organizer": "Protocolo Labs",
     "issueUrl": "https://github.com/ethlima/eth-events/issues/2",
     "issueNum": 2,
+    "state": "open",
     "createdAt": "2026-03-26T05:12:21Z"
   },
   {
     "id": 10,
     "title": "Solana Latam Builders Program",
-    "description": "```markdown\n​El Solana LATAM Builders Program es un bootcamp intensivo, gratuito y guiado donde aprenderás a desarrollar Solana Programs desde cero, entender su arquitectura basada en cuentas y llevar tu primer proyecto funcional hasta despliegue.\n```",
+    "description": "​El Solana LATAM Builders Program es un bootcamp intensivo, gratuito y guiado donde aprenderás a desarrollar Solana Programs desde cero, entender su arquitectura basada en cuentas y llevar tu primer proyecto funcional hasta despliegue.",
     "date": "2026-04-13",
+    "endDate": "2026-04-27",
     "time": "",
     "location": "Online",
     "type": "bootcamp",
@@ -46,13 +51,15 @@
     "organizer": "Way Learn",
     "issueUrl": "https://github.com/ethlima/eth-events/issues/10",
     "issueNum": 10,
+    "state": "open",
     "createdAt": "2026-03-27T01:50:49Z"
   },
   {
     "id": 6,
     "title": "Open Agents",
-    "description": "```markdown\n> dates: April 24–May 6\n> prizes: $50,000+ USD 💸\n> think: autonomous agents, agentic finance, onchain infra\n```",
+    "description": "> dates: April 24–May 6\n> prizes: $50,000+ USD 💸\n> think: autonomous agents, agentic finance, onchain infra",
     "date": "2026-04-24",
+    "endDate": "2026-05-06",
     "time": "",
     "location": "Async",
     "type": "hackathon",
@@ -61,13 +68,15 @@
     "organizer": "Eth Global",
     "issueUrl": "https://github.com/ethlima/eth-events/issues/6",
     "issueNum": 6,
+    "state": "open",
     "createdAt": "2026-03-26T13:48:20Z"
   },
   {
     "id": 7,
     "title": "Zero to Agent: Lima - UNI",
-    "description": "```markdown\n​Zero to Agent es una semana de construcción global donde pasamos de una idea a un agente de IA real, desplegado y funcional usando v0 + Vercel. Pero tú y yo nos reuniremos el sábado 25 de abril en la Universidad Nacional de Ingeniería (UNI), en un solo espacio para crear, colaborar y, sobre todo, entregar.\n```",
+    "description": "​Zero to Agent es una semana de construcción global donde pasamos de una idea a un agente de IA real, desplegado y funcional usando v0 + Vercel. Pero tú y yo nos reuniremos el sábado 25 de abril en la Universidad Nacional de Ingeniería (UNI), en un solo espacio para crear, colaborar y, sobre todo, entregar.",
     "date": "2026-04-25",
+    "endDate": "",
     "time": "",
     "location": "Universidad Nacional de Ingeniería",
     "type": "workshop",
@@ -76,13 +85,15 @@
     "organizer": "Eduardo Ruiz",
     "issueUrl": "https://github.com/ethlima/eth-events/issues/7",
     "issueNum": 7,
+    "state": "open",
     "createdAt": "2026-03-26T22:18:07Z"
   },
   {
     "id": 9,
     "title": "Ethereum Mexico 2026",
-    "description": "```markdown\n🌐 Global Hybrid Hackathon: May 4 – June 3 | Online\n🏗 In-Person Builder Sessions: June 4 – 5 | Bitso Offices, Mexico City\n🇲🇽 ETH Mexico 2026 | Main Event TBA | Mexico City\n🏦 Stablecoin Conference by Bitso Business: June 15 – 16 | Mexico City\n```",
+    "description": "🌐 Global Hybrid Hackathon: May 4 – June 3 | Online\n🏗 In-Person Builder Sessions: June 4 – 5 | Bitso Offices, Mexico City\n🇲🇽 ETH Mexico 2026 | Main Event TBA | Mexico City\n🏦 Stablecoin Conference by Bitso Business: June 15 – 16 | Mexico City",
     "date": "2026-05-04",
+    "endDate": "2026-06-03",
     "time": "",
     "location": "Hybrid",
     "type": "hackathon",
@@ -93,13 +104,15 @@
     "organizer": "ethereum mexico",
     "issueUrl": "https://github.com/ethlima/eth-events/issues/9",
     "issueNum": 9,
+    "state": "open",
     "createdAt": "2026-03-27T00:28:16Z"
   },
   {
     "id": 8,
     "title": "Dev3pack Global Hackathon",
-    "description": "```markdown\nThe largest Web3 & AI student hackathon\n```",
+    "description": "The largest Web3 & AI student hackathon",
     "date": "2026-05-08",
+    "endDate": "2026-05-10",
     "time": "",
     "location": "Híbrido",
     "type": "hackathon",
@@ -108,13 +121,15 @@
     "organizer": "Dev3Pack",
     "issueUrl": "https://github.com/ethlima/eth-events/issues/8",
     "issueNum": 8,
+    "state": "open",
     "createdAt": "2026-03-26T22:26:13Z"
   },
   {
     "id": 4,
     "title": "Founder School",
-    "description": "```markdown\nA 10-week, cohort-based, virtual, and equity-free program designed to help you go from zero to one.\n```",
+    "description": "A 10-week, cohort-based, virtual, and equity-free program designed to help you go from zero to one.",
     "date": "2026-06-12",
+    "endDate": "",
     "time": "",
     "location": "Online",
     "type": "meetup",
@@ -123,6 +138,7 @@
     "organizer": "",
     "issueUrl": "https://github.com/ethlima/eth-events/issues/4",
     "issueNum": 4,
+    "state": "open",
     "createdAt": "2026-03-26T06:02:41Z"
   }
 ]
