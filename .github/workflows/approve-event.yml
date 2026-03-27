@@ -99,10 +99,18 @@ jobs:
             });
             console.log(`⛔ ${context.actor} no tiene permisos.`);
 
-      # ── SYNC INLINE (sin workflow_dispatch, evita el 403) ─────────────────
+      # ── SYNC & DEPLOY INLINE ─────────────────
       - name: Checkout
         if: steps.check-permission.outputs.allowed == 'true'
         uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Setup Node.js
+        if: steps.check-permission.outputs.allowed == 'true'
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
 
       - name: Regenerar events.json
         if: steps.check-permission.outputs.allowed == 'true'
@@ -111,52 +119,81 @@ jobs:
           script: |
             const fs = require('fs');
 
-            const { data: issues } = await github.rest.issues.listForRepo({
-              owner: context.repo.owner,
-              repo: context.repo.repo,
-              labels: 'approved',
-              state: 'open',
-              per_page: 100,
-            });
+            const issues = await github.paginate(
+              github.rest.issues.listForRepo,
+              {
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                labels: 'approved',
+                state: 'all',
+                per_page: 100,
+              }
+            );
 
             function extract(body, heading) {
               if (!body) return '';
               const re = new RegExp(
-                '###[^\\n]*' + heading + '[^\\n]*\\n+([\\s\\S]*?)(?=\\n###|$)',
+                `###\\s*[^\\n]*${heading}[^\\n]*\\n+([\\s\\S]*?)(?=\\n###|$)`,
                 'i'
               );
               const m = body.match(re);
               if (!m) return '';
-              return m[1].replace(/<!--.*?-->/gs, '').replace(/_No response_/gi, '').trim();
+              return m[1]
+                .replace(/<!--.*?-->/gs, '')
+                .replace(/_No response_/gi, '')
+                .trim();
+            }
+
+            function clean(str) {
+              return (str || '')
+                .replace(/^```markdown\s*/gi, '')
+                .replace(/```\s*$/g, '')
+                .trim();
             }
 
             const events = issues.map(issue => {
               const body = issue.body || '';
+              const rawDate = clean(extract(body, 'Fecha'));
+              const parsedDate = rawDate ? new Date(rawDate) : null;
+
               return {
                 id: issue.number,
-                title: extract(body, 'Nombre') || issue.title.replace(/\[EVENTO\]\s*/i, ''),
-                description: extract(body, 'Descripci'),
-                date: extract(body, 'Fecha'),
-                time: extract(body, 'Hora'),
-                location: extract(body, 'Ubicaci'),
-                type: (extract(body, 'Tipo') || 'meetup').toLowerCase().replace(/[^a-z]/g, ''),
-                link: extract(body, 'Link'),
-                tags: extract(body, 'Tags').split(',').map(t => t.trim()).filter(Boolean),
-                organizer: extract(body, 'Organizador'),
+                title: clean(
+                  extract(body, 'Nombre') ||
+                  issue.title.replace(/\[EVENTO\]\s*/i, '')
+                ),
+                description: clean(extract(body, 'Descripci')),
+                date: rawDate,
+                endDate: clean(extract(body, 'Fecha de fin') || extract(body, 'Término') || extract(body, 'Fin')),
+                time: clean(extract(body, 'Hora')),
+                location: clean(extract(body, 'Ubicaci')),
+                type: clean(
+                  (extract(body, 'Tipo') || 'meetup')
+                    .toLowerCase()
+                    .replace(/[^a-z]/g, '')
+                ),
+                link: clean(extract(body, 'Link')),
+                tags: clean(extract(body, 'Tags'))
+                  .split(',')
+                  .map(t => t.trim().toLowerCase())
+                  .filter(Boolean),
+                organizer: clean(extract(body, 'Organizador')),
                 issueUrl: issue.html_url,
                 issueNum: issue.number,
+                state: issue.state,
                 createdAt: issue.created_at,
+                _sortDate: parsedDate && !isNaN(parsedDate) ? parsedDate : null,
               };
             });
 
             events.sort((a, b) => {
-              if (!a.date) return 1;
-              if (!b.date) return -1;
-              return new Date(a.date) - new Date(b.date);
+              if (!a._sortDate) return 1;
+              if (!b._sortDate) return -1;
+              return a._sortDate - b._sortDate;
             });
 
-            fs.writeFileSync('events.json', JSON.stringify(events, null, 2));
-            console.log('✅ events.json generado con ' + events.length + ' eventos');
+            const finalEvents = events.map(({ _sortDate, ...rest }) => rest);
+            fs.writeFileSync('events.json', JSON.stringify(finalEvents, null, 2));
 
       - name: Commit events.json
         if: steps.check-permission.outputs.allowed == 'true'
@@ -165,4 +202,18 @@ jobs:
           git config user.email "github-actions[bot]@users.noreply.github.com"
           git add events.json
           git diff --cached --quiet || git commit -m "chore: sync events.json [skip ci]"
-          git push
+          git push origin main
+
+      - name: Setup Pages
+        if: steps.check-permission.outputs.allowed == 'true'
+        uses: actions/configure-pages@v4
+
+      - name: Upload artifact
+        if: steps.check-permission.outputs.allowed == 'true'
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: '.'
+
+      - name: Deploy to GitHub Pages
+        if: steps.check-permission.outputs.allowed == 'true'
+        uses: actions/deploy-pages@v4
