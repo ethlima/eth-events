@@ -432,6 +432,137 @@
       opacity: 1;
     }
 
+    /* GRID ADJUSTMENTS */
+    #eth-lima-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 20px;
+    }
+
+    #events-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 24px;
+    }
+
+    /* SEE MORE BUTTON */
+    .see-more-container {
+      display: flex;
+      justify-content: center;
+      margin-top: 48px;
+    }
+
+    .btn-see-more {
+      font-family: var(--mono);
+      font-size: 12px;
+      font-weight: 700;
+      padding: 12px 32px;
+      background: transparent;
+      color: var(--muted);
+      border: 1px solid var(--border);
+      border-radius: 100px;
+      cursor: pointer;
+      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .btn-see-more:hover {
+      border-color: var(--accent);
+      color: var(--text);
+      background: var(--accent-glow);
+      transform: translateY(-2px);
+      box-shadow: 0 10px 20px rgba(98, 126, 234, 0.1);
+    }
+
+    .btn-see-more svg {
+      width: 16px;
+      height: 16px;
+      transition: transform 0.3s;
+    }
+
+    .btn-see-more:hover svg {
+      transform: translateY(2px);
+    }
+
+    /* PREMIUM CARD IMPROVEMENTS */
+    .event-card {
+      background: linear-gradient(180deg, rgba(22, 25, 33, 0.6) 0%, rgba(10, 11, 15, 0.8) 100%);
+      border: 1px solid var(--border);
+      position: relative;
+    }
+
+    .event-card::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      border-radius: 16px;
+      padding: 1px;
+      background: linear-gradient(135deg, rgba(255,255,255,0.1), transparent 40%, rgba(255,255,255,0.05));
+      -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+      mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+      -webkit-mask-composite: xor;
+      mask-composite: exclude;
+      pointer-events: none;
+    }
+
+    .event-card.eth-lima-card {
+       border-color: rgba(98, 126, 234, 0.2);
+    }
+    
+    .event-card.eth-lima-card:hover {
+       border-color: rgba(98, 126, 234, 0.6);
+       box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4), 0 0 20px rgba(98, 126, 234, 0.2);
+    }
+
+    /* REMOVE FEATURED FOR COMMUNITY AS REQUESTED */
+    .event-card.featured {
+      grid-column: auto;
+      min-height: auto;
+      display: flex;
+      flex-direction: column;
+      background: linear-gradient(180deg, rgba(22, 25, 33, 0.6) 0%, rgba(10, 11, 15, 0.8) 100%);
+    }
+
+    .event-card.featured .event-header {
+      padding: 20px 20px 0;
+    }
+
+    .event-card.featured .event-body {
+      padding: 16px 20px 20px;
+    }
+
+    .event-card.featured .event-title {
+      font-size: 18px;
+    }
+
+    /* RESPONSIVE */
+    @media (max-width: 1200px) {
+      #eth-lima-grid {
+        grid-template-columns: repeat(3, 1fr);
+      }
+    }
+
+    @media (max-width: 992px) {
+      #eth-lima-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+      #events-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+
+    @media (max-width: 768px) {
+      #eth-lima-grid, #events-grid {
+        grid-template-columns: 1fr;
+      }
+      
+      .hero h1 {
+        font-size: 48px;
+      }
+    }
+
     .event-header {
       padding: 20px 20px 0;
       display: flex;
@@ -990,6 +1121,22 @@
         padding: 30px 20px;
         flex-direction: column;
       }
+
+      /* Mobile Featured Adjustment */
+      .event-card.featured {
+        grid-template-columns: 1fr;
+        min-height: auto;
+      }
+
+      .event-card.featured .event-title {
+        font-size: 24px;
+      }
+
+      .event-card.next-up-mobile {
+         transform: scale(1.02);
+         border-color: var(--accent);
+         box-shadow: 0 10px 30px rgba(98, 126, 234, 0.2);
+      }
     }
   </style>
 </head>
@@ -1028,9 +1175,26 @@
   </section>
 
   <!-- EVENTS -->
-  <section class="section" id="events">
-    <div class="section-header">
-      <h2 class="section-title">Próximos <span>Eventos</span></h2>
+  <section class="section" id="events" style="margin-top: 40px;">
+    <!-- Section for ETH Lima Events -->
+    <div id="eth-lima-container" style="display: none;">
+      <div class="section-header">
+        <h2 class="section-title">Eventos <span>ETH Lima</span></h2>
+      </div>
+      <div class="events-grid" id="eth-lima-grid">
+        <!-- ETH Lima events here -->
+      </div>
+      <div class="see-more-container" id="eth-lima-more-container" style="display: none;">
+        <button class="btn-see-more" onclick="showAllEthLima()">
+          VER TODOS LOS EVENTOS
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M6 9l6 6 6-6"/></svg>
+        </button>
+      </div>
+    </div>
+
+    <!-- Section for Community Events -->
+    <div class="section-header" style="margin-top: 80px;">
+      <h2 class="section-title">Eventos de la <span>Comunidad</span></h2>
       <div class="filter-bar" id="filter-bar">
         <button class="filter-btn active" data-filter="all">TODOS</button>
       </div>
@@ -1039,6 +1203,12 @@
       <div class="loading">
         <div class="spinner"></div> CARGANDO EVENTOS...
       </div>
+    </div>
+    <div class="see-more-container" id="community-more-container" style="display: none;">
+      <button class="btn-see-more" onclick="showAllCommunity()">
+        VER TODOS LOS EVENTOS
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M6 9l6 6 6-6"/></svg>
+      </button>
     </div>
   </section>
 
@@ -1213,11 +1383,10 @@
         const m = body.match(re);
         if (!m) return '';
         const val = m[1] || '';
-        return val
-          .replace(/^```markdown\s*/gi, '')
+        return val.replace(/^```markdown\s*/gi, '')
           .replace(/```\s*$/g, '')
           .replace(/_No response_/gi, '')
-          .replace(/<!--[\s\S]*?-->/g, '')
+          .replace(/<\!--[\s\S]*?-->/g, '')
           .trim();
       }
       return {
@@ -1238,6 +1407,8 @@
 
     function renderEvents(events) {
       const grid = document.getElementById('events-grid');
+      const ethLimaGrid = document.getElementById('eth-lima-grid');
+      const ethLimaContainer = document.getElementById('eth-lima-container');
       const pastGrid = document.getElementById('past-events-grid');
       const pastSection = document.getElementById('past-events');
       const filterBar = document.getElementById('filter-bar');
@@ -1248,17 +1419,27 @@
       const allWithDates = events.map(e => {
         const start = e.date ? new Date(e.date + 'T00:00') : new Date('2099-12-31');
         const end = (e.endDate && e.endDate !== '') ? new Date(e.endDate + 'T00:00') : start;
+        
+        // Is it an ETH Lima event?
+        const isEthLima = (e.organizer || '').toLowerCase().includes('eth lima') || 
+                          (e.organizer || '').toLowerCase().includes('ethereum lima') ||
+                          (e.tags || []).some(t => t.toLowerCase() === 'ethlima');
+
         return {
           ...e,
           _dateObj: start,
           _endObj: end,
-          _isPast: end < now
+          _isPast: end < now,
+          _isEthLima: isEthLima
         };
       });
 
       const upcoming = allWithDates
         .filter(e => !e._isPast)
         .sort((a, b) => a._dateObj - b._dateObj);
+
+      const ethLimaUpcoming = upcoming.filter(e => e._isEthLima);
+      const communityUpcoming = upcoming.filter(e => !e._isEthLima);
 
       const past = allWithDates
         .filter(e => e._isPast)
@@ -1292,7 +1473,26 @@
         return;
       }
 
-      renderGrid(upcoming, events);
+      // Render ETH Lima events
+      window._ethLimaUpcoming = ethLimaUpcoming;
+      if (ethLimaUpcoming.length > 0) {
+        ethLimaContainer.style.display = 'block';
+        const initial = ethLimaUpcoming.slice(0, 4);
+        ethLimaGrid.innerHTML = initial.map(e => cardHTML(e)).join('');
+        
+        if (ethLimaUpcoming.length > 4) {
+          document.getElementById('eth-lima-more-container').style.display = 'flex';
+        }
+      } else {
+        ethLimaContainer.style.display = 'none';
+      }
+
+      // Render Community events
+      window._communityUpcoming = communityUpcoming;
+      renderGrid(communityUpcoming.slice(0, 9), events);
+      if (communityUpcoming.length > 9) {
+        document.getElementById('community-more-container').style.display = 'flex';
+      }
 
       // Render past events
       if (past.length > 0) {
@@ -1301,6 +1501,18 @@
       } else {
         pastSection.style.display = 'none';
       }
+    }
+
+    function showAllEthLima() {
+      const ethLimaGrid = document.getElementById('eth-lima-grid');
+      ethLimaGrid.innerHTML = window._ethLimaUpcoming.map(e => cardHTML(e)).join('');
+      document.getElementById('eth-lima-more-container').style.display = 'none';
+    }
+
+    function showAllCommunity() {
+      const grid = document.getElementById('events-grid');
+      grid.innerHTML = window._communityUpcoming.map(e => cardHTML(e)).join('');
+      document.getElementById('community-more-container').style.display = 'none';
     }
 
     function applyFilter(filter, allEvents) {
@@ -1312,13 +1524,25 @@
       const now = new Date();
       now.setHours(0, 0, 0, 0);
 
-      const filteredUpcoming = filtered.filter(e => {
+      const filteredWithDates = filtered.map(e => {
         const start = e.date ? new Date(e.date + 'T00:00') : new Date('2099-12-31');
         const end = (e.endDate && e.endDate !== '') ? new Date(e.endDate + 'T00:00') : start;
-        return end >= now;
+        return { ...e, _dateObj: start, _endObj: end, _isPast: end < now };
       });
 
-      renderGrid(filteredUpcoming, allEvents);
+      const upcoming = filteredWithDates
+        .filter(e => !e._isPast)
+        .sort((a, b) => a._dateObj - b._dateObj);
+
+      renderGrid(upcoming.slice(0, 9), allEvents);
+      
+      const moreCont = document.getElementById('community-more-container');
+      if (upcoming.length > 9) {
+        moreCont.style.display = 'flex';
+        window._communityUpcoming = upcoming; // update for "see more"
+      } else {
+        moreCont.style.display = 'none';
+      }
     }
 
     function renderGrid(events, allEvents) {
@@ -1328,7 +1552,6 @@
         return;
       }
       grid.innerHTML = events.map(e => cardHTML(e)).join('');
-      // No re-bind needed here as we use onclick in the string
     }
 
     function openModal(id) {
@@ -1399,7 +1622,7 @@
        document.body.style.overflow = 'auto';
     }
 
-    function cardHTML(e, isPast = false) {
+    function cardHTML(e, isPast = false, isFeatured = false) {
       if(!window._allEvents) window._allEvents = [];
       if(!window._allEvents.find(item => item.id == e.id)) window._allEvents.push(e);
 
@@ -1426,14 +1649,19 @@
 
       const tagsHTML = e.tags.slice(0, 3).map(t => `<span class="tag">#${t}</span>`).join('');
       
-      const shortDesc = (e.description || '').length > 40 
-        ? (e.description || '').substring(0, 40) + '...' 
+      const shortDesc = (e.description || '').length > 100 
+        ? (e.description || '').substring(0, 100) + '...' 
         : (e.description || 'Sin descripción.');
 
+      const ethLimaBadge = e._isEthLima ? `<span class="eth-lima-badge">ETH Lima Official</span>` : '';
+
       return `
-        <div class="event-card ${isPast ? 'past' : ''}" onclick="openModal(${e.id})">
+        <div class="event-card ${isPast ? 'past' : ''} ${isFeatured ? 'featured next-up-mobile' : ''} ${e._isEthLima ? 'eth-lima-card' : ''}" onclick="openModal(${e.id})">
           <div class="event-header">
-            <span class="event-type ${typeClass}">${e.type.toUpperCase()}</span>
+            <div style="display:flex; flex-direction:column; gap:8px">
+              ${ethLimaBadge}
+              <span class="event-type ${typeClass}">${e.type.toUpperCase()}</span>
+            </div>
             <span class="event-issue">#${e.issueNum}</span>
           </div>
           <div class="event-body">
@@ -1449,7 +1677,7 @@
           <div class="event-footer">
             <div class="event-tags">${tagsHTML}</div>
             <div class="event-link">
-              MÁS INFO →
+              ${isFeatured ? 'RESERVAR LUGAR →' : 'MÁS INFO →'}
             </div>
           </div>
         </div>`;
