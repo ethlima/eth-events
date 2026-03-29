@@ -51,6 +51,23 @@
     "createdAt": "2026-03-26T13:23:48Z"
   },
   {
+    "id": 14,
+    "title": "La Ruta de Puqi: UNI",
+    "description": "```markdown\nContinuación de La Ruta de Puqi\n```",
+    "date": "2026-03-28",
+    "time": "",
+    "location": "UNI",
+    "type": "workshop",
+    "link": "",
+    "tags": [
+      "ethlima"
+    ],
+    "organizer": "Ethereum Lima",
+    "issueUrl": "https://github.com/ethlima/eth-events/issues/14",
+    "issueNum": 14,
+    "createdAt": "2026-03-29T17:10:49Z"
+  },
+  {
     "id": 11,
     "title": "Stellar Hacks: Agents",
     "description": "```markdown\n*¡Es hora! 🤖 Stellar Hacks: Agents ya está aquí.*\n\nLos agentes de IA están en todas partes... pero la mayoría se quedan cortos cuando necesitan realizar transacciones. Stellar tiene la infraestructura para cambiar eso: liquidación rápida, comisiones bajas, infraestructura de stablecoins sólida y barreras programables a través de Soroban.\n\nYa sea que estés creando agentes que pagan, ganan o hacen algo genial en Stellar, esto es para ti.\n\n*¿Qué construir?*\n\n- Agentes de IA que interactúan con Stellar\n- Servicios de agente a agente usando x402 o MPP\n- APIs pagadas y flujos de trabajo autónomos\n- Muros de pago onchain y herramientas de micropagos\n- Mercados gestionados por máquinas\n- Cualquier cosa en la intersección de IA y Stellar - ¡sé creativo!\n\n*La tecnología:*\n\n- x402 convierte solicitudes HTTP en transacciones con stablecoins\n- MPP permite flujos de pago de máquina a máquina\n- Soroban te da barreras de contratos inteligentes y políticas de gasto\n\n*Premios:*\n\n- 🥇 $5,000\n- 🥈 $2,000\n- 🥉 $1,250\n- 4to lugar: $1,000\n- 5to lugar: $750\n\n*Fechas clave:*\n\n- 📅 Inscripciones abiertas: 30 de marzo\n- ⏰ Fecha límite: 13 de abril\n\n*Requisitos:*\n\n- Repositorio de código abierto\n- Video de demostración de 2-3 minutos\n- Interacción con Stellar testnet o mainnet\n```",
