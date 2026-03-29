@@ -1,24 +1,5 @@
 [
   {
-    "id": 15,
-    "title": "La Ruta de Puqi: UARM",
-    "description": "UARM: Universidad Antonio Ruíz de Montoya",
-    "date": "2025-04-18",
-    "endDate": "",
-    "time": "",
-    "location": "UARM",
-    "type": "workshop",
-    "link": "",
-    "tags": [
-      "ethlima"
-    ],
-    "organizer": "Ethereum Lima",
-    "issueUrl": "https://github.com/ethlima/eth-events/issues/15",
-    "issueNum": 15,
-    "state": "open",
-    "createdAt": "2026-03-29T17:14:27Z"
-  },
-  {
     "id": 12,
     "title": "La Ruta de Puqi: Donde Inicia el camino",
     "description": "Sesión de inicio del Challengue Universitario. Fundamentos de Ethereum.",
@@ -148,6 +129,25 @@
     "issueNum": 10,
     "state": "open",
     "createdAt": "2026-03-27T01:50:49Z"
+  },
+  {
+    "id": 15,
+    "title": "La Ruta de Puqi: UARM",
+    "description": "UARM: Universidad Antonio Ruíz de Montoya",
+    "date": "2026-04-18",
+    "endDate": "",
+    "time": "",
+    "location": "UARM",
+    "type": "workshop",
+    "link": "",
+    "tags": [
+      "ethlima"
+    ],
+    "organizer": "Ethereum Lima",
+    "issueUrl": "https://github.com/ethlima/eth-events/issues/15",
+    "issueNum": 15,
+    "state": "open",
+    "createdAt": "2026-03-29T17:14:27Z"
   },
   {
     "id": 6,
