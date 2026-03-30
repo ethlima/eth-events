@@ -4,6 +4,9 @@ on:
   issues:
     types: [opened, edited, labeled, unlabeled, closed, reopened]
   workflow_dispatch:
+  workflow_run:
+    workflows: ["🔖 Approve Event via Comment"]
+    types: [completed]
 
 permissions:
   contents: write
@@ -17,10 +20,10 @@ concurrency:
 
 jobs:
   sync-events:
-    # Solo corre si es manual, si se agrega/quita el label 'approved', 
-    # o si se edita un issue que ya está aprobado.
+    # Solo corre si es manual, si se completa la aprobación, if labeled, etc.
     if: |
       github.event_name == 'workflow_dispatch' ||
+      (github.event_name == 'workflow_run' && github.event.workflow_run.conclusion == 'success') ||
       (github.event_name == 'issues' && (
         github.event.label.name == 'approved' || 
         contains(github.event.issue.labels.*.name, 'approved')
