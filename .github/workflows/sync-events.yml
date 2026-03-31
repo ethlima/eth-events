@@ -107,10 +107,11 @@ jobs:
                     .replace(/[^a-z]/g, '')
                 ),
                 link: clean(extract(body, 'Link')),
-                tags: clean(extract(body, 'Tags'))
+                tags: (clean(extract(body, 'Tags')) || '')
                   .split(',')
                   .map(t => t.trim().toLowerCase())
                   .filter(Boolean),
+                image: (body.match(/!\[.*?\]\((.*?)\)/) || body.match(/<img.*?src=["'](.*?)["']/) || [])[1] || '',
                 organizer: clean(extract(body, 'Organizador')),
                 issueUrl: issue.html_url,
                 issueNum: issue.number,
