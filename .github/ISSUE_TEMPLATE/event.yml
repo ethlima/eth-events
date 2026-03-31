@@ -111,6 +111,17 @@ body:
     validations:
       required: false
 
+  - type: input
+    id: imagen
+    attributes:
+      label: 🖼️ Imagen de Portada (URL)
+      description: |
+        Pega un link directo a la imagen (.jpg, .png). 
+        💡 Tip: Arrastra tu imagen al área de "Descripción" arriba, espera a que cargue, y copia el link generado aquí.
+      placeholder: "https://r.githubusercontent.com/..."
+    validations:
+      required: false
+
   - type: checkboxes
     id: confirmacion
     attributes:
