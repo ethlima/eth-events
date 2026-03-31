@@ -1489,7 +1489,7 @@
         type: (get('Tipo') || 'meetup').toLowerCase().replace(/[^a-z]/g, ''),
         link: get('Link'),
         tags: get('Tags').split(',').map(t => t.trim()).filter(Boolean),
-        image: get('Imagen') || (body.match(/!\[.*?\]\((.*?)\)/) || [])[1] || '',
+        image: (body.match(/!\[.*?\]\((.*?)\)/) || body.match(/<img.*?src=["'](.*?)["']/) || [])[1] || '',
         organizer: get('Organiza') || (get('Tags').toLowerCase().includes('ethlima') ? 'Ethereum Lima' : ''),
         issueUrl: issue.html_url,
         issueNum: issue.number,
