@@ -131,6 +131,25 @@
     "createdAt": "2026-03-26T05:12:21Z"
   },
   {
+    "id": 18,
+    "title": "Arbitrum Mentorship Program",
+    "description": "The Arbitrum Mentorship Program helps teams move from early experimentation to mainnet launch. It provides structured guidance, hands-on mentorship, and ecosystem exposure for builders ready to ship, grow, and scale on Arbitrum.",
+    "date": "2026-04-13",
+    "endDate": "",
+    "time": "",
+    "location": "Online",
+    "type": "cohorte",
+    "link": "https://tally.so/r/aQdj2W",
+    "tags": [
+      "arbitrum"
+    ],
+    "organizer": "Arbitrum",
+    "issueUrl": "https://github.com/ethlima/eth-events/issues/18",
+    "issueNum": 18,
+    "state": "open",
+    "createdAt": "2026-03-30T03:14:00Z"
+  },
+  {
     "id": 10,
     "title": "Solana Latam Builders Program",
     "description": "​El Solana LATAM Builders Program es un bootcamp intensivo, gratuito y guiado donde aprenderás a desarrollar Solana Programs desde cero, entender su arquitectura basada en cuentas y llevar tu primer proyecto funcional hasta despliegue.",
