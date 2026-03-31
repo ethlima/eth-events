@@ -1478,6 +1478,10 @@
           .replace(/<\!--[\s\S]*?-->/g, '')
           .trim();
       }
+      const tagsFromLabels = (issue.labels || []).map(l => typeof l === 'string' ? l : l.name);
+      const tagsFromBody = get('Tags').split(',').map(t => t.trim()).filter(Boolean);
+      const allTags = [...new Set([...tagsFromLabels, ...tagsFromBody])];
+
       return {
         id: issue.number,
         title: get('Nombre') || issue.title.replace(/\[EVENTO\]\s*/i, ''),
@@ -1488,9 +1492,9 @@
         location: get('Ubicaci'),
         type: (get('Tipo') || 'meetup').toLowerCase().replace(/[^a-z]/g, ''),
         link: get('Link'),
-        tags: get('Tags').split(',').map(t => t.trim()).filter(Boolean),
+        tags: allTags,
         image: (body.match(/!\[.*?\]\((.*?)\)/) || body.match(/<img.*?src=["'](.*?)["']/) || [])[1] || '',
-        organizer: get('Organiza') || (get('Tags').toLowerCase().includes('ethlima') ? 'Ethereum Lima' : ''),
+        organizer: get('Organiza') || (allTags.some(t => t.toLowerCase().includes('ethlima')) ? 'Ethereum Lima' : ''),
         issueUrl: issue.html_url,
         issueNum: issue.number,
       };
