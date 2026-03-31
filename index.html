@@ -1742,11 +1742,12 @@
 
       const ethLimaBadge = e._isEthLima ? `<span class="eth-lima-badge">ETH Lima Official</span>` : '';
       
-      // Default placeholder if no image
+      // Determine if image should be shown: only for active ethlima events
+      const showImage = e._isEthLima && !isPast;
       const imageUrl = e.image || `https://via.placeholder.com/600x600/111318/627eea?text=${encodeURIComponent(e.title)}`;
 
       const cardBody = `
-          ${imageUrl ? `<div class="event-cover"><img src="${imageUrl}" alt="${e.title}" loading="lazy"></div>` : ''}
+          ${showImage ? `<div class="event-cover"><img src="${imageUrl}" alt="${e.title}" loading="lazy"></div>` : ''}
           <div class="event-header">
             <div style="display:flex; flex-direction:column; gap:8px">
               ${ethLimaBadge}
