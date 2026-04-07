@@ -1271,16 +1271,13 @@
       <div class="section-header">
         <h2 class="section-title">Eventos <span>ETH Lima</span></h2>
       </div>
-      <!-- Swiper -->
-      <div class="swiper ethLimaSwiper">
-        <div class="swiper-wrapper" id="eth-lima-grid">
-          <!-- ETH Lima events here -->
-        </div>
-        <!-- Arrows -->
-        <div class="swiper-button-next"></div>
-        <div class="swiper-button-prev"></div>
-        <!-- Pagination -->
-        <div class="swiper-pagination"></div>
+      <div class="events-grid" id="eth-lima-grid" style="grid-template-columns: repeat(3, 1fr); gap: 24px;">
+      </div>
+      <div class="see-more-container" id="eth-lima-more-container" style="display: none;">
+        <button class="btn-see-more" onclick="showAllEthLima()">
+          VER TODOS LOS EVENTOS ETH LIMA
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M6 9l6 6 6-6"/></svg>
+        </button>
       </div>
     </div>
 
@@ -1587,11 +1584,16 @@
       }
 
       // Render ETH Lima events
-      window._ethLimaUpcoming = ethLimaUpcoming;
-      if (ethLimaUpcoming.length > 0) {
+      const ethLimaSorted = ethLimaUpcoming.sort((a, b) => b._dateObj - a._dateObj);
+      window._ethLimaUpcoming = ethLimaSorted;
+      if (ethLimaSorted.length > 0) {
         ethLimaContainer.style.display = 'block';
-        ethLimaGrid.innerHTML = ethLimaUpcoming.map(e => cardHTML(e, false, false, true)).join('');
-        initSwiper();
+        ethLimaGrid.innerHTML = ethLimaSorted.slice(0, 6).map(e => cardHTML(e)).join('');
+        if (ethLimaSorted.length > 6) {
+          document.getElementById('eth-lima-more-container').style.display = 'flex';
+        } else {
+          document.getElementById('eth-lima-more-container').style.display = 'none';
+        }
       } else {
         ethLimaContainer.style.display = 'none';
       }
