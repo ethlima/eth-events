@@ -138,6 +138,27 @@
     "createdAt": "2026-03-26T05:12:21Z"
   },
   {
+    "id": 19,
+    "title": "“Del código al trofeo: El detrás de escena de AlephRob y recursos clave para hackear”",
+    "description": "Una charla enfocada en insights prácticos, aprendizajes reales y aplicación directa en el ecosistema de tecnología, blockchain e IA.",
+    "date": "2026-04-11",
+    "endDate": "",
+    "time": "",
+    "location": "Online",
+    "type": "workshop",
+    "link": "https://luma.com/7og8c8gv",
+    "tags": [
+      "builder-series",
+      "ethlima"
+    ],
+    "image": "https://github.com/user-attachments/assets/d097742c-26f4-475f-90db-ea138f88bba2",
+    "organizer": "Ethereum Lima",
+    "issueUrl": "https://github.com/ethlima/eth-events/issues/19",
+    "issueNum": 19,
+    "state": "open",
+    "createdAt": "2026-04-07T19:43:03Z"
+  },
+  {
     "id": 18,
     "title": "Arbitrum Mentorship Program",
     "description": "The Arbitrum Mentorship Program helps teams move from early experimentation to mainnet launch. It provides structured guidance, hands-on mentorship, and ecosystem exposure for builders ready to ship, grow, and scale on Arbitrum.",
