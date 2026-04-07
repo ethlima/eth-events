@@ -1588,7 +1588,7 @@
       window._ethLimaUpcoming = ethLimaSorted;
       if (ethLimaSorted.length > 0) {
         ethLimaContainer.style.display = 'block';
-        ethLimaGrid.innerHTML = ethLimaSorted.slice(0, 6).map(e => cardHTML(e)).join('');
+        ethLimaGrid.innerHTML = ethLimaSorted.slice(0, 6).map(e => cardHTML(e, false, false, false, 30)).join('');
         if (ethLimaSorted.length > 6) {
           document.getElementById('eth-lima-more-container').style.display = 'flex';
         } else {
@@ -1620,7 +1620,7 @@
 
     function showAllEthLima() {
       const ethLimaGrid = document.getElementById('eth-lima-grid');
-      ethLimaGrid.innerHTML = window._ethLimaUpcoming.map(e => cardHTML(e)).join('');
+      ethLimaGrid.innerHTML = window._ethLimaUpcoming.map(e => cardHTML(e, false, false, false, 30)).join('');
       document.getElementById('eth-lima-more-container').style.display = 'none';
     }
 
@@ -1743,7 +1743,7 @@
        document.body.style.overflow = 'auto';
     }
 
-    function cardHTML(e, isPast = false, isFeatured = false, isSwiper = false) {
+    function cardHTML(e, isPast = false, isFeatured = false, isSwiper = false, descLimit = 100) {
       if(!window._allEvents) window._allEvents = [];
       if(!window._allEvents.find(item => item.id == e.id)) window._allEvents.push(e);
 
@@ -1770,8 +1770,8 @@
 
       const tagsHTML = e.tags.slice(0, 3).map(t => `<span class="tag">#${t}</span>`).join('');
       
-      const shortDesc = (e.description || '').length > 100 
-        ? (e.description || '').substring(0, 100) + '...' 
+      const shortDesc = (e.description || '').length > descLimit 
+        ? (e.description || '').substring(0, descLimit) + '...' 
         : (e.description || 'Sin descripción.');
 
       const ethLimaBadge = e._isEthLima ? `<span class="eth-lima-badge">ETH Lima Official</span>` : '';
