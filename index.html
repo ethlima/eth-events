@@ -573,6 +573,18 @@
       transform: translateY(2px);
     }
 
+    .btn-see-more.past-btn {
+      background: rgba(17, 19, 24, 0.4);
+      border-color: transparent;
+      opacity: 0.6;
+    }
+
+    .btn-see-more.past-btn:hover {
+      opacity: 1;
+      background: rgba(17, 19, 24, 0.8);
+      border-color: var(--border);
+    }
+
     /* PREMIUM CARD IMPROVEMENTS */
     .event-card {
       background: linear-gradient(180deg, rgba(22, 25, 33, 0.6) 0%, rgba(10, 11, 15, 0.8) 100%);
@@ -626,13 +638,13 @@
 
     /* RESPONSIVE */
     @media (max-width: 1200px) {
-      #eth-lima-grid {
+      #eth-lima-grid, #past-events-grid {
         grid-template-columns: repeat(3, 1fr);
       }
     }
 
     @media (max-width: 992px) {
-      #eth-lima-grid {
+      #eth-lima-grid, #past-events-grid {
         grid-template-columns: repeat(2, 1fr);
       }
       #events-grid {
@@ -641,7 +653,7 @@
     }
 
     @media (max-width: 768px) {
-      #eth-lima-grid, #events-grid {
+      #eth-lima-grid, #events-grid, #past-events-grid {
         grid-template-columns: 1fr;
       }
       
@@ -1250,16 +1262,7 @@
     </a>
   </nav>
 
-  <!-- PAST EVENTS SECTION -->
-  <section class="section" id="past-events"
-    style="display: none; padding-top: 20px; padding-bottom: 40px; border-bottom: 1px solid var(--border)">
-    <div class="section-header" style="margin-bottom: 24px">
-      <h3 class="section-title" style="font-size: 20px; color: var(--muted)">Eventos <span>Pasados</span></h3>
-    </div>
-    <div class="events-grid" id="past-events-grid"
-      style="grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 16px;">
-    </div>
-  </section>
+
 
   <!-- EVENTS -->
   <section class="section" id="events" style="margin-top: 40px;">
@@ -1298,6 +1301,21 @@
         VER TODOS LOS EVENTOS
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M6 9l6 6 6-6"/></svg>
       </button>
+    </div>
+
+    <!-- PAST EVENTS SECTION -->
+    <div id="past-events" style="display: none; margin-top: 80px; padding-top: 40px; border-top: 1px solid var(--border)">
+      <div class="section-header" style="margin-bottom: 32px">
+        <h2 class="section-title" style="font-size: 24px; color: var(--muted)">Eventos <span>Pasados</span></h2>
+      </div>
+      <div class="events-grid" id="past-events-grid" style="grid-template-columns: repeat(4, 1fr); gap: 20px;">
+      </div>
+      <div class="see-more-container" id="past-more-container" style="display: none;">
+        <button class="btn-see-more past-btn" onclick="showAllPast()">
+          MOSTRAR MÁS EVENTOS PASADOS
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M6 9l6 6 6-6"/></svg>
+        </button>
+      </div>
     </div>
   </section>
 
@@ -1586,9 +1604,13 @@
       }
 
       // Render past events
+      window._pastEvents = past;
       if (past.length > 0) {
         pastSection.style.display = 'block';
-        pastGrid.innerHTML = past.map(e => cardHTML(e, true)).join('');
+        pastGrid.innerHTML = past.slice(0, 8).map(e => cardHTML(e, true)).join('');
+        if (past.length > 8) {
+          document.getElementById('past-more-container').style.display = 'flex';
+        }
       } else {
         pastSection.style.display = 'none';
       }
@@ -1604,6 +1626,12 @@
       const grid = document.getElementById('events-grid');
       grid.innerHTML = window._communityUpcoming.map(e => cardHTML(e)).join('');
       document.getElementById('community-more-container').style.display = 'none';
+    }
+
+    function showAllPast() {
+      const pastGrid = document.getElementById('past-events-grid');
+      pastGrid.innerHTML = window._pastEvents.map(e => cardHTML(e, true)).join('');
+      document.getElementById('past-more-container').style.display = 'none';
     }
 
     function applyFilter(filter, allEvents) {
