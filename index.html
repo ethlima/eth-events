@@ -1584,7 +1584,7 @@
       }
 
       // Render ETH Lima events
-      const ethLimaSorted = ethLimaUpcoming.sort((a, b) => b._dateObj - a._dateObj);
+      const ethLimaSorted = ethLimaUpcoming.sort((a, b) => a._dateObj - b._dateObj);
       window._ethLimaUpcoming = ethLimaSorted;
       if (ethLimaSorted.length > 0) {
         ethLimaContainer.style.display = 'block';
