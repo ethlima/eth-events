@@ -1562,13 +1562,19 @@
       document.getElementById('stat-types').textContent = types.length;
 
       // Filters
+      // Asegurar que el botón "Todos" tenga el listener y use los eventos procesados
+      const allBtn = document.querySelector('.filter-btn[data-filter="all"]');
+      if (allBtn) {
+        allBtn.onclick = () => applyFilter('all', allWithDates);
+      }
+
       types.forEach(t => {
         if (!document.querySelector(`.filter-btn[data-filter="${t}"]`)) {
           const btn = document.createElement('button');
           btn.className = 'filter-btn';
           btn.dataset.filter = t;
           btn.textContent = t.toUpperCase();
-          btn.onclick = () => applyFilter(t, events);
+          btn.onclick = () => applyFilter(t, allWithDates);
           filterBar.appendChild(btn);
         }
       });
@@ -1640,7 +1646,10 @@
       document.querySelectorAll('.filter-btn').forEach(b => {
         b.classList.toggle('active', b.dataset.filter === filter);
       });
-      const filtered = filter === 'all' ? allEvents : allEvents.filter(e => e.type === filter);
+      // Filtrar por tipo y excluir eventos oficiales de ETH Lima en la grilla de comunidad
+      const filtered = filter === 'all' 
+        ? allEvents.filter(e => !e._isEthLima)
+        : allEvents.filter(e => e.type === filter && !e._isEthLima);
 
       const now = new Date();
       now.setHours(0, 0, 0, 0);
