@@ -199,24 +199,6 @@
     "createdAt": "2026-03-27T01:50:49Z"
   },
   {
-    "id": 22,
-    "title": "ZK & Privacy Bootcamp - April",
-    "description": "It will start from April 14 to May 7, every Tuesday and Thursday (2 hours by session, at 4PM UTC). Your main teacher will be Milica.",
-    "date": "2026-04-14",
-    "endDate": "2026-05-07",
-    "time": "",
-    "location": "Online",
-    "type": "bootcamp",
-    "link": "https://tally.so/r/Np02AB",
-    "tags": [],
-    "image": "",
-    "organizer": "Dev3pack",
-    "issueUrl": "https://github.com/ethlima/eth-events/issues/22",
-    "issueNum": 22,
-    "state": "open",
-    "createdAt": "2026-04-09T20:09:13Z"
-  },
-  {
     "id": 17,
     "title": "ZK & Privacy Bootcamp",
     "description": "New cohort from April 14! By Dev3Pack ( https://x.com/dev3pack )",
