@@ -217,6 +217,26 @@
     "createdAt": "2026-03-30T02:14:27Z"
   },
   {
+    "id": 21,
+    "title": "Bootcamp de Chainlink: Introducción al CRE (Español)",
+    "description": "Tres días. 2 horas por día.",
+    "date": "2026-04-20",
+    "endDate": "2026-04-22",
+    "time": "",
+    "location": "Online",
+    "type": "bootcamp",
+    "link": "luma.com/z7fjycix",
+    "tags": [
+      "chainlink"
+    ],
+    "image": "",
+    "organizer": "Chainlink",
+    "issueUrl": "https://github.com/ethlima/eth-events/issues/21",
+    "issueNum": 21,
+    "state": "open",
+    "createdAt": "2026-04-09T16:36:32Z"
+  },
+  {
     "id": 15,
     "title": "La Ruta de Puqi: UARM",
     "description": "UARM: Universidad Antonio Ruíz de Montoya",
