@@ -138,6 +138,24 @@
     "createdAt": "2026-03-26T05:12:21Z"
   },
   {
+    "id": 23,
+    "title": "The Gemma 4 Good Hackathon",
+    "description": "Your mission is to create a solution that addresses a real-world challenge using Gemma 4 models, whether that’s an application that helps millions or a specialized model that could exponentially scale innovation.",
+    "date": "2026-04-02",
+    "endDate": "2026-05-18",
+    "time": "",
+    "location": "Online",
+    "type": "hackathon",
+    "link": "https://www.kaggle.com/competitions/gemma-4-good-hackathon",
+    "tags": [],
+    "image": "",
+    "organizer": "",
+    "issueUrl": "https://github.com/ethlima/eth-events/issues/23",
+    "issueNum": 23,
+    "state": "open",
+    "createdAt": "2026-04-13T14:03:25Z"
+  },
+  {
     "id": 19,
     "title": "“Del código al trofeo: El detrás de escena de AlephRob y recursos clave para hackear”",
     "description": "Una charla enfocada en insights prácticos, aprendizajes reales y aplicación directa en el ecosistema de tecnología, blockchain e IA.",
