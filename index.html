@@ -301,7 +301,7 @@
     .section {
       position: relative;
       z-index: 1;
-      max-width: 1100px;
+      max-width: 1400px;
       margin: 0 auto;
       padding: 40px 40px 80px;
     }
@@ -443,8 +443,8 @@
 
     #events-grid {
       display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 24px;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 20px;
     }
 
     /* SWIPER CAROUSEL */
@@ -638,16 +638,13 @@
 
     /* RESPONSIVE */
     @media (max-width: 1200px) {
-      #eth-lima-grid, #past-events-grid {
+      #eth-lima-grid, #events-grid, #past-events-grid {
         grid-template-columns: repeat(3, 1fr);
       }
     }
 
     @media (max-width: 992px) {
-      #eth-lima-grid, #past-events-grid {
-        grid-template-columns: repeat(2, 1fr);
-      }
-      #events-grid {
+      #eth-lima-grid, #events-grid, #past-events-grid {
         grid-template-columns: repeat(2, 1fr);
       }
     }
@@ -1594,7 +1591,7 @@
       window._ethLimaUpcoming = ethLimaSorted;
       if (ethLimaSorted.length > 0) {
         ethLimaContainer.style.display = 'block';
-        ethLimaGrid.innerHTML = ethLimaSorted.slice(0, 6).map(e => cardHTML(e, false, false, false, 30)).join('');
+        ethLimaGrid.innerHTML = ethLimaSorted.slice(0, 6).map(e => cardHTML(e, false, false, false, 20)).join('');
         if (ethLimaSorted.length > 6) {
           document.getElementById('eth-lima-more-container').style.display = 'flex';
         } else {
@@ -1606,8 +1603,8 @@
 
       // Render Community events
       window._communityUpcoming = communityUpcoming;
-      renderGrid(communityUpcoming.slice(0, 9), events);
-      if (communityUpcoming.length > 9) {
+      renderGrid(communityUpcoming.slice(0, 16), events);
+      if (communityUpcoming.length > 16) {
         document.getElementById('community-more-container').style.display = 'flex';
       }
 
@@ -1626,7 +1623,7 @@
 
     function showAllEthLima() {
       const ethLimaGrid = document.getElementById('eth-lima-grid');
-      ethLimaGrid.innerHTML = window._ethLimaUpcoming.map(e => cardHTML(e, false, false, false, 30)).join('');
+      ethLimaGrid.innerHTML = window._ethLimaUpcoming.map(e => cardHTML(e, false, false, false, 20)).join('');
       document.getElementById('eth-lima-more-container').style.display = 'none';
     }
 
@@ -1664,10 +1661,10 @@
         .filter(e => !e._isPast)
         .sort((a, b) => a._dateObj - b._dateObj);
 
-      renderGrid(upcoming.slice(0, 9), allEvents);
+      renderGrid(upcoming.slice(0, 16), allEvents);
       
       const moreCont = document.getElementById('community-more-container');
-      if (upcoming.length > 9) {
+      if (upcoming.length > 16) {
         moreCont.style.display = 'flex';
         window._communityUpcoming = upcoming; // update for "see more"
       } else {
@@ -1737,8 +1734,8 @@
               </div>
            </div>
         </div>
-        <div class="modal-footer">
-           <a class="nav-cta" href="${e.link || e.issueUrl}" target="_blank" style="padding: 12px 24px; font-size: 14px">
+        <div class="modal-footer" style="display: flex; justify-content: center; padding-top: 20px; border-top: 1px solid var(--border)">
+           <a class="nav-cta" href="${e.link || e.issueUrl}" target="_blank" style="padding: 12px 32px; font-size: 14px; border-radius: 8px">
               ACCEDER AL EVENTO
            </a>
         </div>
@@ -1752,7 +1749,7 @@
        document.body.style.overflow = 'auto';
     }
 
-    function cardHTML(e, isPast = false, isFeatured = false, isSwiper = false, descLimit = 100) {
+    function cardHTML(e, isPast = false, isFeatured = false, isSwiper = false, descLimit = 20) {
       if(!window._allEvents) window._allEvents = [];
       if(!window._allEvents.find(item => item.id == e.id)) window._allEvents.push(e);
 
