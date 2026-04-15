@@ -515,6 +515,24 @@
     "createdAt": "2026-03-26T22:26:13Z"
   },
   {
+    "id": 32,
+    "title": "Hackathon: LatAm Institucional",
+    "description": "Un fin de semana entero para transformar la banca y las instituciones financieras de LatAm desde adentro — usando blockchain e inteligencia artificial.\n\n¿El reto? Resolver los problemas de la banca tradicional: infraestructura obsoleta, falta de conectividad y procesos que frenan el crecimiento, scores crediticios, etc. Buscamos soluciones reales que ayuden a los bancos a modernizar su infraestructura. Además, conectar builders en toda la región.",
+    "date": "2026-05-15",
+    "endDate": "2026-05-17",
+    "time": "18:00",
+    "location": "Online",
+    "type": "hackathon",
+    "link": "https://shorturl.at/w1blH",
+    "tags": [],
+    "image": "",
+    "organizer": "",
+    "issueUrl": "https://github.com/ethlima/eth-events/issues/32",
+    "issueNum": 32,
+    "state": "open",
+    "createdAt": "2026-04-15T17:23:01Z"
+  },
+  {
     "id": 4,
     "title": "Founder School",
     "description": "A 10-week, cohort-based, virtual, and equity-free program designed to help you go from zero to one.",
