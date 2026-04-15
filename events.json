@@ -457,6 +457,26 @@
     "createdAt": "2026-03-26T22:18:07Z"
   },
   {
+    "id": 31,
+    "title": "https://luma.com/zcqhrl3a",
+    "description": "Únete a un buildathon intensivo de 1 día organizado por Ethereum Lima en colaboración con Stellar, como parte de La Ruta de Puqi.\nUn espacio diseñado para reunir a builders, desarrolladores y entusiastas Web3 que quieran crear soluciones reales sobre la tecnología de Stellar.",
+    "date": "2026-05-02",
+    "endDate": "",
+    "time": "16:00",
+    "location": "PUCP",
+    "type": "workshop",
+    "link": "https://luma.com/zcqhrl3a",
+    "tags": [
+      "ethlima"
+    ],
+    "image": "https://github.com/user-attachments/assets/8a897fe9-2124-4834-8e4c-c742f528b239",
+    "organizer": "Ethereum Lima",
+    "issueUrl": "https://github.com/ethlima/eth-events/issues/31",
+    "issueNum": 31,
+    "state": "open",
+    "createdAt": "2026-04-15T02:11:07Z"
+  },
+  {
     "id": 9,
     "title": "Ethereum Mexico 2026",
     "description": "🌐 Global Hybrid Hackathon: May 4 – June 3 | Online\n🏗 In-Person Builder Sessions: June 4 – 5 | Bitso Offices, Mexico City\n🇲🇽 ETH Mexico 2026 | Main Event TBA | Mexico City\n🏦 Stablecoin Conference by Bitso Business: June 15 – 16 | Mexico City",
