@@ -80,6 +80,7 @@ body:
         - workshop
         - hackathon
         - bootcamp
+        - buildathon
         - cohorte
     validations:
       required: true
