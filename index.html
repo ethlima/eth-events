@@ -12,17 +12,19 @@
   <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
   <style>
     :root {
-      --bg: #050609;
-      --surface: rgba(17, 19, 24, 0.6);
-      --surface2: rgba(24, 27, 34, 0.8);
+      --bg: #030407;
+      --surface: rgba(13, 16, 23, 0.7);
+      --surface2: rgba(22, 27, 34, 0.9);
       --border: rgba(255, 255, 255, 0.08);
+      --border-bright: rgba(255, 255, 255, 0.15);
       --accent: #627eea;
       --accent2: #8a9ff5;
-      --accent-glow: rgba(98, 126, 234, 0.12);
-      --text: #f0f2f5;
+      --accent-glow: rgba(98, 126, 234, 0.15);
+      --text: #f8fafc;
       --muted: #94a3b8;
       --success: #10b981;
       --warning: #f59e0b;
+      --card-bg-gradient: linear-gradient(180deg, rgba(22, 27, 34, 0.4) 0%, rgba(13, 16, 23, 0.8) 100%);
       --mono: 'Space Mono', monospace;
       --sans: 'Inter', sans-serif;
     }
@@ -33,12 +35,17 @@
       box-sizing: border-box;
     }
 
+    html {
+      scroll-behavior: smooth;
+    }
+
     body {
       background: var(--bg);
       color: var(--text);
       font-family: var(--sans);
       min-height: 100vh;
       overflow-x: hidden;
+      cursor: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='32' height='32' viewBox='0 0 32 32'><g transform='rotate(15 16 16)'><polygon points='16,4 24,14 16,18 8,14' fill='%23627eea' opacity='0.9'/><polygon points='16,28 24,18 16,14 8,18' fill='%23627eea' opacity='0.7'/><polygon points='16,4 16,18 24,14' fill='%234559b4' opacity='0.8'/><polygon points='16,28 16,18 24,18' fill='%234559b4' opacity='0.6'/></g></svg>") 16 16, auto;
     }
 
     /* Grid bg */
@@ -136,6 +143,44 @@
     .nav-cta:hover {
       background: var(--accent);
       color: #fff;
+    }
+
+    /* Ensure link tags also show the custom cursor */
+    a, button {
+      cursor: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='32' height='32' viewBox='0 0 32 32'><g transform='rotate(15 16 16)'><polygon points='16,4 24,14 16,18 8,14' fill='%238899f7' opacity='1'/><polygon points='16,28 24,18 16,14 8,18' fill='%238899f7' opacity='0.8'/><polygon points='16,4 16,18 24,14' fill='%236779d7' opacity='0.9'/><polygon points='16,28 16,18 24,18' fill='%236779d7' opacity='0.7'/></g></svg>") 16 16, pointer;
+    }
+
+    .lang-switcher {
+      display: flex;
+      gap: 4px;
+      padding: 4px;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      margin-left: 20px;
+    }
+
+    .lang-btn {
+      font-family: var(--mono);
+      font-size: 10px;
+      padding: 4px 8px;
+      background: transparent;
+      border: none;
+      color: var(--muted);
+      cursor: pointer;
+      border-radius: 4px;
+      transition: all 0.2s;
+      font-weight: 700;
+    }
+
+    .lang-btn.active {
+      background: var(--accent);
+      color: #fff;
+    }
+
+    .lang-btn:hover:not(.active) {
+      color: var(--text);
+      background: var(--accent-glow);
     }
 
     /* HERO */
@@ -354,17 +399,18 @@
     .events-grid {
       display: grid;
       grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
-      gap: 20px;
+      gap: 24px;
     }
 
     .event-card {
-      background: var(--surface);
+      background: var(--card-bg-gradient);
       border: 1px solid var(--border);
-      border-radius: 16px;
+      border-radius: 20px;
       overflow: hidden;
-      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+      transition: all 0.4s cubic-bezier(0.23, 1, 0.32, 1);
       position: relative;
       backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
       display: flex;
       flex-direction: column;
       height: 100%;
@@ -372,79 +418,76 @@
     }
 
     .event-card:hover {
-      border-color: rgba(98, 126, 234, 0.5);
-      transform: translateY(-8px);
-      box-shadow: 0 30px 60px rgba(0, 0, 0, 0.5), 0 0 40px rgba(98, 126, 234, 0.15);
-      background: rgba(22, 25, 33, 0.9);
+      border-color: rgba(98, 126, 234, 0.4);
+      transform: translateY(-12px) scale(1.02);
+      box-shadow: 
+        0 40px 80px rgba(0, 0, 0, 0.6), 
+        0 0 40px rgba(98, 126, 234, 0.2);
+      background: rgba(22, 27, 34, 0.95);
     }
 
-    /* PAST EVENTS */
     .event-card.past {
-      opacity: 0.6;
+      opacity: 0.5;
+      filter: grayscale(0.8);
       border-color: transparent;
-      background: rgba(17, 19, 24, 0.4);
+      background: rgba(13, 16, 23, 0.3);
     }
 
     .event-card.past:hover {
       opacity: 1;
+      filter: grayscale(0);
       background: var(--surface);
-      transform: translateY(-4px);
+      transform: translateY(-6px);
     }
 
     .event-card.past .event-body {
-      padding: 14px 18px 18px;
+      padding: 18px 22px 22px;
     }
 
     .event-card.past .event-title {
       font-size: 16px;
+      color: var(--muted);
     }
 
     .event-card.past .event-description {
-      display: -webkit-box;
       -webkit-line-clamp: 2;
       line-clamp: 2;
-      -webkit-box-orient: vertical;
-      overflow: hidden;
-      font-size: 13px;
-      margin-bottom: 12px;
-    }
-
-    .event-card.past .event-meta {
-      padding-top: 12px;
-    }
-
-    .event-card.past .event-type {
-      filter: grayscale(1);
-      opacity: 0.7;
     }
 
     .event-card::before {
       content: '';
       position: absolute;
-      top: 0;
-      left: 0;
-      right: 0;
-      height: 2px;
-      background: linear-gradient(90deg, transparent, var(--accent), transparent);
-      opacity: 0;
-      transition: opacity 0.2s;
+      inset: 0;
+      border-radius: 20px;
+      padding: 1.5px;
+      background: linear-gradient(135deg, rgba(255,255,255,0.15), transparent 40%, rgba(255,255,255,0.05));
+      -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+      mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+      -webkit-mask-composite: xor;
+      mask-composite: exclude;
+      pointer-events: none;
+      transition: opacity 0.4s;
+      opacity: 0.5;
     }
 
     .event-card:hover::before {
       opacity: 1;
+      background: linear-gradient(135deg, var(--accent), transparent 60%, var(--accent));
     }
 
     /* GRID ADJUSTMENTS */
-    #eth-lima-grid {
+    #eth-lima-grid, #past-events-grid {
       display: grid;
       grid-template-columns: repeat(4, 1fr);
-      gap: 20px;
+      gap: 24px;
+      margin-left: auto;
+      margin-right: auto;
     }
 
     #events-grid {
       display: grid;
       grid-template-columns: repeat(4, 1fr);
-      gap: 20px;
+      gap: 24px;
     }
 
     /* SWIPER CAROUSEL */
@@ -479,8 +522,14 @@
       aspect-ratio: 1 / 1;
       overflow: hidden;
       position: relative;
-      background: #1a1a1a;
-      border-radius: 12px 12px 0 0;
+      background: #111318;
+    }
+
+    .event-cover::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(0deg, var(--bg) 0%, transparent 50%);
     }
 
     .event-cover img {
@@ -488,6 +537,11 @@
       height: 100%;
       object-fit: cover;
       object-position: center;
+      transition: transform 0.6s cubic-bezier(0.23, 1, 0.32, 1);
+    }
+
+    .event-card:hover .event-cover img {
+      transform: scale(1.1);
     }
 
     .swiper-button-next, .swiper-button-prev {
@@ -500,9 +554,32 @@
       backdrop-filter: blur(10px);
     }
 
-    .swiper-button-next:after, .swiper-button-prev:after {
-      font-size: 18px !important;
-      font-weight: bold;
+    .no-image-backsplash {
+      width: 100%;
+      aspect-ratio: 16 / 9;
+      background: linear-gradient(135deg, #161a22 0%, #0a0b0f 100%);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .no-image-backsplash::before {
+      content: '';
+      position: absolute;
+      width: 150%;
+      height: 150%;
+      background-image: radial-gradient(circle at 2px 2px, rgba(98, 126, 234, 0.05) 1px, transparent 0);
+      background-size: 24px 24px;
+      transform: rotate(-15deg);
+    }
+
+    .no-image-backsplash svg {
+      width: 64px;
+      height: 64px;
+      color: rgba(98, 126, 234, 0.1);
+      z-index: 1;
     }
 
     .swiper-pagination-bullet {
@@ -518,18 +595,17 @@
     }
 
     .eth-lima-badge {
-      position: absolute;
-      top: 12px;
-      right: 12px;
-      background: var(--accent);
-      color: white;
-      font-size: 10px;
+      font-size: 9px;
       font-family: var(--mono);
-      padding: 4px 8px;
-      border-radius: 4px;
+      padding: 4px 10px;
+      border-radius: 100px;
       font-weight: 700;
       z-index: 5;
-      box-shadow: 0 4px 12px rgba(98, 126, 234, 0.3);
+      background: rgba(98, 126, 234, 0.15);
+      color: var(--accent2);
+      border: 1px solid rgba(98, 126, 234, 0.3);
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
     }
 
     /* SEE MORE BUTTON */
@@ -639,12 +715,6 @@
     /* RESPONSIVE */
     @media (max-width: 1200px) {
       #eth-lima-grid, #events-grid, #past-events-grid {
-        grid-template-columns: repeat(3, 1fr);
-      }
-    }
-
-    @media (max-width: 992px) {
-      #eth-lima-grid, #events-grid, #past-events-grid {
         grid-template-columns: repeat(2, 1fr);
       }
     }
@@ -660,11 +730,12 @@
     }
 
     .event-header {
-      padding: 20px 20px 0;
+      padding: 24px 24px 0;
       display: flex;
-      align-items: flex-start;
+      align-items: center;
       justify-content: space-between;
       gap: 12px;
+      z-index: 2;
     }
 
     .event-type {
@@ -725,25 +796,32 @@
     }
 
     .event-body {
-      padding: 16px 20px 20px;
+      padding: 16px 24px 24px;
       flex: 1;
       display: flex;
       flex-direction: column;
+      z-index: 2;
     }
 
     .event-title {
-      font-size: 18px;
-      font-weight: 600;
-      line-height: 1.3;
-      margin-bottom: 10px;
+      font-size: 20px;
+      font-weight: 700;
+      line-height: 1.25;
+      margin-bottom: 12px;
+      color: var(--text);
     }
 
     .event-description {
       font-size: 14px;
       color: var(--muted);
       line-height: 1.6;
-      margin-bottom: 20px;
+      margin-bottom: 24px;
       flex: 1;
+      display: -webkit-box;
+      -webkit-line-clamp: 3;
+      line-clamp: 3;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
     }
 
     .event-meta {
@@ -771,10 +849,12 @@
     }
 
     .event-footer {
-      padding: 0 20px 20px;
+      padding: 0 24px 24px;
       display: flex;
       align-items: center;
       justify-content: space-between;
+      gap: 12px;
+      z-index: 2;
     }
 
     .event-tags {
@@ -1257,12 +1337,18 @@
       ETH_EVENTS
     </a>
     <ul class="nav-links">
-      <li><a href="#events">EVENTOS</a></li>
-      <li><a href="#how">CÓMO FUNCIONA</a></li>
+      <li><a href="#events" data-i18n="nav_events">EVENTOS</a></li>
+      <li><a href="#how" data-i18n="nav_how">CÓMO FUNCIONA</a></li>
     </ul>
-    <a class="nav-cta" href="https://github.com/ethlima/eth-events/issues/new?template=event.yml" target="_blank">
-      + NUEVO EVENTO
-    </a>
+    <div style="display: flex; align-items: center;">
+      <a class="nav-cta" href="https://github.com/ethlima/eth-events/issues/new?template=event.yml" target="_blank" data-i18n="nav_new">
+        + NUEVO EVENTO
+      </a>
+      <div class="lang-switcher">
+        <button class="lang-btn" id="lang-es" onclick="setLanguage('es')">ES</button>
+        <button class="lang-btn" id="lang-en" onclick="setLanguage('en')">EN</button>
+      </div>
+    </div>
   </nav>
 
 
@@ -1272,12 +1358,12 @@
     <!-- Section for ETH Lima Events -->
     <div id="eth-lima-container" style="display: none; padding-bottom: 60px;">
       <div class="section-header">
-        <h2 class="section-title">Eventos <span>ETH Lima</span></h2>
+        <h2 class="section-title" data-i18n="sec_eth_lima">Eventos <span>ETH Lima</span></h2>
       </div>
-      <div class="events-grid" id="eth-lima-grid" style="grid-template-columns: repeat(4, 1fr); gap: 20px;">
+      <div class="events-grid" id="eth-lima-grid">
       </div>
       <div class="see-more-container" id="eth-lima-more-container" style="display: none;">
-        <button class="btn-see-more" onclick="showAllEthLima()">
+        <button class="btn-see-more" onclick="showAllEthLima()" data-i18n="btn_see_all_eth">
           VER TODOS LOS EVENTOS ETH LIMA
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M6 9l6 6 6-6"/></svg>
         </button>
@@ -1286,18 +1372,18 @@
 
     <!-- Section for Community Events -->
     <div class="section-header" style="margin-top: 80px;">
-      <h2 class="section-title">Eventos de la <span>Comunidad</span></h2>
+      <h2 class="section-title" data-i18n="sec_community">Eventos de la <span>Comunidad</span></h2>
       <div class="filter-bar" id="filter-bar">
-        <button class="filter-btn active" data-filter="all">TODOS</button>
+        <button class="filter-btn active" data-filter="all" data-i18n="filter_all">TODOS</button>
       </div>
     </div>
     <div class="events-grid" id="events-grid">
       <div class="loading">
-        <div class="spinner"></div> CARGANDO EVENTOS...
+        <div class="spinner"></div> <span data-i18n="loading">CARGANDO EVENTOS...</span>
       </div>
     </div>
     <div class="see-more-container" id="community-more-container" style="display: none;">
-      <button class="btn-see-more" onclick="showAllCommunity()">
+      <button class="btn-see-more" onclick="showAllCommunity()" data-i18n="btn_see_all">
         VER TODOS LOS EVENTOS
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M6 9l6 6 6-6"/></svg>
       </button>
@@ -1306,12 +1392,12 @@
     <!-- PAST EVENTS SECTION -->
     <div id="past-events" style="display: none; margin-top: 80px; padding-top: 40px; border-top: 1px solid var(--border)">
       <div class="section-header" style="margin-bottom: 32px">
-        <h2 class="section-title" style="font-size: 24px; color: var(--muted)">Eventos <span>Pasados</span></h2>
+        <h2 class="section-title" style="font-size: 24px; color: var(--muted)" data-i18n="sec_past">Eventos <span>Pasados</span></h2>
       </div>
-      <div class="events-grid" id="past-events-grid" style="grid-template-columns: repeat(4, 1fr); gap: 20px;">
+      <div class="events-grid" id="past-events-grid">
       </div>
       <div class="see-more-container" id="past-more-container" style="display: none;">
-        <button class="btn-see-more past-btn" onclick="showAllPast()">
+        <button class="btn-see-more past-btn" onclick="showAllPast()" data-i18n="btn_see_more_past">
           MOSTRAR MÁS EVENTOS PASADOS
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M6 9l6 6 6-6"/></svg>
         </button>
@@ -1323,31 +1409,31 @@
   <div class="stats" id="stats">
     <div class="stat">
       <span class="stat-value" id="stat-total">—</span>
-      <span class="stat-label">EVENTOS</span>
+      <span class="stat-label" data-i18n="stat_events">EVENTOS</span>
     </div>
     <div class="stat">
       <span class="stat-value" id="stat-upcoming">—</span>
-      <span class="stat-label">PRÓXIMOS</span>
+      <span class="stat-label" data-i18n="stat_upcoming">PRÓXIMOS</span>
     </div>
     <div class="stat">
       <span class="stat-value" id="stat-types">—</span>
-      <span class="stat-label">CATEGORÍAS</span>
+      <span class="stat-label" data-i18n="stat_types">CATEGORÍAS</span>
     </div>
   </div>
 
   <!-- HERO (Moved down/secondary) -->
   <section class="hero" style="padding-top: 40px; padding-bottom: 80px; border-top: 1px solid var(--border)">
     <div class="hero-tag">POWERED BY GITHUB ISSUES</div>
-    <h2 style="font-size: 32px; margin-bottom: 20px">Súmate a la <span>Comunidad</span></h2>
-    <p>Agrega tu evento abriendo un issue en GitHub. Descentralizado y abierto.</p>
+    <h2 style="font-size: 32px; margin-bottom: 20px" data-i18n="hero_title">Súmate a la <span>Comunidad</span></h2>
+    <p data-i18n="hero_subtitle">Agrega tu evento abriendo un issue en GitHub. Descentralizado y abierto.</p>
     <div class="hero-actions">
-      <a class="btn-primary" href="https://github.com/ethlima/eth-events/issues/new?template=event.yml" target="_blank">
+      <a class="btn-primary" href="https://github.com/ethlima/eth-events/issues/new?template=event.yml" target="_blank" data-i18n="btn_propose">
         <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
           <path d="M12 5v14M5 12h14" />
         </svg>
         PROPONER EVENTO
       </a>
-      <a class="btn-secondary" href="https://github.com/ethlima/eth-events" target="_blank">
+      <a class="btn-secondary" href="https://github.com/ethlima/eth-events" target="_blank" data-i18n="btn_github">
         <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
           <path
             d="M12 2C6.477 2 2 6.477 2 12c0 4.418 2.865 8.166 6.839 9.489.5.092.682-.217.682-.482 0-.237-.009-.868-.013-1.703-2.782.604-3.369-1.341-3.369-1.341-.454-1.155-1.11-1.462-1.11-1.462-.908-.62.069-.608.069-.608 1.003.07 1.531 1.03 1.531 1.03.892 1.529 2.341 1.087 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.11-4.555-4.943 0-1.091.39-1.984 1.029-2.683-.103-.253-.446-1.27.098-2.647 0 0 .84-.269 2.75 1.025A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.294 2.747-1.025 2.747-1.025.546 1.377.202 2.394.1 2.647.64.699 1.028 1.592 1.028 2.683 0 3.842-2.339 4.687-4.566 4.93.359.309.678.919.678 1.852 0 1.336-.012 2.415-.012 2.744 0 .267.18.578.688.48C19.138 20.161 22 16.416 22 12c0-5.523-4.477-10-10-10z" />
@@ -1360,53 +1446,47 @@
   <!-- HOW IT WORKS -->
   <div class="how-section" id="how">
     <div class="how-inner">
-      <h2 class="how-title">¿Cómo agregar un evento?</h2>
+      <h2 class="how-title" data-i18n="how_title">¿Cómo agregar un evento?</h2>
       <div class="steps">
         <div class="step">
-          <div class="step-num">PASO 01</div>
+          <div class="step-num" data-i18n="how_s1_step">PASO 01</div>
+          <div class="step-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+              <path d="M12 5v14M5 12h14" />
+            </svg>
+          </div>
+          <h3 data-i18n="how_s1_title">Click en nuevo evento</h3>
+          <p data-i18n="how_s1_desc">Presiona el botón "+ NUEVO EVENTO" para iniciar el proceso a través de un issue en GitHub.</p>
+        </div>
+        <div class="step">
+          <div class="step-num" data-i18n="how_s2_step">PASO 02</div>
           <div class="step-icon">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
               <path d="M9 12h6M9 16h6M9 8h6M5 20h14a2 2 0 002-2V6a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
             </svg>
           </div>
-          <h3>Abre un Issue</h3>
-          <p>Ve al repositorio en GitHub y abre un nuevo issue usando el template <code>event.md</code>. Llena los
-            campos del formulario.</p>
+          <h3 data-i18n="how_s2_title">Llena el formulario</h3>
+          <p data-i18n="how_s2_desc">Completa el formulario del issue con los detalles del evento (nombre, fecha, ubicación, etc.).</p>
         </div>
         <div class="step">
-          <div class="step-num">PASO 02</div>
+          <div class="step-num" data-i18n="how_s3_step">PASO 03</div>
           <div class="step-icon">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
-              <path d="M7 7h10v10H7z" />
-              <path d="M7 7L4 4m13 3l3-3M7 17l-3 3m13-3l3 3" />
+              <path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
             </svg>
           </div>
-          <h3>GitHub Actions</h3>
-          <p>Un workflow automático se dispara, parsea el issue y regenera el archivo <code>events.json</code> con los
-            datos del evento.</p>
+          <h3 data-i18n="how_s3_title">Espera la aprobación</h3>
+          <p data-i18n="how_s3_desc">El equipo de Ethereum Lima revisará tu propuesta. Una vez aprobado, se publicará automáticamente.</p>
         </div>
         <div class="step">
-          <div class="step-num">PASO 03</div>
+          <div class="step-num" data-i18n="how_support_step">SOPORTE</div>
           <div class="step-icon">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
-              <path d="M13 10V3L4 14h7v7l9-11h-7z" />
+              <path d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
             </svg>
           </div>
-          <h3>Deploy automático</h3>
-          <p>GitHub Pages se actualiza automáticamente y el evento aparece en el sitio en minutos. Sin intervención
-            manual.</p>
-        </div>
-        <div class="step">
-          <div class="step-num">PASO 04</div>
-          <div class="step-icon">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
-              <path
-                d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0z" />
-            </svg>
-          </div>
-          <h3>Comunidad revisa</h3>
-          <p>Los maintainers pueden aprobar, cerrar o etiquetar issues. Solo eventos con label <code>approved</code> se
-            publican.</p>
+          <h3 data-i18n="how_support_title">¿Algún problema?</h3>
+          <p data-i18n="how_support_desc">Escríbenos a <a href="mailto:hola@ethlima.org" style="color:var(--accent); text-decoration:none">hola@ethlima.org</a> y te ayudaremos con el proceso.</p>
         </div>
       </div>
     </div>
@@ -1444,35 +1524,167 @@
 
   <script>
     // ──────────────────────────────────────────────
+    // I18N SUPPORT
+    // ──────────────────────────────────────────────
+    const TRANSLATIONS = {
+      es: {
+        nav_events: "EVENTOS",
+        nav_how: "CÓMO FUNCIONA",
+        nav_new: "+ NUEVO EVENTO",
+        sec_eth_lima: "Eventos <span>ETH Lima</span>",
+        sec_community: "Eventos de la <span>Comunidad</span>",
+        sec_past: "Eventos <span>Pasados</span>",
+        btn_see_all_eth: "VER TODOS LOS EVENTOS ETH LIMA",
+        btn_see_all: "VER TODOS LOS EVENTOS",
+        btn_see_more_past: "MOSTRAR MÁS EVENTOS PASADOS",
+        stat_events: "EVENTOS",
+        stat_upcoming: "PRÓXIMOS",
+        stat_types: "CATEGORÍAS",
+        hero_title: "Súmate a la <span>Comunidad</span>",
+        hero_subtitle: "Agrega tu evento abriendo un issue en GitHub. Descentralizado y abierto.",
+        btn_propose: "PROPONER EVENTO",
+        btn_github: "VER EN GITHUB",
+        how_title: "¿Cómo agregar un evento?",
+        how_s1_step: "PASO 01",
+        how_s1_title: "Click en nuevo evento",
+        how_s1_desc: "Presiona el botón '+ NUEVO EVENTO' para iniciar el proceso a través de un issue en GitHub.",
+        how_s2_step: "PASO 02",
+        how_s2_title: "Llena el formulario",
+        how_s2_desc: "Completa el formulario del issue con los detalles del evento (nombre, fecha, ubicación, etc.).",
+        how_s3_step: "PASO 03",
+        how_s3_title: "Espera la aprobación",
+        how_s3_desc: "El equipo de Ethereum Lima revisará tu propuesta. Una vez aprobado, se publicará automáticamente.",
+        how_support_step: "SOPORTE",
+        how_support_title: "¿Algún problema?",
+        how_support_desc: "Escríbenos a hola@ethlima.org y te ayudaremos con el proceso.",
+        loading: "CARGANDO EVENTOS...",
+        filter_all: "TODOS",
+        card_more_info: "VER MÁS →",
+        card_reserve: "RESERVAR →",
+        modal_date: "Fecha",
+        modal_time: "Hora",
+        modal_location: "Ubicación",
+        modal_organizer: "Organiza",
+        modal_btn_access: "ACCEDER AL EVENTO",
+        empty_filters: "Sin eventos de este tipo",
+        empty_try_another: "// Prueba otro filtro",
+        confirm_date: "Por confirmar",
+        confirm_loc: "Sin definir",
+        organizer_community: "Comunidad"
+      },
+      en: {
+        nav_events: "EVENTS",
+        nav_how: "HOW IT WORKS",
+        nav_new: "+ NEW EVENT",
+        sec_eth_lima: "<span>ETH Lima</span> Events",
+        sec_community: "<span>Community</span> Events",
+        sec_past: "<span>Past</span> Events",
+        btn_see_all_eth: "SEE ALL ETH LIMA EVENTS",
+        btn_see_all: "SEE ALL EVENTS",
+        btn_see_more_past: "SHOW MORE PAST EVENTS",
+        stat_events: "EVENTS",
+        stat_upcoming: "UPCOMING",
+        stat_types: "CATEGORIES",
+        hero_title: "Join the <span>Community</span>",
+        hero_subtitle: "Add your event by opening a GitHub issue. Decentralized and open.",
+        btn_propose: "PROPOSE EVENT",
+        btn_github: "VIEW ON GITHUB",
+        how_title: "How to add an event?",
+        how_s1_step: "STEP 01",
+        how_s1_title: "Click new event",
+        how_s1_desc: "Press the '+ NEW EVENT' button to start the process via a GitHub issue.",
+        how_s2_step: "STEP 02",
+        how_s2_title: "Fill the form",
+        how_s2_desc: "Complete the issue form with event details (name, date, location, etc.).",
+        how_s3_step: "STEP 03",
+        how_s3_title: "Wait for approval",
+        how_s3_desc: "The Ethereum Lima team will review your proposal. Once approved, it will be published automatically.",
+        how_support_step: "SUPPORT",
+        how_support_title: "Any problems?",
+        how_support_desc: "Email us at hola@ethlima.org and we'll help you with the process.",
+        loading: "LOADING EVENTS...",
+        filter_all: "ALL",
+        card_more_info: "VIEW MORE →",
+        card_reserve: "RESERVE →",
+        modal_date: "Date",
+        modal_time: "Time",
+        modal_location: "Location",
+        modal_organizer: "Organizer",
+        modal_btn_access: "ACCESS EVENT",
+        empty_filters: "No events of this type",
+        empty_try_another: "// Try another filter",
+        confirm_date: "To be confirmed",
+        confirm_loc: "Not defined",
+        organizer_community: "Community"
+      }
+    };
+
+    let currentLang = localStorage.getItem('eth_events_lang') || 'es';
+
+    function setLanguage(lang) {
+      currentLang = lang;
+      localStorage.setItem('eth_events_lang', lang);
+      
+      // Update toggle buttons
+      document.querySelectorAll('.lang-btn').forEach(btn => btn.classList.remove('active'));
+      document.getElementById(`lang-${lang}`).classList.add('active');
+      
+      // Update HTML attributes
+      document.documentElement.lang = lang;
+      
+      // Update static texts
+      document.querySelectorAll('[data-i18n]').forEach(el => {
+        const key = el.getAttribute('data-i18n');
+        if (TRANSLATIONS[lang][key]) {
+          el.innerHTML = TRANSLATIONS[lang][key];
+        }
+      });
+
+      // Rerender grids to update card labels and dates
+      if (window._allEvents) {
+        renderAllGrids(window._allEvents);
+      }
+    }
+
+    // Wrap the rendering logic to allow re-rendering
+    function renderAllGrids(data) {
+       renderEvents(data);
+    }
+
+    // ──────────────────────────────────────────────
     // Carga eventos desde events.json (generado por GitHub Actions)
     // ──────────────────────────────────────────────
     const REPO = 'ethlima/eth-events'; // ← CAMBIAR
 
     async function loadEvents() {
       const grid = document.getElementById('events-grid');
+      // Initialize language UI
+      setLanguage(currentLang);
       try {
-        // 1. Carga events.json generado por el workflow
         const res = await fetch('./events.json?t=' + Date.now());
         if (!res.ok) throw new Error('no json');
         const data = await res.json();
         if (!Array.isArray(data)) throw new Error('bad json');
-        renderEvents(data);
+        window._allEvents = data;
+        renderAllGrids(data);
       } catch {
-        // 2. Fallback: GitHub Issues API
         try {
           const res = await fetch(
             `https://api.github.com/repos/${REPO}/issues?labels=approved&state=open&per_page=100`
           );
           const issues = await res.json();
           if (!Array.isArray(issues)) throw new Error('api error');
-          renderEvents(issues.map(parseIssue));
+          const data = issues.map(parseIssue);
+          window._allEvents = data;
+          renderAllGrids(data);
         } catch {
+          const t = TRANSLATIONS[currentLang];
           grid.innerHTML = `
             <div class="empty-state">
-              <h3>Sin eventos aún</h3>
-              <p>// Sé el primero en proponer un evento</p>
-              <a class="btn-primary" href="https://github.com/${REPO}/issues/new?template=event.yml" target="_blank">
-                + PROPONER EVENTO
+              <h3>${t.empty_filters}</h3>
+              <p>${t.empty_try_another}</p>
+              <a class="btn-primary" href="https://github.com/${REPO}/issues/new?template=event.yml" target="_blank" data-i18n="btn_propose">
+                ${t.btn_propose}
               </a>
             </div>`;
         }
@@ -1597,7 +1809,7 @@
       window._ethLimaUpcoming = ethLimaSorted;
       if (ethLimaSorted.length > 0) {
         ethLimaContainer.style.display = 'block';
-        ethLimaGrid.innerHTML = ethLimaSorted.slice(0, 6).map(e => cardHTML(e, false, false, false, 20)).join('');
+        ethLimaGrid.innerHTML = ethLimaSorted.slice(0, 6).map(e => cardHTML(e, false, false, false, 20, true)).join('');
         if (ethLimaSorted.length > 6) {
           document.getElementById('eth-lima-more-container').style.display = 'flex';
         } else {
@@ -1618,7 +1830,7 @@
       window._pastEvents = past;
       if (past.length > 0) {
         pastSection.style.display = 'block';
-        pastGrid.innerHTML = past.slice(0, 8).map(e => cardHTML(e, true)).join('');
+        pastGrid.innerHTML = past.slice(0, 8).map(e => cardHTML(e, true, false, false, 100, false)).join('');
         if (past.length > 8) {
           document.getElementById('past-more-container').style.display = 'flex';
         }
@@ -1629,19 +1841,19 @@
 
     function showAllEthLima() {
       const ethLimaGrid = document.getElementById('eth-lima-grid');
-      ethLimaGrid.innerHTML = window._ethLimaUpcoming.map(e => cardHTML(e, false, false, false, 20)).join('');
+      ethLimaGrid.innerHTML = window._ethLimaUpcoming.map(e => cardHTML(e, false, false, false, 20, true)).join('');
       document.getElementById('eth-lima-more-container').style.display = 'none';
     }
 
     function showAllCommunity() {
       const grid = document.getElementById('events-grid');
-      grid.innerHTML = window._communityUpcoming.map(e => cardHTML(e)).join('');
+      grid.innerHTML = window._communityUpcoming.map(e => cardHTML(e, false, false, false, 100, false)).join('');
       document.getElementById('community-more-container').style.display = 'none';
     }
 
     function showAllPast() {
       const pastGrid = document.getElementById('past-events-grid');
-      pastGrid.innerHTML = window._pastEvents.map(e => cardHTML(e, true)).join('');
+      pastGrid.innerHTML = window._pastEvents.map(e => cardHTML(e, true, false, false, 100, false)).join('');
       document.getElementById('past-more-container').style.display = 'none';
     }
 
@@ -1680,17 +1892,20 @@
 
     function renderGrid(events, allEvents) {
       const grid = document.getElementById('events-grid');
+      const t = TRANSLATIONS[currentLang];
       if (events.length === 0) {
-        grid.innerHTML = `<div class="empty-state"><h3>Sin eventos de este tipo</h3><p>// Prueba otro filtro</p></div>`;
+        grid.innerHTML = `<div class="empty-state"><h3>${t.empty_filters}</h3><p>${t.empty_try_another}</p></div>`;
         return;
       }
-      grid.innerHTML = events.map(e => cardHTML(e)).join('');
+      grid.innerHTML = events.map(e => cardHTML(e, false, false, false, 100, false)).join('');
     }
 
     function openModal(id) {
        const events = window._allEvents || [];
        const e = events.find(item => item.id == id);
        if(!e) return;
+
+       const t = TRANSLATIONS[currentLang];
 
        const typeClass = {
         conference: 'type-conference',
@@ -1699,15 +1914,17 @@
         meetup: 'type-meetup',
         bootcamp: 'type-bootcamp',
         cohorte: 'type-cohorte',
+        buildathon: 'type-buildathon'
       }[e.type] || 'type-meetup';
 
-      const dateStr = e.date ? new Date(e.date + 'T00:00').toLocaleDateString('es', {
+      const locale = currentLang === 'es' ? 'es' : 'en-US';
+      const dateStr = e.date ? new Date(e.date + 'T00:00').toLocaleDateString(locale, {
         day: 'numeric', month: 'long', year: 'numeric'
-      }) : 'Por confirmar';
+      }) : t.confirm_date;
 
       let fullDate = dateStr;
       if (e.endDate && e.date !== e.endDate) {
-        const endDateStr = new Date(e.endDate + 'T00:00').toLocaleDateString('es', {
+        const endDateStr = new Date(e.endDate + 'T00:00').toLocaleDateString(locale, {
           day: 'numeric', month: 'long', year: 'numeric'
         });
         fullDate = `${dateStr} — ${endDateStr}`;
@@ -1720,29 +1937,29 @@
            <h2 class="modal-title">${e.title}</h2>
         </div>
         <div class="modal-body">
-           <p class="modal-desc">${e.description || 'Sin descripción detallada.'}</p>
+           <p class="modal-desc">${e.description || '// ' + t.confirm_date}</p>
            <div class="modal-meta-grid">
               <div class="m-item">
-                 <span class="m-label">Fecha</span>
+                 <span class="m-label">${t.modal_date}</span>
                  <span class="m-val">${fullDate}</span>
               </div>
               <div class="m-item">
-                 <span class="m-label">Hora</span>
-                 <span class="m-val">${e.time || 'Por confirmar'}</span>
+                 <span class="m-label">${t.modal_time}</span>
+                 <span class="m-val">${e.time || t.confirm_date}</span>
               </div>
               <div class="m-item">
-                 <span class="m-label">Ubicación</span>
-                 <span class="m-val">${e.location || 'Sin definir'}</span>
+                 <span class="m-label">${t.modal_location}</span>
+                 <span class="m-val">${e.location || t.confirm_loc}</span>
               </div>
               <div class="m-item">
-                 <span class="m-label">Organiza</span>
-                 <span class="m-val">${e.organizer || 'Comunidad'}</span>
+                 <span class="m-label">${t.modal_organizer}</span>
+                 <span class="m-val">${e.organizer || t.organizer_community}</span>
               </div>
            </div>
         </div>
         <div class="modal-footer" style="display: flex; justify-content: center; padding-top: 20px; border-top: 1px solid var(--border)">
            <a class="nav-cta" href="${e.link || e.issueUrl}" target="_blank" style="padding: 12px 32px; font-size: 14px; border-radius: 8px">
-              ACCEDER AL EVENTO
+              ${t.modal_btn_access}
            </a>
         </div>
        `;
@@ -1755,9 +1972,11 @@
        document.body.style.overflow = 'auto';
     }
 
-    function cardHTML(e, isPast = false, isFeatured = false, isSwiper = false, descLimit = 20) {
+    function cardHTML(e, isPast = false, isFeatured = false, isSwiper = false, descLimit = 100, showImage = false) {
       if(!window._allEvents) window._allEvents = [];
       if(!window._allEvents.find(item => item.id == e.id)) window._allEvents.push(e);
+
+      const t = TRANSLATIONS[currentLang];
 
       const typeClass = {
         conference: 'type-conference',
@@ -1766,15 +1985,17 @@
         meetup: 'type-meetup',
         bootcamp: 'type-bootcamp',
         cohorte: 'type-cohorte',
+        buildathon: 'type-buildathon'
       }[e.type] || 'type-meetup';
 
-      const dateStr = e.date ? new Date(e.date + 'T00:00').toLocaleDateString('es', {
+      const locale = currentLang === 'es' ? 'es' : 'en-US';
+      const dateStr = e.date ? new Date(e.date + 'T00:00').toLocaleDateString(locale, {
         day: 'numeric', month: 'short'
-      }) : 'Por confirmar';
+      }) : t.confirm_date;
 
       let fullDate = dateStr;
       if (e.endDate && e.date !== e.endDate) {
-        const endDateStr = new Date(e.endDate + 'T00:00').toLocaleDateString('es', {
+        const endDateStr = new Date(e.endDate + 'T00:00').toLocaleDateString(locale, {
           day: 'numeric', month: 'short'
         });
         fullDate = `${dateStr} — ${endDateStr}`;
@@ -1784,20 +2005,22 @@
       
       const shortDesc = (e.description || '').length > descLimit 
         ? (e.description || '').substring(0, descLimit) + '...' 
-        : (e.description || 'Sin descripción.');
+        : (e.description || t.confirm_date);
 
-      const ethLimaBadge = e._isEthLima ? `<span class="eth-lima-badge">ETH Lima Official</span>` : '';
+      const ethLimaBadge = e._isEthLima ? `<span class="eth-lima-badge">ETH Lima</span>` : '';
       
-      // Determine if image should be shown: only for active ethlima events
-      const showImage = e._isEthLima && !isPast;
-      const imageUrl = e.image || `https://via.placeholder.com/600x600/111318/627eea?text=${encodeURIComponent(e.title)}`;
+      // Images selectively enabled
+      const imageUrl = showImage ? e.image : '';
+      const imageSection = imageUrl 
+        ? `<div class="event-cover"><img src="${imageUrl}" alt="${e.title}" loading="lazy"></div>`
+        : '';
 
-      const cardBody = `
-          ${showImage ? `<div class="event-cover"><img src="${imageUrl}" alt="${e.title}" loading="lazy"></div>` : ''}
+      const cardContent = `
+          ${imageSection}
           <div class="event-header">
-            <div style="display:flex; flex-direction:column; gap:8px">
-              ${ethLimaBadge}
+            <div style="display:flex; align-items:center; gap:8px">
               <span class="event-type ${typeClass}">${e.type.toUpperCase()}</span>
+              ${ethLimaBadge}
             </div>
             <span class="event-issue">#${e.issueNum}</span>
           </div>
@@ -1814,17 +2037,17 @@
           <div class="event-footer">
             <div class="event-tags">${tagsHTML}</div>
             <div class="event-link">
-              ${isFeatured ? 'RESERVAR LUGAR →' : 'MÁS INFO →'}
+              ${isFeatured ? t.card_reserve : t.card_more_info}
             </div>
           </div>`;
 
       if (isSwiper) {
-        return `<div class="swiper-slide"><div class="event-card ${isPast ? 'past' : ''} ${e._isEthLima ? 'eth-lima-card' : ''}" onclick="openModal(${e.id})">${cardBody}</div></div>`;
+        return `<div class="swiper-slide"><div class="event-card ${isPast ? 'past' : ''} ${e._isEthLima ? 'eth-lima-card' : ''}" onclick="openModal(${e.id})">${cardContent}</div></div>`;
       }
 
       return `
-        <div class="event-card ${isPast ? 'past' : ''} ${isFeatured ? 'featured next-up-mobile' : ''} ${e._isEthLima ? 'eth-lima-card' : ''}" onclick="openModal(${e.id})">
-          ${cardBody}
+        <div class="event-card ${isPast ? 'past' : ''} ${isFeatured ? 'featured' : ''} ${e._isEthLima ? 'eth-lima-card' : ''}" onclick="openModal(${e.id})">
+          ${cardContent}
         </div>`;
     }
 
