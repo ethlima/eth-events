@@ -457,6 +457,26 @@
     "createdAt": "2026-03-26T22:18:07Z"
   },
   {
+    "id": 34,
+    "title": "Más allá del laboratorio: simulación, datos e IA como pilares de la ingeniería científica",
+    "description": "Builder Series",
+    "date": "2026-04-28",
+    "endDate": "",
+    "time": "",
+    "location": "Online",
+    "type": "workshop",
+    "link": "https://luma.com/mdhm38eh",
+    "tags": [
+      "ethlima"
+    ],
+    "image": "",
+    "organizer": "Ethereum Lima",
+    "issueUrl": "https://github.com/ethlima/eth-events/issues/34",
+    "issueNum": 34,
+    "state": "open",
+    "createdAt": "2026-04-23T22:14:30Z"
+  },
+  {
     "id": 31,
     "title": "Buildathon La Ruta de Puqi - Eth Lima x Stellar",
     "description": "Únete a un buildathon intensivo de 1 día organizado por Ethereum Lima en colaboración con Stellar, como parte de La Ruta de Puqi.\nUn espacio diseñado para reunir a builders, desarrolladores y entusiastas Web3 que quieran crear soluciones reales sobre la tecnología de Stellar.",
