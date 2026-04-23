@@ -517,6 +517,31 @@
     "createdAt": "2026-03-27T00:28:16Z"
   },
   {
+    "id": 33,
+    "title": "Dev3pack Global Hackathon",
+    "description": "El mayor hackatón para estudiantes sobre Web3 e IA, organizado por la comunidad Dev3pack (https://x.com/dev3pack). Nos asociamos con Solana, Vercel y Eleven Labs. Al inscribirte, tendrás acceso a la hacker house en Lima 🇵🇪",
+    "date": "2026-05-08",
+    "endDate": "2026-05-10",
+    "time": "",
+    "location": "Hibrído",
+    "type": "hackathon",
+    "link": "https://hack.dev3pack.xyz/",
+    "tags": [
+      "dev3pack",
+      "solana",
+      "vercel",
+      "elevenlabs",
+      "ai",
+      "web3"
+    ],
+    "image": "",
+    "organizer": "Dev3pack",
+    "issueUrl": "https://github.com/ethlima/eth-events/issues/33",
+    "issueNum": 33,
+    "state": "open",
+    "createdAt": "2026-04-20T20:00:41Z"
+  },
+  {
     "id": 8,
     "title": "Dev3pack Global Hackathon",
     "description": "The largest Web3 & AI student hackathon",
