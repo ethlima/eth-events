@@ -542,24 +542,6 @@
     "createdAt": "2026-04-20T20:00:41Z"
   },
   {
-    "id": 8,
-    "title": "Dev3pack Global Hackathon",
-    "description": "The largest Web3 & AI student hackathon",
-    "date": "2026-05-08",
-    "endDate": "2026-05-10",
-    "time": "",
-    "location": "Híbrido",
-    "type": "hackathon",
-    "link": "https://hack.dev3pack.xyz/",
-    "tags": [],
-    "image": "",
-    "organizer": "Dev3Pack",
-    "issueUrl": "https://github.com/ethlima/eth-events/issues/8",
-    "issueNum": 8,
-    "state": "open",
-    "createdAt": "2026-03-26T22:26:13Z"
-  },
-  {
     "id": 32,
     "title": "Hackathon: LatAm Institucional",
     "description": "Un fin de semana entero para transformar la banca y las instituciones financieras de LatAm desde adentro — usando blockchain e inteligencia artificial.\n\n¿El reto? Resolver los problemas de la banca tradicional: infraestructura obsoleta, falta de conectividad y procesos que frenan el crecimiento, scores crediticios, etc. Buscamos soluciones reales que ayuden a los bancos a modernizar su infraestructura. Además, conectar builders en toda la región.",
