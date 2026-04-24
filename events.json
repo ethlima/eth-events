@@ -1,5 +1,25 @@
 [
   {
+    "id": 35,
+    "title": "Bootcamp de Marketing Web3",
+    "description": "Aprende a usar IA para crear contenido, crecer comunidad y hacer marketing en Web3.\n\nTrabajaremos con herramientas como: #ChatGPT, #Canva y #Claude\n\nUn programa práctico de:\n👉 4 sesiones en vivo + 1 presentación final de proyectos\n\n🟣Aprenderás a: crear contenido con IA\n🟣Generar ideas y copies en segundos\n🟣Automatizar tu flujo de trabajo\n🟣Construir comunidad en Web3\n🟣 y mucho más\n\n🎁 Acceso gratuito\n🎓 Certificación opcional\n🌎 Comunidad LATAM\n⚠️ Cupos limitados",
+    "date": "2025-05-16",
+    "endDate": "",
+    "time": "",
+    "location": "Online",
+    "type": "bootcamp",
+    "link": "https://luma.com/1e2a8z9m",
+    "tags": [
+      "marketing"
+    ],
+    "image": "",
+    "organizer": "MKT Community",
+    "issueUrl": "https://github.com/ethlima/eth-events/issues/35",
+    "issueNum": 35,
+    "state": "open",
+    "createdAt": "2026-04-24T15:58:08Z"
+  },
+  {
     "id": 12,
     "title": "La Ruta de Puqi: Donde Inicia el camino",
     "description": "Sesión de inicio del Challengue Universitario. Fundamentos de Ethereum.",
