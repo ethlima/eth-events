@@ -477,6 +477,24 @@
     "createdAt": "2026-04-23T22:14:30Z"
   },
   {
+    "id": 37,
+    "title": "Ethereum Protocol Fellowship: Cohort 7",
+    "description": "EPF is an open fellowship program for developers aspiring to work on Ethereum core protocol, clients, research and related tooling.",
+    "date": "2026-04-30",
+    "endDate": "2026-05-13",
+    "time": "",
+    "location": "Online",
+    "type": "cohorte",
+    "link": "https://github.com/eth-protocol-fellows/cohort-seven",
+    "tags": [],
+    "image": "",
+    "organizer": "Ethereum",
+    "issueUrl": "https://github.com/ethlima/eth-events/issues/37",
+    "issueNum": 37,
+    "state": "open",
+    "createdAt": "2026-04-30T21:19:00Z"
+  },
+  {
     "id": 31,
     "title": "Buildathon La Ruta de Puqi - Eth Lima x Stellar",
     "description": "Únete a un buildathon intensivo de 1 día organizado por Ethereum Lima en colaboración con Stellar, como parte de La Ruta de Puqi.\nUn espacio diseñado para reunir a builders, desarrolladores y entusiastas Web3 que quieran crear soluciones reales sobre la tecnología de Stellar.",
