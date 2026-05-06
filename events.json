@@ -598,6 +598,26 @@
     "createdAt": "2026-04-24T20:31:48Z"
   },
   {
+    "id": 38,
+    "title": "Bootcamp Ethereum Lima 2026",
+    "description": "Gratuito. Aprende Proyectos en web3, Lenguajes de programación, Arbitrum y Arbitrum Stylus.",
+    "date": "2026-05-30",
+    "endDate": "2026-07-03",
+    "time": "",
+    "location": "Online",
+    "type": "bootcamp",
+    "link": "https://bootcamp.ethlima.org/",
+    "tags": [
+      "ethlima"
+    ],
+    "image": "https://github.com/user-attachments/assets/3b53986c-e2e6-4bf9-90ff-e6c18e6324ad",
+    "organizer": "Ethereum Lima",
+    "issueUrl": "https://github.com/ethlima/eth-events/issues/38",
+    "issueNum": 38,
+    "state": "open",
+    "createdAt": "2026-05-06T04:10:57Z"
+  },
+  {
     "id": 4,
     "title": "Founder School",
     "description": "A 10-week, cohort-based, virtual, and equity-free program designed to help you go from zero to one.",
