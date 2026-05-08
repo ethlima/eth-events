@@ -618,6 +618,24 @@
     "createdAt": "2026-05-06T04:10:57Z"
   },
   {
+    "id": 39,
+    "title": "GitHub Community Day",
+    "description": "La comunidad de GitHub llega a la UTP para un evento único que reunirá a estudiantes, developers y apasionados por la tecnología en una experiencia diseñada para potenciar tu forma de crear y colaborar en proyectos.",
+    "date": "2026-06-06",
+    "endDate": "",
+    "time": "",
+    "location": "UTP Torre Arequipa, Lima",
+    "type": "conference",
+    "link": "https://www.eventbrite.com/e/github-community-day-peru-tickets-1988461462763",
+    "tags": [],
+    "image": "",
+    "organizer": "Developer Student Clubs UTP",
+    "issueUrl": "https://github.com/ethlima/eth-events/issues/39",
+    "issueNum": 39,
+    "state": "open",
+    "createdAt": "2026-05-08T23:05:07Z"
+  },
+  {
     "id": 4,
     "title": "Founder School",
     "description": "A 10-week, cohort-based, virtual, and equity-free program designed to help you go from zero to one.",
