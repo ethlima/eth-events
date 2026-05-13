@@ -578,6 +578,26 @@
     "createdAt": "2026-04-15T17:23:01Z"
   },
   {
+    "id": 40,
+    "title": "La Ruta de Puqi - UPC",
+    "description": "Evento oficial de la Ideathon Interuniversitaria, iniciativa que reunirá a estudiantes de distintas universidades para desarrollar proyectos en blockchain y Web3, con más de 300 USD en premios para los mejores equipos.\nLos invitamos a participar en este encuentro enfocado en Ethereum, innovación y oportunidades dentro del ecosistema Web3.\n📍 UPC San Isidro\n📅 16 de mayo\n⏰ 5:00 pm – 8:00 pm",
+    "date": "2026-05-16",
+    "endDate": "",
+    "time": "17:00",
+    "location": "UPC San Isidro",
+    "type": "workshop",
+    "link": "Ethereum Lima",
+    "tags": [
+      "ethlima"
+    ],
+    "image": "https://github.com/user-attachments/assets/77be1f8f-8e6a-4163-9c0a-c09a66b9dcbd",
+    "organizer": "Ethereum Lima",
+    "issueUrl": "https://github.com/ethlima/eth-events/issues/40",
+    "issueNum": 40,
+    "state": "open",
+    "createdAt": "2026-05-13T02:00:38Z"
+  },
+  {
     "id": 36,
     "title": "Bootcamp Marketing Web3 + IA",
     "description": "Aprende a usar IA para crear contenido, crecer comunidad y hacer marketing en Web3.\n\nTrabajaremos con herramientas como: #ChatGPT, #Canva y #Claude\n\nUn programa práctico de:\n👉 4 sesiones en vivo + 1 presentación final de proyectos\n\n🟣Aprenderás a: crear contenido con IA\n🟣Generar ideas y copies en segundos\n🟣Automatizar tu flujo de trabajo\n🟣Construir comunidad en Web3\n🟣 y mucho más\n\n🎁 Acceso gratuito\n🎓 Certificación opcional\n🌎 Comunidad LATAM\n⚠️ Cupos limitados",
