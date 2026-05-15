@@ -618,6 +618,26 @@
     "createdAt": "2026-04-24T20:31:48Z"
   },
   {
+    "id": 41,
+    "title": "Resultados Buildathon x Stellar",
+    "description": "Publicación de ganadores de la Buildathon.",
+    "date": "2026-05-17",
+    "endDate": "",
+    "time": "12:00",
+    "location": "Online",
+    "type": "conference",
+    "link": "https://x.com/EthereumLima/status/2054650559232200940",
+    "tags": [
+      "ethlima"
+    ],
+    "image": "https://github.com/user-attachments/assets/58d18506-0cfc-4240-b12d-4a65600f4ebe",
+    "organizer": "Ethereum Lima",
+    "issueUrl": "https://github.com/ethlima/eth-events/issues/41",
+    "issueNum": 41,
+    "state": "open",
+    "createdAt": "2026-05-15T15:32:04Z"
+  },
+  {
     "id": 38,
     "title": "Bootcamp Ethereum Lima 2026",
     "description": "Gratuito. Aprende Proyectos en web3, Lenguajes de programación, Arbitrum y Arbitrum Stylus.",
