@@ -730,11 +730,11 @@
     }
 
     .event-header {
-      padding: 24px 24px 0;
+      padding: 20px 20px 0;
       display: flex;
       align-items: center;
       justify-content: space-between;
-      gap: 12px;
+      gap: 10px;
       z-index: 2;
     }
 
@@ -796,7 +796,7 @@
     }
 
     .event-body {
-      padding: 16px 24px 24px;
+      padding: 12px 20px 20px;
       flex: 1;
       display: flex;
       flex-direction: column;
@@ -804,22 +804,22 @@
     }
 
     .event-title {
-      font-size: 20px;
+      font-size: 18px;
       font-weight: 700;
       line-height: 1.25;
-      margin-bottom: 12px;
+      margin-bottom: 8px;
       color: var(--text);
     }
 
     .event-description {
-      font-size: 14px;
+      font-size: 13px;
       color: var(--muted);
-      line-height: 1.6;
-      margin-bottom: 24px;
+      line-height: 1.5;
+      margin-bottom: 20px;
       flex: 1;
       display: -webkit-box;
-      -webkit-line-clamp: 3;
-      line-clamp: 3;
+      -webkit-line-clamp: 2;
+      line-clamp: 2;
       -webkit-box-orient: vertical;
       overflow: hidden;
     }
@@ -827,8 +827,8 @@
     .event-meta {
       display: flex;
       flex-direction: column;
-      gap: 8px;
-      padding-top: 16px;
+      gap: 6px;
+      padding-top: 12px;
       border-top: 1px solid var(--border);
     }
 
@@ -849,7 +849,7 @@
     }
 
     .event-footer {
-      padding: 0 24px 24px;
+      padding: 0 20px 20px;
       display: flex;
       align-items: center;
       justify-content: space-between;
@@ -1986,16 +1986,8 @@
       const select = document.getElementById('month-select');
       const months = [];
       const now = new Date();
-      const currentYear = now.getFullYear();
       
-      // Populate all months for current year and next year
-      for (let y = currentYear - 1; y <= currentYear + 1; y++) {
-        for (let m = 0; m < 12; m++) {
-          months.push({ m, y });
-        }
-      }
-
-      // Add months from events if they are outside this range
+      // Get unique months from events only
       events.forEach(e => {
         if (e._dateObj) {
           const m = e._dateObj.getMonth();
@@ -2017,6 +2009,11 @@
         const selected = (item.m === now.getMonth() && item.y === now.getFullYear()) ? 'selected' : '';
         return `<option value="${item.y}-${item.m}" ${selected}>${label}</option>`;
       }).join('');
+
+      // If nothing selected (current month not in events), select the closest or first one
+      if (select.value === "" && months.length > 0) {
+          select.value = `${months[0].y}-${months[0].m}`;
+      }
     }
 
     function updateCalendarView() {
@@ -2104,9 +2101,26 @@
     }
 
     function renderAllGrids(data) {
-      renderEvents(data);
-      renderOrganizers(data);
-      populateMonthSelector(data);
+      const processed = data.map(e => {
+        const start = e.date ? new Date(e.date + 'T00:00') : new Date('2099-12-31');
+        const end = (e.endDate && e.endDate !== '') ? new Date(e.endDate + 'T00:00') : start;
+        const isEthLima = (e.organizer || '').toLowerCase().includes('eth lima') || 
+                          (e.organizer || '').toLowerCase().includes('ethereum lima') ||
+                          (e.tags || []).some(t => t.toLowerCase() === 'ethlima');
+        return {
+          ...e,
+          _dateObj: start,
+          _endObj: end,
+          _isPast: end < new Date().setHours(0,0,0,0),
+          _isEthLima: isEthLima
+        };
+      });
+      
+      window._allEvents = processed; // Store processed events
+      
+      renderEvents(processed);
+      renderOrganizers(processed);
+      populateMonthSelector(processed);
       if (currentViewMode === 'calendar') {
         updateCalendarView();
       }
@@ -2202,32 +2216,14 @@
       const now = new Date();
       now.setHours(0, 0, 0, 0);
 
-      const allWithDates = events.map(e => {
-        const start = e.date ? new Date(e.date + 'T00:00') : new Date('2099-12-31');
-        const end = (e.endDate && e.endDate !== '') ? new Date(e.endDate + 'T00:00') : start;
-        
-        // Is it an ETH Lima event?
-        const isEthLima = (e.organizer || '').toLowerCase().includes('eth lima') || 
-                          (e.organizer || '').toLowerCase().includes('ethereum lima') ||
-                          (e.tags || []).some(t => t.toLowerCase() === 'ethlima');
-
-        return {
-          ...e,
-          _dateObj: start,
-          _endObj: end,
-          _isPast: end < now,
-          _isEthLima: isEthLima
-        };
-      });
-
-      const upcoming = allWithDates
+      const upcoming = events
         .filter(e => !e._isPast)
         .sort((a, b) => a._dateObj - b._dateObj);
 
       const ethLimaUpcoming = upcoming.filter(e => e._isEthLima);
       const communityUpcoming = upcoming.filter(e => !e._isEthLima);
 
-      const past = allWithDates
+      const past = events
         .filter(e => e._isPast)
         .sort((a, b) => b._dateObj - a._dateObj);
 
@@ -2327,16 +2323,7 @@
         ? allEvents.filter(e => !e._isEthLima)
         : allEvents.filter(e => e.type === filter && !e._isEthLima);
 
-      const now = new Date();
-      now.setHours(0, 0, 0, 0);
-
-      const filteredWithDates = filtered.map(e => {
-        const start = e.date ? new Date(e.date + 'T00:00') : new Date('2099-12-31');
-        const end = (e.endDate && e.endDate !== '') ? new Date(e.endDate + 'T00:00') : start;
-        return { ...e, _dateObj: start, _endObj: end, _isPast: end < now };
-      });
-
-      const upcoming = filteredWithDates
+      const upcoming = filtered
         .filter(e => !e._isPast)
         .sort((a, b) => a._dateObj - b._dateObj);
 
