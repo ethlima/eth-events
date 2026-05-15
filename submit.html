@@ -441,17 +441,56 @@
   </footer>
 
   <script>
-    document.getElementById('event-form').addEventListener('submit', function(e) {
+    const form = document.getElementById('event-form');
+    const submitBtn = form.querySelector('.btn-submit');
+    const btnText = submitBtn.innerHTML;
+
+    form.addEventListener('submit', async function(e) {
       e.preventDefault();
       
-      // Simulate submission for Phase 1
-      document.getElementById('form-content').style.opacity = '0';
-      document.getElementById('form-content').style.pointerEvents = 'none';
-      document.getElementById('success-overlay').style.display = 'flex';
+      // Loading state
+      submitBtn.disabled = true;
+      submitBtn.innerHTML = `<svg class="spinner" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" style="animation: spin 1s linear infinite"><path d="M21 12a9 9 0 11-6.219-8.56"/></svg> ENVIANDO...`;
       
-      window.scrollTo({ top: 0, behavior: 'smooth' });
+      const formData = new FormData(form);
+      const data = Object.fromEntries(formData.entries());
+
+      try {
+        const response = await fetch('/api/submit', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(data)
+        });
+
+        const result = await response.json();
+
+        if (response.ok) {
+          // Success
+          document.getElementById('form-content').style.opacity = '0';
+          document.getElementById('form-content').style.pointerEvents = 'none';
+          document.getElementById('success-overlay').style.display = 'flex';
+          
+          // Optionally show the issue link
+          const subtitle = document.querySelector('#success-overlay .form-subtitle');
+          subtitle.innerHTML += `<br><br><a href="${result.url}" target="_blank" style="color:var(--accent); text-decoration:none; font-family:var(--mono); font-size:12px">Ver seguimiento en GitHub #${result.number}</a>`;
+          
+          window.scrollTo({ top: 0, behavior: 'smooth' });
+        } else {
+          throw new Error(result.error || 'Error al enviar');
+        }
+      } catch (error) {
+        alert('Hubo un problema al enviar tu propuesta: ' + error.message);
+        submitBtn.disabled = false;
+        submitBtn.innerHTML = btnText;
+      }
     });
   </script>
+
+  <style>
+    @keyframes spin {
+      to { transform: rotate(360deg); }
+    }
+  </style>
 </body>
 
 </html>
